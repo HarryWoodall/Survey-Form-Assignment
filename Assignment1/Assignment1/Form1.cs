@@ -8,12 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Assignment1
-{
-    public partial class Form1 : Form
-    {
-        public Form1()
-        {
+namespace Assignment1 {
+
+    public partial class Form1 : Form {
+
+        public Form1() {
             InitializeComponent();
         }
     }
