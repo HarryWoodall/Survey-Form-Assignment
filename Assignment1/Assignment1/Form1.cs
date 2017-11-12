@@ -28,26 +28,71 @@ namespace Assignment1 {
 
         public void initializeQuestions() {
             question1 = new Question();
+            question2 = new Question();
+            question3 = new Question();
+
             questionList.Add(question1);
+            questionList.Add(question2);
+            questionList.Add(question3);
 
-            question1.addToolTip(toolTip1);
-            question1.addToolTip(toolTip2);
-            question1.addToolTip(toolTip3);
-            question1.addToolTip(toolTip4);
-            question1.addToolTip(toolTip5);
+            question1.addToolTip(q1ToolTip1);
+            question1.addToolTip(q1ToolTip2);
+            question1.addToolTip(q1toolTip3);
+            question1.addToolTip(q1ToolTip4);
+            question1.addToolTip(q1ToolTip5);
 
-            question1.addMainPanel(option1);
-            question1.addMainPanel(option2);
-            question1.addMainPanel(option3);
-            question1.addMainPanel(option4);
-            question1.addMainPanel(option5);
+            question1.addMainPanel(q1Option1);
+            question1.addMainPanel(q1Option2);
+            question1.addMainPanel(q1Option3);
+            question1.addMainPanel(q1Option4);
+            question1.addMainPanel(q1Option5);
 
-            question1.addSelectedPanel(selected1);
-            question1.addSelectedPanel(selected2);
-            question1.addSelectedPanel(selected3);
-            question1.addSelectedPanel(selected4);
-            question1.addSelectedPanel(selected5);
+            question1.addSelectedPanel(q1Selected1);
+            question1.addSelectedPanel(q1Selected2);
+            question1.addSelectedPanel(q1Selected3);
+            question1.addSelectedPanel(q1Selected4);
+            question1.addSelectedPanel(q1Selected5);
+
+
+            question2.addToolTip(q2ToolTip1);
+            question2.addToolTip(q2ToolTip2);
+            question2.addToolTip(q2ToolTip3);
+            question2.addToolTip(q2ToolTip4);
+            question2.addToolTip(q2ToolTip5);
+
+            question2.addMainPanel(q2Option1);
+            question2.addMainPanel(q2Option2);
+            question2.addMainPanel(q2Option3);
+            question2.addMainPanel(q2Option4);
+            question2.addMainPanel(q2Option5);
+
+            question2.addSelectedPanel(q2Selected1);
+            question2.addSelectedPanel(q2Selected2);
+            question2.addSelectedPanel(q2Selected3);
+            question2.addSelectedPanel(q2Selected4);
+            question2.addSelectedPanel(q2Selected5);
+
+
+            question3.addToolTip(q3ToolTip1);
+            question3.addToolTip(q3ToolTip2);
+            question3.addToolTip(q3ToolTip3);
+            question3.addToolTip(q3ToolTip4);
+            question3.addToolTip(q3ToolTip5);
+
+            question3.addMainPanel(q3Option1);
+            question3.addMainPanel(q3Option2);
+            question3.addMainPanel(q3Option3);
+            question3.addMainPanel(q3Option4);
+            question3.addMainPanel(q3Option5);
+
+            question3.addSelectedPanel(q3Selected1);
+            question3.addSelectedPanel(q3Selected2);
+            question3.addSelectedPanel(q3Selected3);
+            question3.addSelectedPanel(q3Selected4);
+            question3.addSelectedPanel(q3Selected5);
         }
+
+        #region Animation
 
         public void fadeIn(int index, Question question) {
 
@@ -70,11 +115,7 @@ namespace Assignment1 {
             }
         }
 
-        public void testBox() {
-            if (dayBox.Focus()) {
-                Console.WriteLine("Awesome");
-            }
-        }
+        #endregion
 
         #region Event Handelers
 
@@ -95,39 +136,53 @@ namespace Assignment1 {
         public void panel_onEnter(object sender, EventArgs e) {
             Panel panel = (Panel)sender;
 
-            if (question1.getMainList().Contains(panel)) {
-                question1.setCurrentPanel(panel);
-                int index = Convert.ToInt32(panel.Tag);
-                question1.getToolTipList()[index].Tag = "0";
-                question1.getToolTipList()[index].Visible = true;
+            foreach (Question question in questionList) {
+                if (question.getMainList().Contains(panel)) {
+                    question.setCurrentPanel(panel);
+                    int index = Convert.ToInt32(panel.Tag);
+                    question.getToolTipList()[index].Tag = "0";
+                    question.getToolTipList()[index].Visible = true;
+                }
             }
         }
 
         public void panel_onLeave(object sender, EventArgs e) {
             Panel panel = (Panel)sender;
 
-            if (question1.getMainList().Contains(panel)) {
-                int index = Convert.ToInt32(panel.Tag);
-                question1.getToolTipList()[index].Tag = "1";
+            foreach (Question question in questionList) {
+                if (question.getMainList().Contains(panel)) {
+                    int index = Convert.ToInt32(panel.Tag);
+                    question.getToolTipList()[index].Tag = "1";
+                }
             }
         }
 
         public void panel_onClick(object sender, EventArgs e) {
             Panel panel = (Panel)sender;
+            Label label = (Label)panel.Controls[0];
 
-            if (question1.getMainList().Contains(panel)) {
-                int index = Convert.ToInt32(panel.Tag);
+            foreach (Question question in questionList) {
+                if (question.getMainList().Contains(panel)) {
+                    int index = Convert.ToInt32(panel.Tag);
 
-                foreach (Panel selected in question1.getSelectedList()) {
-                    selected.Visible = false;
+                    foreach (Panel selected in question.getSelectedList()) {
+                        selected.Visible = false;
+                    }
+
+                    foreach (Panel main in question.getMainList()) {
+                        Label lb = (Label)main.Controls[0];
+                        lb.Font = new Font("Calibri", 22);
+                        lb.Location = new Point((panel.Width - label.Width) / 2, (panel.Height - label.Height) / 2);
+                    }
+                    question.getSelectedList()[index].Visible = true;
+                    question.setAnswer(index);
                 }
-                question1.getSelectedList()[index].Visible = true;
-                question1.setAnswer(index);
-                Console.WriteLine(question1.getAnswer().ToString());
             }
+            label.Font = new Font("Calibri", 42);
+            label.Location = new Point((panel.Width - label.Width) / 2, (panel.Height - label.Height) / 2);
         }
 
-        private void dateEnter(object sender, EventArgs e) {
+        private void date_Enter(object sender, EventArgs e) {
             TextBox box = (TextBox)sender;
             if (box.Tag.ToString() == "0") {
                 box.ForeColor = Color.Black;
@@ -136,20 +191,29 @@ namespace Assignment1 {
             }
         }
 
-        private void dateLeave(object sender, EventArgs e) {
+        private void date_Leave(object sender, EventArgs e) {
             TextBox box = (TextBox)sender;
             if (box.Text == "") {
+                box.ForeColor = Color.Gray;
+
                 if (box == dayBox) {
-                    box.ForeColor = Color.Gray;
                     box.Text = "DD";
                 } else if (box == monthBox) {
-                    box.ForeColor = Color.Gray;
                     box.Text = "MM";
                 } else if (box == yearBox) {
-                    box.ForeColor = Color.Gray;
                     box.Text = "YYYY";
                 }
                 box.Tag = "0";
+            }
+        }
+
+        private void date_Change(object sender, EventArgs e) {
+            TextBox box = (TextBox)sender;
+            if (box.Text.Length > 0 && box.Focused) {
+                int n;
+                if (!int.TryParse(box.Text, out n)) {
+                    box.Text = box.Text.Substring(0, box.Text.Length - 1);
+                }
             }
         }
 
