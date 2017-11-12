@@ -64,6 +64,19 @@
             this.label15 = new System.Windows.Forms.Label();
             this.selected5 = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.forenameBox = new System.Windows.Forms.TextBox();
+            this.demographic1 = new System.Windows.Forms.ComboBox();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.dayBox = new System.Windows.Forms.TextBox();
+            this.surnameBox = new System.Windows.Forms.TextBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.monthBox = new System.Windows.Forms.TextBox();
+            this.yearBox = new System.Windows.Forms.TextBox();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.option4.SuspendLayout();
             this.option3.SuspendLayout();
@@ -80,6 +93,8 @@
             this.selected3.SuspendLayout();
             this.selected4.SuspendLayout();
             this.selected5.SuspendLayout();
+            this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -121,13 +136,16 @@
             // 
             // option4
             // 
-            this.option4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.option4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.option4.Controls.Add(this.label10);
-            this.option4.Location = new System.Drawing.Point(789, 209);
+            this.option4.Location = new System.Drawing.Point(630, 73);
             this.option4.Name = "option4";
             this.option4.Size = new System.Drawing.Size(200, 100);
             this.option4.TabIndex = 5;
             this.option4.Tag = "3";
+            this.option4.Click += new System.EventHandler(this.panel_onClick);
+            this.option4.MouseEnter += new System.EventHandler(this.panel_onEnter);
+            this.option4.MouseLeave += new System.EventHandler(this.panel_onLeave);
             // 
             // label10
             // 
@@ -143,13 +161,16 @@
             // 
             // option3
             // 
-            this.option3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.option3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.option3.Controls.Add(this.label9);
-            this.option3.Location = new System.Drawing.Point(583, 209);
+            this.option3.Location = new System.Drawing.Point(424, 73);
             this.option3.Name = "option3";
             this.option3.Size = new System.Drawing.Size(200, 100);
             this.option3.TabIndex = 6;
             this.option3.Tag = "2";
+            this.option3.Click += new System.EventHandler(this.panel_onClick);
+            this.option3.MouseEnter += new System.EventHandler(this.panel_onEnter);
+            this.option3.MouseLeave += new System.EventHandler(this.panel_onLeave);
             // 
             // label9
             // 
@@ -167,11 +188,14 @@
             // 
             this.option1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.option1.Controls.Add(this.label7);
-            this.option1.Location = new System.Drawing.Point(171, 209);
+            this.option1.Location = new System.Drawing.Point(12, 73);
             this.option1.Name = "option1";
             this.option1.Size = new System.Drawing.Size(200, 100);
             this.option1.TabIndex = 8;
             this.option1.Tag = "0";
+            this.option1.Click += new System.EventHandler(this.panel_onClick);
+            this.option1.MouseEnter += new System.EventHandler(this.panel_onEnter);
+            this.option1.MouseLeave += new System.EventHandler(this.panel_onLeave);
             // 
             // label7
             // 
@@ -187,13 +211,16 @@
             // 
             // option2
             // 
-            this.option2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.option2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.option2.Controls.Add(this.label8);
-            this.option2.Location = new System.Drawing.Point(377, 209);
+            this.option2.Location = new System.Drawing.Point(218, 73);
             this.option2.Name = "option2";
             this.option2.Size = new System.Drawing.Size(200, 100);
             this.option2.TabIndex = 7;
             this.option2.Tag = "1";
+            this.option2.Click += new System.EventHandler(this.panel_onClick);
+            this.option2.MouseEnter += new System.EventHandler(this.panel_onEnter);
+            this.option2.MouseLeave += new System.EventHandler(this.panel_onLeave);
             // 
             // label8
             // 
@@ -209,13 +236,16 @@
             // 
             // option5
             // 
-            this.option5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.option5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.option5.Controls.Add(this.label11);
-            this.option5.Location = new System.Drawing.Point(995, 209);
+            this.option5.Location = new System.Drawing.Point(836, 73);
             this.option5.Name = "option5";
             this.option5.Size = new System.Drawing.Size(200, 100);
             this.option5.TabIndex = 10;
             this.option5.Tag = "4";
+            this.option5.Click += new System.EventHandler(this.panel_onClick);
+            this.option5.MouseEnter += new System.EventHandler(this.panel_onEnter);
+            this.option5.MouseLeave += new System.EventHandler(this.panel_onLeave);
             // 
             // label11
             // 
@@ -231,9 +261,9 @@
             // 
             // toolTip5
             // 
-            this.toolTip5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.toolTip5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.toolTip5.Controls.Add(this.label3);
-            this.toolTip5.Location = new System.Drawing.Point(995, 312);
+            this.toolTip5.Location = new System.Drawing.Point(1649, 362);
             this.toolTip5.Name = "toolTip5";
             this.toolTip5.Size = new System.Drawing.Size(200, 100);
             this.toolTip5.TabIndex = 15;
@@ -256,7 +286,7 @@
             // 
             this.toolTip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.toolTip1.Controls.Add(this.label2);
-            this.toolTip1.Location = new System.Drawing.Point(171, 312);
+            this.toolTip1.Location = new System.Drawing.Point(825, 362);
             this.toolTip1.Name = "toolTip1";
             this.toolTip1.Size = new System.Drawing.Size(200, 100);
             this.toolTip1.TabIndex = 14;
@@ -277,9 +307,9 @@
             // 
             // toolTip3
             // 
-            this.toolTip3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.toolTip3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.toolTip3.Controls.Add(this.label6);
-            this.toolTip3.Location = new System.Drawing.Point(583, 312);
+            this.toolTip3.Location = new System.Drawing.Point(1237, 362);
             this.toolTip3.Name = "toolTip3";
             this.toolTip3.Size = new System.Drawing.Size(200, 100);
             this.toolTip3.TabIndex = 12;
@@ -300,9 +330,9 @@
             // 
             // toolTip2
             // 
-            this.toolTip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.toolTip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.toolTip2.Controls.Add(this.label4);
-            this.toolTip2.Location = new System.Drawing.Point(377, 312);
+            this.toolTip2.Location = new System.Drawing.Point(1031, 362);
             this.toolTip2.Name = "toolTip2";
             this.toolTip2.Size = new System.Drawing.Size(200, 100);
             this.toolTip2.TabIndex = 13;
@@ -323,9 +353,9 @@
             // 
             // toolTip4
             // 
-            this.toolTip4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.toolTip4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.toolTip4.Controls.Add(this.label5);
-            this.toolTip4.Location = new System.Drawing.Point(789, 312);
+            this.toolTip4.Location = new System.Drawing.Point(1443, 362);
             this.toolTip4.Name = "toolTip4";
             this.toolTip4.Size = new System.Drawing.Size(200, 100);
             this.toolTip4.TabIndex = 11;
@@ -348,7 +378,7 @@
             // 
             this.selected1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.selected1.Controls.Add(this.label12);
-            this.selected1.Location = new System.Drawing.Point(171, 185);
+            this.selected1.Location = new System.Drawing.Point(12, 49);
             this.selected1.Name = "selected1";
             this.selected1.Size = new System.Drawing.Size(200, 18);
             this.selected1.TabIndex = 9;
@@ -369,9 +399,9 @@
             // 
             // selected2
             // 
-            this.selected2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.selected2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.selected2.Controls.Add(this.label13);
-            this.selected2.Location = new System.Drawing.Point(377, 185);
+            this.selected2.Location = new System.Drawing.Point(218, 49);
             this.selected2.Name = "selected2";
             this.selected2.Size = new System.Drawing.Size(200, 18);
             this.selected2.TabIndex = 10;
@@ -392,9 +422,9 @@
             // 
             // selected3
             // 
-            this.selected3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.selected3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.selected3.Controls.Add(this.label14);
-            this.selected3.Location = new System.Drawing.Point(583, 185);
+            this.selected3.Location = new System.Drawing.Point(424, 49);
             this.selected3.Name = "selected3";
             this.selected3.Size = new System.Drawing.Size(200, 18);
             this.selected3.TabIndex = 11;
@@ -415,9 +445,9 @@
             // 
             // selected4
             // 
-            this.selected4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.selected4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.selected4.Controls.Add(this.label15);
-            this.selected4.Location = new System.Drawing.Point(789, 185);
+            this.selected4.Location = new System.Drawing.Point(630, 49);
             this.selected4.Name = "selected4";
             this.selected4.Size = new System.Drawing.Size(200, 18);
             this.selected4.TabIndex = 12;
@@ -438,9 +468,9 @@
             // 
             // selected5
             // 
-            this.selected5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.selected5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.selected5.Controls.Add(this.label16);
-            this.selected5.Location = new System.Drawing.Point(995, 185);
+            this.selected5.Location = new System.Drawing.Point(836, 49);
             this.selected5.Name = "selected5";
             this.selected5.Size = new System.Drawing.Size(200, 18);
             this.selected5.TabIndex = 13;
@@ -459,29 +489,175 @@
             this.label16.TabIndex = 0;
             this.label16.Text = "1";
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(9, 8);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(461, 39);
+            this.label17.TabIndex = 16;
+            this.label17.Text = "DID YOU ENJOY THE SCULPTURE?";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.panel3.Controls.Add(this.selected1);
+            this.panel3.Controls.Add(this.label17);
+            this.panel3.Controls.Add(this.selected5);
+            this.panel3.Controls.Add(this.option3);
+            this.panel3.Controls.Add(this.option1);
+            this.panel3.Controls.Add(this.option4);
+            this.panel3.Controls.Add(this.option5);
+            this.panel3.Controls.Add(this.selected4);
+            this.panel3.Controls.Add(this.selected2);
+            this.panel3.Controls.Add(this.selected3);
+            this.panel3.Controls.Add(this.option2);
+            this.panel3.Location = new System.Drawing.Point(813, 177);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1046, 179);
+            this.panel3.TabIndex = 17;
+            // 
+            // forenameBox
+            // 
+            this.forenameBox.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.forenameBox.Location = new System.Drawing.Point(215, 20);
+            this.forenameBox.Name = "forenameBox";
+            this.forenameBox.Size = new System.Drawing.Size(261, 47);
+            this.forenameBox.TabIndex = 18;
+            // 
+            // demographic1
+            // 
+            this.demographic1.FormattingEnabled = true;
+            this.demographic1.Location = new System.Drawing.Point(60, 319);
+            this.demographic1.Name = "demographic1";
+            this.demographic1.Size = new System.Drawing.Size(121, 21);
+            this.demographic1.TabIndex = 20;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.panel4.Controls.Add(this.label21);
+            this.panel4.Controls.Add(this.label20);
+            this.panel4.Controls.Add(this.yearBox);
+            this.panel4.Controls.Add(this.monthBox);
+            this.panel4.Controls.Add(this.dayBox);
+            this.panel4.Controls.Add(this.surnameBox);
+            this.panel4.Controls.Add(this.label19);
+            this.panel4.Controls.Add(this.label18);
+            this.panel4.Controls.Add(this.forenameBox);
+            this.panel4.Controls.Add(this.demographic1);
+            this.panel4.Location = new System.Drawing.Point(12, 177);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(764, 812);
+            this.panel4.TabIndex = 21;
+            // 
+            // dayBox
+            // 
+            this.dayBox.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dayBox.ForeColor = System.Drawing.Color.Gray;
+            this.dayBox.Location = new System.Drawing.Point(215, 185);
+            this.dayBox.MaxLength = 2;
+            this.dayBox.Name = "dayBox";
+            this.dayBox.Size = new System.Drawing.Size(65, 47);
+            this.dayBox.TabIndex = 24;
+            this.dayBox.Tag = "0";
+            this.dayBox.Text = "DD";
+            this.dayBox.Enter += new System.EventHandler(this.dateEnter);
+            this.dayBox.Leave += new System.EventHandler(this.dateLeave);
+            // 
+            // surnameBox
+            // 
+            this.surnameBox.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.surnameBox.Location = new System.Drawing.Point(215, 99);
+            this.surnameBox.Name = "surnameBox";
+            this.surnameBox.Size = new System.Drawing.Size(261, 47);
+            this.surnameBox.TabIndex = 23;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(44, 102);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(155, 39);
+            this.label19.TabIndex = 22;
+            this.label19.Text = "SURNAME";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(27, 20);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(172, 39);
+            this.label18.TabIndex = 21;
+            this.label18.Text = "FORENAME";
+            // 
+            // monthBox
+            // 
+            this.monthBox.AccessibleRole = System.Windows.Forms.AccessibleRole.None;
+            this.monthBox.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.monthBox.ForeColor = System.Drawing.Color.Gray;
+            this.monthBox.Location = new System.Drawing.Point(323, 185);
+            this.monthBox.MaxLength = 2;
+            this.monthBox.Name = "monthBox";
+            this.monthBox.Size = new System.Drawing.Size(65, 47);
+            this.monthBox.TabIndex = 25;
+            this.monthBox.Tag = "0";
+            this.monthBox.Text = "MM";
+            this.monthBox.Enter += new System.EventHandler(this.dateEnter);
+            this.monthBox.Leave += new System.EventHandler(this.dateLeave);
+            // 
+            // yearBox
+            // 
+            this.yearBox.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.yearBox.ForeColor = System.Drawing.Color.Gray;
+            this.yearBox.Location = new System.Drawing.Point(431, 185);
+            this.yearBox.MaxLength = 4;
+            this.yearBox.Name = "yearBox";
+            this.yearBox.Size = new System.Drawing.Size(80, 47);
+            this.yearBox.TabIndex = 26;
+            this.yearBox.Tag = "0";
+            this.yearBox.Text = "YYYY";
+            this.yearBox.Enter += new System.EventHandler(this.dateEnter);
+            this.yearBox.Leave += new System.EventHandler(this.dateLeave);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(286, 188);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(31, 39);
+            this.label20.TabIndex = 27;
+            this.label20.Text = "/";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(394, 188);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(31, 39);
+            this.label21.TabIndex = 28;
+            this.label21.Text = "/";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1904, 1042);
-            this.Controls.Add(this.selected5);
-            this.Controls.Add(this.selected4);
-            this.Controls.Add(this.selected3);
-            this.Controls.Add(this.selected2);
-            this.Controls.Add(this.selected1);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.toolTip2);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolTip5);
-            this.Controls.Add(this.option5);
+            this.Controls.Add(this.toolTip4);
             this.Controls.Add(this.toolTip1);
             this.Controls.Add(this.toolTip3);
-            this.Controls.Add(this.option1);
-            this.Controls.Add(this.toolTip2);
-            this.Controls.Add(this.option3);
-            this.Controls.Add(this.toolTip4);
-            this.Controls.Add(this.option2);
-            this.Controls.Add(this.option4);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "Form1";
             this.Text = "Form1";
@@ -517,6 +693,10 @@
             this.selected4.PerformLayout();
             this.selected5.ResumeLayout(false);
             this.selected5.PerformLayout();
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            this.panel4.ResumeLayout(false);
+            this.panel4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -557,6 +737,19 @@
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Panel selected5;
         private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TextBox forenameBox;
+        private System.Windows.Forms.ComboBox demographic1;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.TextBox surnameBox;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.TextBox dayBox;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox yearBox;
+        private System.Windows.Forms.TextBox monthBox;
     }
 }
 
