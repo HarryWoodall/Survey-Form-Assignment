@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.titleBanner = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.q1Option4 = new System.Windows.Forms.Panel();
@@ -65,19 +65,19 @@
             this.q1Selected5 = new System.Windows.Forms.Panel();
             this.label16 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.section5 = new System.Windows.Forms.Panel();
             this.forenameBox = new System.Windows.Forms.TextBox();
             this.demographic1 = new System.Windows.Forms.ComboBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label20 = new System.Windows.Forms.Label();
+            this.section1 = new System.Windows.Forms.Panel();
+            this.dateSlash2 = new System.Windows.Forms.Label();
+            this.dateSlash1 = new System.Windows.Forms.Label();
             this.yearBox = new System.Windows.Forms.TextBox();
             this.monthBox = new System.Windows.Forms.TextBox();
             this.dayBox = new System.Windows.Forms.TextBox();
             this.surnameBox = new System.Windows.Forms.TextBox();
-            this.label19 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.surnameLabel = new System.Windows.Forms.Label();
+            this.forenameLabel = new System.Windows.Forms.Label();
+            this.section3 = new System.Windows.Forms.Panel();
             this.q2Selected1 = new System.Windows.Forms.Panel();
             this.label22 = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
@@ -141,7 +141,8 @@
             this.label52 = new System.Windows.Forms.Label();
             this.q3ToolTip3 = new System.Windows.Forms.Panel();
             this.label53 = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
+            this.section2 = new System.Windows.Forms.Panel();
+            this.titleBanner.SuspendLayout();
             this.q1Option4.SuspendLayout();
             this.q1Option3.SuspendLayout();
             this.q1Option1.SuspendLayout();
@@ -157,9 +158,9 @@
             this.q1Selected3.SuspendLayout();
             this.q1Selected4.SuspendLayout();
             this.q1Selected5.SuspendLayout();
-            this.panel3.SuspendLayout();
-            this.panel4.SuspendLayout();
-            this.panel5.SuspendLayout();
+            this.section5.SuspendLayout();
+            this.section1.SuspendLayout();
+            this.section3.SuspendLayout();
             this.q2Selected1.SuspendLayout();
             this.q2Selected5.SuspendLayout();
             this.q2Option3.SuspendLayout();
@@ -191,6 +192,7 @@
             this.q3ToolTip4.SuspendLayout();
             this.q3ToolTip1.SuspendLayout();
             this.q3ToolTip3.SuspendLayout();
+            this.section2.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -198,17 +200,18 @@
             this.timer1.Interval = 1;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // panel1
+            // titleBanner
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
-            this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1920, 150);
-            this.panel1.TabIndex = 0;
+            this.titleBanner.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.titleBanner.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("titleBanner.BackgroundImage")));
+            this.titleBanner.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.titleBanner.Controls.Add(this.label1);
+            this.titleBanner.Controls.Add(this.panel2);
+            this.titleBanner.Location = new System.Drawing.Point(0, 0);
+            this.titleBanner.Margin = new System.Windows.Forms.Padding(0);
+            this.titleBanner.Name = "titleBanner";
+            this.titleBanner.Size = new System.Drawing.Size(1920, 160);
+            this.titleBanner.TabIndex = 0;
             // 
             // label1
             // 
@@ -225,6 +228,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.Color.Black;
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 150);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1920, 10);
@@ -359,7 +363,7 @@
             // 
             this.q1ToolTip5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.q1ToolTip5.Controls.Add(this.label3);
-            this.q1ToolTip5.Location = new System.Drawing.Point(1649, 362);
+            this.q1ToolTip5.Location = new System.Drawing.Point(879, 188);
             this.q1ToolTip5.Name = "q1ToolTip5";
             this.q1ToolTip5.Size = new System.Drawing.Size(200, 75);
             this.q1ToolTip5.TabIndex = 15;
@@ -382,7 +386,7 @@
             // 
             this.q1ToolTip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.q1ToolTip1.Controls.Add(this.label2);
-            this.q1ToolTip1.Location = new System.Drawing.Point(825, 362);
+            this.q1ToolTip1.Location = new System.Drawing.Point(55, 188);
             this.q1ToolTip1.Name = "q1ToolTip1";
             this.q1ToolTip1.Size = new System.Drawing.Size(200, 75);
             this.q1ToolTip1.TabIndex = 14;
@@ -405,7 +409,7 @@
             // 
             this.q1toolTip3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.q1toolTip3.Controls.Add(this.label6);
-            this.q1toolTip3.Location = new System.Drawing.Point(1237, 362);
+            this.q1toolTip3.Location = new System.Drawing.Point(467, 188);
             this.q1toolTip3.Name = "q1toolTip3";
             this.q1toolTip3.Size = new System.Drawing.Size(200, 75);
             this.q1toolTip3.TabIndex = 12;
@@ -428,7 +432,7 @@
             // 
             this.q1ToolTip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.q1ToolTip2.Controls.Add(this.label4);
-            this.q1ToolTip2.Location = new System.Drawing.Point(1031, 362);
+            this.q1ToolTip2.Location = new System.Drawing.Point(261, 188);
             this.q1ToolTip2.Name = "q1ToolTip2";
             this.q1ToolTip2.Size = new System.Drawing.Size(200, 75);
             this.q1ToolTip2.TabIndex = 13;
@@ -451,7 +455,7 @@
             // 
             this.q1ToolTip4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.q1ToolTip4.Controls.Add(this.label5);
-            this.q1ToolTip4.Location = new System.Drawing.Point(1443, 362);
+            this.q1ToolTip4.Location = new System.Drawing.Point(673, 188);
             this.q1ToolTip4.Name = "q1ToolTip4";
             this.q1ToolTip4.Size = new System.Drawing.Size(200, 75);
             this.q1ToolTip4.TabIndex = 11;
@@ -595,24 +599,24 @@
             this.label17.TabIndex = 16;
             this.label17.Text = "I ENJOYED THE SCULPTURE?";
             // 
-            // panel3
+            // section5
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.panel3.Controls.Add(this.q1Selected1);
-            this.panel3.Controls.Add(this.label17);
-            this.panel3.Controls.Add(this.q1Selected5);
-            this.panel3.Controls.Add(this.q1Option3);
-            this.panel3.Controls.Add(this.q1Option1);
-            this.panel3.Controls.Add(this.q1Option4);
-            this.panel3.Controls.Add(this.q1Option5);
-            this.panel3.Controls.Add(this.q1Selected4);
-            this.panel3.Controls.Add(this.q1Selected2);
-            this.panel3.Controls.Add(this.q1Selected3);
-            this.panel3.Controls.Add(this.q1Option2);
-            this.panel3.Location = new System.Drawing.Point(813, 177);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1046, 179);
-            this.panel3.TabIndex = 17;
+            this.section5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.section5.Controls.Add(this.q1Selected1);
+            this.section5.Controls.Add(this.label17);
+            this.section5.Controls.Add(this.q1Selected5);
+            this.section5.Controls.Add(this.q1Option3);
+            this.section5.Controls.Add(this.q1Option1);
+            this.section5.Controls.Add(this.q1Option4);
+            this.section5.Controls.Add(this.q1Option5);
+            this.section5.Controls.Add(this.q1Selected4);
+            this.section5.Controls.Add(this.q1Selected2);
+            this.section5.Controls.Add(this.q1Selected3);
+            this.section5.Controls.Add(this.q1Option2);
+            this.section5.Location = new System.Drawing.Point(43, 3);
+            this.section5.Name = "section5";
+            this.section5.Size = new System.Drawing.Size(1046, 179);
+            this.section5.TabIndex = 17;
             // 
             // forenameBox
             // 
@@ -630,43 +634,43 @@
             this.demographic1.Size = new System.Drawing.Size(121, 21);
             this.demographic1.TabIndex = 20;
             // 
-            // panel4
+            // section1
             // 
-            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.panel4.Controls.Add(this.label21);
-            this.panel4.Controls.Add(this.label20);
-            this.panel4.Controls.Add(this.yearBox);
-            this.panel4.Controls.Add(this.monthBox);
-            this.panel4.Controls.Add(this.dayBox);
-            this.panel4.Controls.Add(this.surnameBox);
-            this.panel4.Controls.Add(this.label19);
-            this.panel4.Controls.Add(this.label18);
-            this.panel4.Controls.Add(this.forenameBox);
-            this.panel4.Controls.Add(this.demographic1);
-            this.panel4.Location = new System.Drawing.Point(12, 177);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(764, 812);
-            this.panel4.TabIndex = 21;
+            this.section1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.section1.Controls.Add(this.dateSlash2);
+            this.section1.Controls.Add(this.dateSlash1);
+            this.section1.Controls.Add(this.yearBox);
+            this.section1.Controls.Add(this.monthBox);
+            this.section1.Controls.Add(this.dayBox);
+            this.section1.Controls.Add(this.surnameBox);
+            this.section1.Controls.Add(this.surnameLabel);
+            this.section1.Controls.Add(this.forenameLabel);
+            this.section1.Controls.Add(this.forenameBox);
+            this.section1.Controls.Add(this.demographic1);
+            this.section1.Location = new System.Drawing.Point(12, 177);
+            this.section1.Name = "section1";
+            this.section1.Size = new System.Drawing.Size(764, 812);
+            this.section1.TabIndex = 21;
             // 
-            // label21
+            // dateSlash2
             // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(394, 188);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(31, 39);
-            this.label21.TabIndex = 28;
-            this.label21.Text = "/";
+            this.dateSlash2.AutoSize = true;
+            this.dateSlash2.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateSlash2.Location = new System.Drawing.Point(394, 188);
+            this.dateSlash2.Name = "dateSlash2";
+            this.dateSlash2.Size = new System.Drawing.Size(31, 39);
+            this.dateSlash2.TabIndex = 28;
+            this.dateSlash2.Text = "/";
             // 
-            // label20
+            // dateSlash1
             // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(286, 188);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(31, 39);
-            this.label20.TabIndex = 27;
-            this.label20.Text = "/";
+            this.dateSlash1.AutoSize = true;
+            this.dateSlash1.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dateSlash1.Location = new System.Drawing.Point(286, 188);
+            this.dateSlash1.Name = "dateSlash1";
+            this.dateSlash1.Size = new System.Drawing.Size(31, 39);
+            this.dateSlash1.TabIndex = 27;
+            this.dateSlash1.Text = "/";
             // 
             // yearBox
             // 
@@ -722,44 +726,44 @@
             this.surnameBox.Size = new System.Drawing.Size(261, 47);
             this.surnameBox.TabIndex = 23;
             // 
-            // label19
+            // surnameLabel
             // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(44, 102);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(155, 39);
-            this.label19.TabIndex = 22;
-            this.label19.Text = "SURNAME";
+            this.surnameLabel.AutoSize = true;
+            this.surnameLabel.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.surnameLabel.Location = new System.Drawing.Point(44, 102);
+            this.surnameLabel.Name = "surnameLabel";
+            this.surnameLabel.Size = new System.Drawing.Size(155, 39);
+            this.surnameLabel.TabIndex = 22;
+            this.surnameLabel.Text = "SURNAME";
             // 
-            // label18
+            // forenameLabel
             // 
-            this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(27, 20);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(172, 39);
-            this.label18.TabIndex = 21;
-            this.label18.Text = "FORENAME";
+            this.forenameLabel.AutoSize = true;
+            this.forenameLabel.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.forenameLabel.Location = new System.Drawing.Point(27, 20);
+            this.forenameLabel.Name = "forenameLabel";
+            this.forenameLabel.Size = new System.Drawing.Size(172, 39);
+            this.forenameLabel.TabIndex = 21;
+            this.forenameLabel.Text = "FORENAME";
             // 
-            // panel5
+            // section3
             // 
-            this.panel5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
-            this.panel5.Controls.Add(this.q2Selected1);
-            this.panel5.Controls.Add(this.label23);
-            this.panel5.Controls.Add(this.q2Selected5);
-            this.panel5.Controls.Add(this.q2Option3);
-            this.panel5.Controls.Add(this.q2Option1);
-            this.panel5.Controls.Add(this.q2Option4);
-            this.panel5.Controls.Add(this.q2Option5);
-            this.panel5.Controls.Add(this.q2Selected4);
-            this.panel5.Controls.Add(this.q2Selected2);
-            this.panel5.Controls.Add(this.q2Selected3);
-            this.panel5.Controls.Add(this.q2Option2);
-            this.panel5.Location = new System.Drawing.Point(813, 443);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1046, 179);
-            this.panel5.TabIndex = 23;
+            this.section3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.section3.Controls.Add(this.q2Selected1);
+            this.section3.Controls.Add(this.label23);
+            this.section3.Controls.Add(this.q2Selected5);
+            this.section3.Controls.Add(this.q2Option3);
+            this.section3.Controls.Add(this.q2Option1);
+            this.section3.Controls.Add(this.q2Option4);
+            this.section3.Controls.Add(this.q2Option5);
+            this.section3.Controls.Add(this.q2Selected4);
+            this.section3.Controls.Add(this.q2Selected2);
+            this.section3.Controls.Add(this.q2Selected3);
+            this.section3.Controls.Add(this.q2Option2);
+            this.section3.Location = new System.Drawing.Point(43, 269);
+            this.section3.Name = "section3";
+            this.section3.Size = new System.Drawing.Size(1046, 179);
+            this.section3.TabIndex = 23;
             // 
             // q2Selected1
             // 
@@ -1015,7 +1019,7 @@
             // 
             this.q2ToolTip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.q2ToolTip2.Controls.Add(this.label33);
-            this.q2ToolTip2.Location = new System.Drawing.Point(1031, 628);
+            this.q2ToolTip2.Location = new System.Drawing.Point(261, 454);
             this.q2ToolTip2.Name = "q2ToolTip2";
             this.q2ToolTip2.Size = new System.Drawing.Size(200, 75);
             this.q2ToolTip2.TabIndex = 20;
@@ -1038,7 +1042,7 @@
             // 
             this.q2ToolTip5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.q2ToolTip5.Controls.Add(this.label34);
-            this.q2ToolTip5.Location = new System.Drawing.Point(1649, 628);
+            this.q2ToolTip5.Location = new System.Drawing.Point(879, 454);
             this.q2ToolTip5.Name = "q2ToolTip5";
             this.q2ToolTip5.Size = new System.Drawing.Size(200, 75);
             this.q2ToolTip5.TabIndex = 22;
@@ -1061,7 +1065,7 @@
             // 
             this.q2ToolTip4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.q2ToolTip4.Controls.Add(this.label35);
-            this.q2ToolTip4.Location = new System.Drawing.Point(1443, 628);
+            this.q2ToolTip4.Location = new System.Drawing.Point(673, 454);
             this.q2ToolTip4.Name = "q2ToolTip4";
             this.q2ToolTip4.Size = new System.Drawing.Size(200, 75);
             this.q2ToolTip4.TabIndex = 18;
@@ -1084,7 +1088,7 @@
             // 
             this.q2ToolTip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.q2ToolTip1.Controls.Add(this.label36);
-            this.q2ToolTip1.Location = new System.Drawing.Point(825, 628);
+            this.q2ToolTip1.Location = new System.Drawing.Point(55, 454);
             this.q2ToolTip1.Name = "q2ToolTip1";
             this.q2ToolTip1.Size = new System.Drawing.Size(200, 75);
             this.q2ToolTip1.TabIndex = 21;
@@ -1107,7 +1111,7 @@
             // 
             this.q2ToolTip3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.q2ToolTip3.Controls.Add(this.label37);
-            this.q2ToolTip3.Location = new System.Drawing.Point(1237, 628);
+            this.q2ToolTip3.Location = new System.Drawing.Point(467, 454);
             this.q2ToolTip3.Name = "q2ToolTip3";
             this.q2ToolTip3.Size = new System.Drawing.Size(200, 75);
             this.q2ToolTip3.TabIndex = 19;
@@ -1140,7 +1144,7 @@
             this.panel6.Controls.Add(this.q3Selected2);
             this.panel6.Controls.Add(this.q3Selected3);
             this.panel6.Controls.Add(this.q3Option2);
-            this.panel6.Location = new System.Drawing.Point(813, 709);
+            this.panel6.Location = new System.Drawing.Point(43, 535);
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(1046, 179);
             this.panel6.TabIndex = 29;
@@ -1399,7 +1403,7 @@
             // 
             this.q3ToolTip2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.q3ToolTip2.Controls.Add(this.label49);
-            this.q3ToolTip2.Location = new System.Drawing.Point(1031, 894);
+            this.q3ToolTip2.Location = new System.Drawing.Point(261, 720);
             this.q3ToolTip2.Name = "q3ToolTip2";
             this.q3ToolTip2.Size = new System.Drawing.Size(200, 75);
             this.q3ToolTip2.TabIndex = 26;
@@ -1422,7 +1426,7 @@
             // 
             this.q3ToolTip5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.q3ToolTip5.Controls.Add(this.label50);
-            this.q3ToolTip5.Location = new System.Drawing.Point(1649, 894);
+            this.q3ToolTip5.Location = new System.Drawing.Point(879, 720);
             this.q3ToolTip5.Name = "q3ToolTip5";
             this.q3ToolTip5.Size = new System.Drawing.Size(200, 75);
             this.q3ToolTip5.TabIndex = 28;
@@ -1445,7 +1449,7 @@
             // 
             this.q3ToolTip4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.q3ToolTip4.Controls.Add(this.label51);
-            this.q3ToolTip4.Location = new System.Drawing.Point(1443, 894);
+            this.q3ToolTip4.Location = new System.Drawing.Point(673, 720);
             this.q3ToolTip4.Name = "q3ToolTip4";
             this.q3ToolTip4.Size = new System.Drawing.Size(200, 75);
             this.q3ToolTip4.TabIndex = 24;
@@ -1468,7 +1472,7 @@
             // 
             this.q3ToolTip1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.q3ToolTip1.Controls.Add(this.label52);
-            this.q3ToolTip1.Location = new System.Drawing.Point(825, 894);
+            this.q3ToolTip1.Location = new System.Drawing.Point(55, 720);
             this.q3ToolTip1.Name = "q3ToolTip1";
             this.q3ToolTip1.Size = new System.Drawing.Size(200, 75);
             this.q3ToolTip1.TabIndex = 27;
@@ -1491,7 +1495,7 @@
             // 
             this.q3ToolTip3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.q3ToolTip3.Controls.Add(this.label53);
-            this.q3ToolTip3.Location = new System.Drawing.Point(1237, 894);
+            this.q3ToolTip3.Location = new System.Drawing.Point(467, 720);
             this.q3ToolTip3.Name = "q3ToolTip3";
             this.q3ToolTip3.Size = new System.Drawing.Size(200, 75);
             this.q3ToolTip3.TabIndex = 25;
@@ -1510,38 +1514,46 @@
             this.label53.TabIndex = 3;
             this.label53.Text = "Don\'t Care";
             // 
+            // section2
+            // 
+            this.section2.Controls.Add(this.panel6);
+            this.section2.Controls.Add(this.section5);
+            this.section2.Controls.Add(this.q3ToolTip2);
+            this.section2.Controls.Add(this.q1toolTip3);
+            this.section2.Controls.Add(this.section3);
+            this.section2.Controls.Add(this.q1ToolTip1);
+            this.section2.Controls.Add(this.q3ToolTip5);
+            this.section2.Controls.Add(this.q1ToolTip4);
+            this.section2.Controls.Add(this.q2ToolTip2);
+            this.section2.Controls.Add(this.q1ToolTip5);
+            this.section2.Controls.Add(this.q3ToolTip4);
+            this.section2.Controls.Add(this.q2ToolTip3);
+            this.section2.Controls.Add(this.q1ToolTip2);
+            this.section2.Controls.Add(this.q3ToolTip1);
+            this.section2.Controls.Add(this.q2ToolTip1);
+            this.section2.Controls.Add(this.q2ToolTip5);
+            this.section2.Controls.Add(this.q2ToolTip4);
+            this.section2.Controls.Add(this.q3ToolTip3);
+            this.section2.Location = new System.Drawing.Point(793, 177);
+            this.section2.Name = "section2";
+            this.section2.Size = new System.Drawing.Size(1113, 853);
+            this.section2.TabIndex = 30;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1904, 1042);
-            this.Controls.Add(this.panel6);
-            this.Controls.Add(this.q3ToolTip2);
-            this.Controls.Add(this.panel5);
-            this.Controls.Add(this.q3ToolTip5);
-            this.Controls.Add(this.q2ToolTip2);
-            this.Controls.Add(this.q3ToolTip4);
-            this.Controls.Add(this.panel4);
-            this.Controls.Add(this.q3ToolTip1);
-            this.Controls.Add(this.q2ToolTip5);
-            this.Controls.Add(this.q3ToolTip3);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.q2ToolTip4);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.q2ToolTip1);
-            this.Controls.Add(this.q1ToolTip2);
-            this.Controls.Add(this.q2ToolTip3);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.q1ToolTip5);
-            this.Controls.Add(this.q1ToolTip4);
-            this.Controls.Add(this.q1ToolTip1);
-            this.Controls.Add(this.q1toolTip3);
+            this.Controls.Add(this.section2);
+            this.Controls.Add(this.section1);
+            this.Controls.Add(this.titleBanner);
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
+            this.SizeChanged += new System.EventHandler(this.Form1_SizeChanged);
+            this.titleBanner.ResumeLayout(false);
+            this.titleBanner.PerformLayout();
             this.q1Option4.ResumeLayout(false);
             this.q1Option4.PerformLayout();
             this.q1Option3.ResumeLayout(false);
@@ -1572,12 +1584,12 @@
             this.q1Selected4.PerformLayout();
             this.q1Selected5.ResumeLayout(false);
             this.q1Selected5.PerformLayout();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            this.panel4.ResumeLayout(false);
-            this.panel4.PerformLayout();
-            this.panel5.ResumeLayout(false);
-            this.panel5.PerformLayout();
+            this.section5.ResumeLayout(false);
+            this.section5.PerformLayout();
+            this.section1.ResumeLayout(false);
+            this.section1.PerformLayout();
+            this.section3.ResumeLayout(false);
+            this.section3.PerformLayout();
             this.q2Selected1.ResumeLayout(false);
             this.q2Selected1.PerformLayout();
             this.q2Selected5.ResumeLayout(false);
@@ -1640,6 +1652,7 @@
             this.q3ToolTip1.PerformLayout();
             this.q3ToolTip3.ResumeLayout(false);
             this.q3ToolTip3.PerformLayout();
+            this.section2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1647,7 +1660,7 @@
         #endregion
 
         private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel titleBanner;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel q1Option4;
@@ -1681,19 +1694,19 @@
         private System.Windows.Forms.Panel q1Selected5;
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel section5;
         private System.Windows.Forms.TextBox forenameBox;
         private System.Windows.Forms.ComboBox demographic1;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Panel section1;
+        private System.Windows.Forms.Label forenameLabel;
         private System.Windows.Forms.TextBox surnameBox;
-        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label surnameLabel;
         private System.Windows.Forms.TextBox dayBox;
-        private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Label dateSlash2;
+        private System.Windows.Forms.Label dateSlash1;
         private System.Windows.Forms.TextBox yearBox;
         private System.Windows.Forms.TextBox monthBox;
-        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Panel section3;
         private System.Windows.Forms.Panel q2Selected1;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label23;
@@ -1757,6 +1770,7 @@
         private System.Windows.Forms.Label label52;
         private System.Windows.Forms.Panel q3ToolTip3;
         private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.Panel section2;
     }
 }
 

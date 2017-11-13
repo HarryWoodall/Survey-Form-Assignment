@@ -17,6 +17,10 @@ namespace Assignment1 {
         private Question question3;
         private List<Question> questionList = new List<Question>();
 
+        // Scaling 
+        private float xScale = 1;
+        private float yScale = 1;
+
         public Form1() {
             InitializeComponent();
 
@@ -218,5 +222,37 @@ namespace Assignment1 {
         }
 
         #endregion
+
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+
+            // Revert Scale to default
+            section1.Scale(new SizeF(1 / xScale, 1 / yScale));
+            section2.Scale(new SizeF(1 / xScale, 1 / yScale));
+            titleBanner.Scale(new SizeF(1 / xScale, 1 / yScale));
+
+
+            // Calculate new Scale
+            xScale = (float)ClientRectangle.Width / 1920;
+            yScale = (float)ClientRectangle.Height / 1080;
+
+            // Apply Scale
+            section1.Scale(new SizeF(xScale, yScale));
+            section2.Scale(new SizeF(xScale, yScale));
+            titleBanner.Scale(new SizeF(xScale, yScale));
+
+            // Fix Offset
+            section1.Location = new Point(12, 177);
+            section2.Location = new Point(section1.Location.X + section1.Width + 20, section1.Location.Y);
+            forenameLabel.Location = new Point(27, forenameLabel.Location.Y);
+            forenameBox.Location = new Point(215, forenameBox.Location.Y);
+            surnameLabel.Location = new Point(44, surnameLabel.Location.Y);
+            surnameBox.Location = new Point(215, surnameBox.Location.Y);
+            dayBox.Location = new Point(215, dayBox.Location.Y);
+            dateSlash1.Location = new Point(286, dateSlash1.Location.Y);
+            monthBox.Location = new Point(323, monthBox.Location.Y);
+            dateSlash2.Location = new Point(394, dateSlash2.Location.Y);
+            yearBox.Location = new Point(431, yearBox.Location.Y);
+        }
     }
 }
