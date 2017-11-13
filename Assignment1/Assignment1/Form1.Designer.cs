@@ -67,7 +67,7 @@
             this.label17 = new System.Windows.Forms.Label();
             this.section5 = new System.Windows.Forms.Panel();
             this.forenameBox = new System.Windows.Forms.TextBox();
-            this.demographic1 = new System.Windows.Forms.ComboBox();
+            this.genderBox = new System.Windows.Forms.ComboBox();
             this.section1 = new System.Windows.Forms.Panel();
             this.dateSlash2 = new System.Windows.Forms.Label();
             this.dateSlash1 = new System.Windows.Forms.Label();
@@ -142,6 +142,7 @@
             this.q3ToolTip3 = new System.Windows.Forms.Panel();
             this.label53 = new System.Windows.Forms.Label();
             this.section2 = new System.Windows.Forms.Panel();
+            this.label18 = new System.Windows.Forms.Label();
             this.titleBanner.SuspendLayout();
             this.q1Option4.SuspendLayout();
             this.q1Option3.SuspendLayout();
@@ -626,17 +627,20 @@
             this.forenameBox.Size = new System.Drawing.Size(261, 47);
             this.forenameBox.TabIndex = 18;
             // 
-            // demographic1
+            // genderBox
             // 
-            this.demographic1.FormattingEnabled = true;
-            this.demographic1.Location = new System.Drawing.Point(60, 319);
-            this.demographic1.Name = "demographic1";
-            this.demographic1.Size = new System.Drawing.Size(121, 21);
-            this.demographic1.TabIndex = 20;
+            this.genderBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.genderBox.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.genderBox.FormattingEnabled = true;
+            this.genderBox.Location = new System.Drawing.Point(215, 315);
+            this.genderBox.Name = "genderBox";
+            this.genderBox.Size = new System.Drawing.Size(261, 47);
+            this.genderBox.TabIndex = 20;
             // 
             // section1
             // 
             this.section1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.section1.Controls.Add(this.label18);
             this.section1.Controls.Add(this.dateSlash2);
             this.section1.Controls.Add(this.dateSlash1);
             this.section1.Controls.Add(this.yearBox);
@@ -646,7 +650,7 @@
             this.section1.Controls.Add(this.surnameLabel);
             this.section1.Controls.Add(this.forenameLabel);
             this.section1.Controls.Add(this.forenameBox);
-            this.section1.Controls.Add(this.demographic1);
+            this.section1.Controls.Add(this.genderBox);
             this.section1.Location = new System.Drawing.Point(12, 177);
             this.section1.Name = "section1";
             this.section1.Size = new System.Drawing.Size(764, 812);
@@ -1539,6 +1543,16 @@
             this.section2.Size = new System.Drawing.Size(1113, 853);
             this.section2.TabIndex = 30;
             // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(44, 318);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(155, 39);
+            this.label18.TabIndex = 29;
+            this.label18.Text = "SURNAME";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1696,7 +1710,7 @@
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Panel section5;
         private System.Windows.Forms.TextBox forenameBox;
-        private System.Windows.Forms.ComboBox demographic1;
+        private System.Windows.Forms.ComboBox genderBox;
         private System.Windows.Forms.Panel section1;
         private System.Windows.Forms.Label forenameLabel;
         private System.Windows.Forms.TextBox surnameBox;
@@ -1771,6 +1785,7 @@
         private System.Windows.Forms.Panel q3ToolTip3;
         private System.Windows.Forms.Label label53;
         private System.Windows.Forms.Panel section2;
+        private System.Windows.Forms.Label label18;
     }
 }
 

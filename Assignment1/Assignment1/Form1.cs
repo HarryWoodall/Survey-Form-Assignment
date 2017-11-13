@@ -94,6 +94,9 @@ namespace Assignment1 {
             question3.addSelectedPanel(q3Selected3);
             question3.addSelectedPanel(q3Selected4);
             question3.addSelectedPanel(q3Selected5);
+
+            genderBox.Items.Add("MALE");
+            genderBox.Items.Add("FEMALE");
         }
 
         #region Animation
@@ -221,10 +224,7 @@ namespace Assignment1 {
             }
         }
 
-        #endregion
-
-        private void Form1_SizeChanged(object sender, EventArgs e)
-        {
+        private void Form1_SizeChanged(object sender, EventArgs e) {
 
             // Revert Scale to default
             section1.Scale(new SizeF(1 / xScale, 1 / yScale));
@@ -254,5 +254,8 @@ namespace Assignment1 {
             dateSlash2.Location = new Point(394, dateSlash2.Location.Y);
             yearBox.Location = new Point(431, yearBox.Location.Y);
         }
+
+        #endregion
+
     }
 }
