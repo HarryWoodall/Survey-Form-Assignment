@@ -95,8 +95,29 @@ namespace Assignment1 {
             question3.addSelectedPanel(q3Selected4);
             question3.addSelectedPanel(q3Selected5);
 
+
             genderBox.Items.Add("MALE");
             genderBox.Items.Add("FEMALE");
+
+            ethnicityBox.Items.Add("WHITE / WHITE BRITISH");
+            ethnicityBox.Items.Add("MIXED");
+            ethnicityBox.Items.Add("ASIAN / ASIAN BRITISH");
+            ethnicityBox.Items.Add("BLACK / BLACK BRITISH");
+            ethnicityBox.Items.Add("OTHER");
+
+            educationBox.Items.Add("PRIMARY");
+            educationBox.Items.Add("SECONDARY");
+            educationBox.Items.Add("ADVANCED");
+            educationBox.Items.Add("HIGHER");
+            educationBox.Items.Add("OTHER");
+
+            employmentBox.Items.Add("EMPLOYED");
+            employmentBox.Items.Add("SELF EMPLOYED");
+            employmentBox.Items.Add("UNEMPLOYED");
+            employmentBox.Items.Add("LOOKING FOR WORK");
+            employmentBox.Items.Add("STUDENT");
+            employmentBox.Items.Add("RETIRED");
+            employmentBox.Items.Add("OTHER");
         }
 
         #region Animation
@@ -253,6 +274,10 @@ namespace Assignment1 {
             monthBox.Location = new Point(323, monthBox.Location.Y);
             dateSlash2.Location = new Point(394, dateSlash2.Location.Y);
             yearBox.Location = new Point(431, yearBox.Location.Y);
+        }
+
+        public void submit_onClick(object sender, EventArgs e) {
+            Person person = new Person();
         }
 
         #endregion
