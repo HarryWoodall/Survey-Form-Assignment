@@ -145,7 +145,7 @@ namespace Assignment1 {
 
         #endregion
 
-        #region Event Handelers
+        #region Event Handlers
 
         private void timer1_Tick(object sender, EventArgs e) {
 
@@ -277,10 +277,89 @@ namespace Assignment1 {
         }
 
         public void submit_onClick(object sender, EventArgs e) {
-            Person person = new Person();
+            if (isComplete()) {
+
+                int[] answers = new int[8];
+
+                answers[0] = question1.getAnswer();
+                answers[1] = question2.getAnswer();
+                answers[2] = question3.getAnswer();
+                answers[3] = getAge();
+                answers[4] = genderBox.SelectedIndex;
+                answers[5] = ethnicityBox.SelectedIndex;
+                answers[6] = educationBox.SelectedIndex;
+                answers[7] = employmentBox.SelectedIndex;
+                Person person = new Person(forenameBox.Text, surnameBox.Text, answers);
+            }
         }
 
         #endregion
 
+        public bool isComplete() {
+            foreach (Control control in this.Controls) {
+                if (control is ComboBox) {
+                    ComboBox box = (ComboBox)control;
+                    if (box.SelectedIndex == -1) {
+                        return false;
+                    }
+                } else if (control is TextBox) {
+                    if (control.Tag.ToString() == "0") {
+                        return false;
+                    } else {
+                        TextBox box = (TextBox)control;
+                        if (box.Text == "") {
+                            return false;
+                        }
+                    }
+                }
+            }
+
+            foreach (Question question in questionList) {
+                if (question.getAnswer() == -1) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public int getAge() {
+            int age;
+            int year = Convert.ToInt32(yearBox.Text);
+            int month = Convert.ToInt32(monthBox.Text);
+            int day = Convert.ToInt32(dayBox.Text);
+
+            DateTime date = DateTime.Today;
+            age = date.Year - year;
+
+            if (month > date.Month) {
+                age--;
+            }
+            else if (month == date.Month) {
+                if (day > date.Day) {
+                    age--;
+                }
+            }
+
+            if (age < 10) {
+                return 0;
+            } 
+            else if (age < 20) {
+                return 1;
+            } 
+            else if (age < 30) {
+                return 2;
+            } else if (age < 40) {
+                return 3;
+            }
+            else if (age < 50) {
+                return 4;
+            }
+            else if (age < 60) {
+                return 5;
+            } else {
+                return 6;
+            }
+        }
     }
 }

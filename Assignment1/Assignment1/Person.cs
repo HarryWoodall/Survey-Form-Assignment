@@ -10,14 +10,13 @@ namespace Assignment1
     {
         string foreName;
         string surName;
-        int ageValue;
+        int[] questionvalues;
 
-        int q1;
-        int q2;
-        int q3;
-        int q4;
-        int q5;
-        int q6;
-        int q7;
+        public Person(string foreName, string surName, int[] values)
+        {
+            this.foreName = foreName;
+            this.surName = surName;
+            this.questionvalues = values;
+        }
     }
 }

@@ -69,6 +69,14 @@
             this.forenameBox = new System.Windows.Forms.TextBox();
             this.genderBox = new System.Windows.Forms.ComboBox();
             this.section1 = new System.Windows.Forms.Panel();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label18 = new System.Windows.Forms.Label();
+            this.employmentBox = new System.Windows.Forms.ComboBox();
+            this.employmentLabel = new System.Windows.Forms.Label();
+            this.educationBox = new System.Windows.Forms.ComboBox();
+            this.educationLabel = new System.Windows.Forms.Label();
+            this.ethnicityBox = new System.Windows.Forms.ComboBox();
+            this.ethnicityLabel = new System.Windows.Forms.Label();
             this.genderLabel = new System.Windows.Forms.Label();
             this.dateSlash2 = new System.Windows.Forms.Label();
             this.dateSlash1 = new System.Windows.Forms.Label();
@@ -143,14 +151,6 @@
             this.q3ToolTip3 = new System.Windows.Forms.Panel();
             this.label53 = new System.Windows.Forms.Label();
             this.section2 = new System.Windows.Forms.Panel();
-            this.ethnicityLabel = new System.Windows.Forms.Label();
-            this.ethnicityBox = new System.Windows.Forms.ComboBox();
-            this.educationLabel = new System.Windows.Forms.Label();
-            this.educationBox = new System.Windows.Forms.ComboBox();
-            this.employmentLabel = new System.Windows.Forms.Label();
-            this.employmentBox = new System.Windows.Forms.ComboBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.label18 = new System.Windows.Forms.Label();
             this.titleBanner.SuspendLayout();
             this.q1Option4.SuspendLayout();
             this.q1Option3.SuspendLayout();
@@ -169,6 +169,7 @@
             this.q1Selected5.SuspendLayout();
             this.section5.SuspendLayout();
             this.section1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.section3.SuspendLayout();
             this.q2Selected1.SuspendLayout();
             this.q2Selected5.SuspendLayout();
@@ -202,7 +203,6 @@
             this.q3ToolTip1.SuspendLayout();
             this.q3ToolTip3.SuspendLayout();
             this.section2.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -671,6 +671,93 @@
             this.section1.Name = "section1";
             this.section1.Size = new System.Drawing.Size(764, 812);
             this.section1.TabIndex = 21;
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.label18);
+            this.panel1.Location = new System.Drawing.Point(302, 716);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(160, 79);
+            this.panel1.TabIndex = 9;
+            this.panel1.Tag = "0";
+            this.panel1.Click += new System.EventHandler(this.submit_onClick);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.BackColor = System.Drawing.Color.Transparent;
+            this.label18.Font = new System.Drawing.Font("Calibri", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.White;
+            this.label18.Location = new System.Drawing.Point(25, 20);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(109, 36);
+            this.label18.TabIndex = 0;
+            this.label18.Text = "SUBMIT";
+            // 
+            // employmentBox
+            // 
+            this.employmentBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.employmentBox.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.employmentBox.FormattingEnabled = true;
+            this.employmentBox.Location = new System.Drawing.Point(266, 535);
+            this.employmentBox.Name = "employmentBox";
+            this.employmentBox.Size = new System.Drawing.Size(453, 47);
+            this.employmentBox.TabIndex = 35;
+            // 
+            // employmentLabel
+            // 
+            this.employmentLabel.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDownGrid;
+            this.employmentLabel.AutoSize = true;
+            this.employmentLabel.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.employmentLabel.Location = new System.Drawing.Point(13, 538);
+            this.employmentLabel.Name = "employmentLabel";
+            this.employmentLabel.Size = new System.Drawing.Size(210, 39);
+            this.employmentLabel.TabIndex = 34;
+            this.employmentLabel.Text = "EMPLOYMENT";
+            // 
+            // educationBox
+            // 
+            this.educationBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.educationBox.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.educationBox.FormattingEnabled = true;
+            this.educationBox.Location = new System.Drawing.Point(266, 465);
+            this.educationBox.Name = "educationBox";
+            this.educationBox.Size = new System.Drawing.Size(453, 47);
+            this.educationBox.TabIndex = 33;
+            // 
+            // educationLabel
+            // 
+            this.educationLabel.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDownGrid;
+            this.educationLabel.AutoSize = true;
+            this.educationLabel.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.educationLabel.Location = new System.Drawing.Point(47, 468);
+            this.educationLabel.Name = "educationLabel";
+            this.educationLabel.Size = new System.Drawing.Size(176, 39);
+            this.educationLabel.TabIndex = 32;
+            this.educationLabel.Text = "EDUCATION";
+            // 
+            // ethnicityBox
+            // 
+            this.ethnicityBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ethnicityBox.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ethnicityBox.FormattingEnabled = true;
+            this.ethnicityBox.Location = new System.Drawing.Point(266, 395);
+            this.ethnicityBox.Name = "ethnicityBox";
+            this.ethnicityBox.Size = new System.Drawing.Size(453, 47);
+            this.ethnicityBox.TabIndex = 31;
+            // 
+            // ethnicityLabel
+            // 
+            this.ethnicityLabel.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDownGrid;
+            this.ethnicityLabel.AutoSize = true;
+            this.ethnicityLabel.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ethnicityLabel.Location = new System.Drawing.Point(65, 398);
+            this.ethnicityLabel.Name = "ethnicityLabel";
+            this.ethnicityLabel.Size = new System.Drawing.Size(158, 39);
+            this.ethnicityLabel.TabIndex = 30;
+            this.ethnicityLabel.Text = "ETHNICITY";
             // 
             // genderLabel
             // 
@@ -1570,92 +1657,6 @@
             this.section2.Size = new System.Drawing.Size(1113, 853);
             this.section2.TabIndex = 30;
             // 
-            // ethnicityLabel
-            // 
-            this.ethnicityLabel.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDownGrid;
-            this.ethnicityLabel.AutoSize = true;
-            this.ethnicityLabel.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ethnicityLabel.Location = new System.Drawing.Point(65, 398);
-            this.ethnicityLabel.Name = "ethnicityLabel";
-            this.ethnicityLabel.Size = new System.Drawing.Size(158, 39);
-            this.ethnicityLabel.TabIndex = 30;
-            this.ethnicityLabel.Text = "ETHNICITY";
-            // 
-            // ethnicityBox
-            // 
-            this.ethnicityBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ethnicityBox.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ethnicityBox.FormattingEnabled = true;
-            this.ethnicityBox.Location = new System.Drawing.Point(266, 395);
-            this.ethnicityBox.Name = "ethnicityBox";
-            this.ethnicityBox.Size = new System.Drawing.Size(453, 47);
-            this.ethnicityBox.TabIndex = 31;
-            // 
-            // educationLabel
-            // 
-            this.educationLabel.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDownGrid;
-            this.educationLabel.AutoSize = true;
-            this.educationLabel.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.educationLabel.Location = new System.Drawing.Point(47, 468);
-            this.educationLabel.Name = "educationLabel";
-            this.educationLabel.Size = new System.Drawing.Size(176, 39);
-            this.educationLabel.TabIndex = 32;
-            this.educationLabel.Text = "EDUCATION";
-            // 
-            // educationBox
-            // 
-            this.educationBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.educationBox.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.educationBox.FormattingEnabled = true;
-            this.educationBox.Location = new System.Drawing.Point(266, 465);
-            this.educationBox.Name = "educationBox";
-            this.educationBox.Size = new System.Drawing.Size(453, 47);
-            this.educationBox.TabIndex = 33;
-            // 
-            // employmentLabel
-            // 
-            this.employmentLabel.AccessibleRole = System.Windows.Forms.AccessibleRole.ButtonDropDownGrid;
-            this.employmentLabel.AutoSize = true;
-            this.employmentLabel.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.employmentLabel.Location = new System.Drawing.Point(13, 538);
-            this.employmentLabel.Name = "employmentLabel";
-            this.employmentLabel.Size = new System.Drawing.Size(210, 39);
-            this.employmentLabel.TabIndex = 34;
-            this.employmentLabel.Text = "EMPLOYMENT";
-            // 
-            // employmentBox
-            // 
-            this.employmentBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.employmentBox.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.employmentBox.FormattingEnabled = true;
-            this.employmentBox.Location = new System.Drawing.Point(266, 535);
-            this.employmentBox.Name = "employmentBox";
-            this.employmentBox.Size = new System.Drawing.Size(453, 47);
-            this.employmentBox.TabIndex = 35;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label18);
-            this.panel1.Location = new System.Drawing.Point(302, 716);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(160, 79);
-            this.panel1.TabIndex = 9;
-            this.panel1.Tag = "0";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.BackColor = System.Drawing.Color.Transparent;
-            this.label18.Font = new System.Drawing.Font("Calibri", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(25, 20);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(109, 36);
-            this.label18.TabIndex = 0;
-            this.label18.Text = "SUBMIT";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1705,6 +1706,8 @@
             this.section5.PerformLayout();
             this.section1.ResumeLayout(false);
             this.section1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.section3.ResumeLayout(false);
             this.section3.PerformLayout();
             this.q2Selected1.ResumeLayout(false);
@@ -1770,8 +1773,6 @@
             this.q3ToolTip3.ResumeLayout(false);
             this.q3ToolTip3.PerformLayout();
             this.section2.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
