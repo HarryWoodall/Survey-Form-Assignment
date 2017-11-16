@@ -39,6 +39,7 @@ namespace Assignment1 {
             genderValues.Add(person.getGenderValue());
             ethnicityValues.Add(person.getEthnicityValue());
             educationValues.Add(person.getEducationValue());
+            employmentValues.Add(person.getEmploymentValue());
             q1Values.Add(person.getQ1Value());
             q2Values.Add(person.getQ2Value());
             q3Values.Add(person.getQ3Value());

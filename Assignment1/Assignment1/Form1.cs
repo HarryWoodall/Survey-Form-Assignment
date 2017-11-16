@@ -13,17 +13,18 @@ namespace Assignment1 {
 
     public partial class Form1 : Form {
 
-        public Data data;
+        // Field Variables
+        public Data data = new Data();
 
         private Question question1;
         private Question question2;
         private Question question3;
         private List<Question> questionList = new List<Question>();
 
-        // Panels
+        private List<Label> sideBar;
+
         Panel graphicPanel1;
 
-        // Scaling 
         private float xScale = 1;
         private float yScale = 1;
 
@@ -33,8 +34,9 @@ namespace Assignment1 {
             // Maximise form on startup
             this.WindowState = FormWindowState.Maximized;
             initializeQuestions();
-            inflateSidebar();
-            inflateGraphic(graphicPanel1);
+            getData();
+            //inflateSidebar();
+            //inflateGraphic(graphicPanel1);
             timer1.Start();
         }
 
@@ -160,6 +162,8 @@ namespace Assignment1 {
             // Loops through each panel in each question, animating if need be
             foreach (Question question in questionList) {
                 foreach (Panel panel in question.getToolTipList()) {
+
+                    // Check to see what state each panel is in
                     if (panel.Visible && panel.Tag.ToString() == "0") {
                         fadeIn(question.getToolTipList().IndexOf(panel), question);
                     } else if (panel.Visible && panel.Tag.ToString() == "1") {
@@ -173,8 +177,12 @@ namespace Assignment1 {
             Panel panel = (Panel)sender;
 
             foreach (Question question in questionList) {
+
+                // Find panel in MainPanelList
                 if (question.getMainList().Contains(panel)) {
                     question.setCurrentPanel(panel);
+
+                    // Set the corresponding tool tip panel to visible and change its state.
                     int index = Convert.ToInt32(panel.Tag);
                     question.getToolTipList()[index].Tag = "0";
                     question.getToolTipList()[index].Visible = true;
@@ -186,7 +194,11 @@ namespace Assignment1 {
             Panel panel = (Panel)sender;
 
             foreach (Question question in questionList) {
+
+                //Find panel in MainPanelList
                 if (question.getMainList().Contains(panel)) {
+
+                    // Change the state of the corresponding tool tip panel.
                     int index = Convert.ToInt32(panel.Tag);
                     question.getToolTipList()[index].Tag = "1";
                 }
@@ -195,31 +207,43 @@ namespace Assignment1 {
 
         public void questionPanel_onClick(object sender, EventArgs e) {
             Panel panel = (Panel)sender;
+
+            // Find the only control object inside the label.
             Label label = (Label)panel.Controls[0];
 
             foreach (Question question in questionList) {
+
+                // Find the panel in MainPanelList.
                 if (question.getMainList().Contains(panel)) {
                     int index = Convert.ToInt32(panel.Tag);
 
+                    // Set all panels in SelectedPanelsList to invisible.
                     foreach (Panel selected in question.getSelectedList()) {
                         selected.Visible = false;
                     }
 
+                    // Set all labels in MainPanelList to default font size.
                     foreach (Panel main in question.getMainList()) {
                         Label lb = (Label)main.Controls[0];
                         lb.Font = new Font("Calibri", 22);
                         lb.Location = new Point((panel.Width - label.Width) / 2, (panel.Height - label.Height) / 2);
                     }
+
+                    // Set coresponding selected panel to visible and store index.
                     question.getSelectedList()[index].Visible = true;
                     question.setAnswer(index);
                 }
             }
+
+            // Increase font size of clicked panel and re-center it.
             label.Font = new Font("Calibri", 42);
             label.Location = new Point((panel.Width - label.Width) / 2, (panel.Height - label.Height) / 2);
         }
 
         private void date_Enter(object sender, EventArgs e) {
             TextBox box = (TextBox)sender;
+
+            // Check to see if box contains hint text. If so, delete it.
             if (box.Tag.ToString() == "0") {
                 box.ForeColor = Color.Black;
                 box.Text = "";
@@ -229,9 +253,12 @@ namespace Assignment1 {
 
         private void date_Leave(object sender, EventArgs e) {
             TextBox box = (TextBox)sender;
+
+            // Check to see if box contains empty string value.
             if (box.Text == "") {
                 box.ForeColor = Color.Gray;
 
+                // Add hint text to corresponding boxes.
                 if (box == dayBox) {
                     box.Text = "DD";
                 } else if (box == monthBox) {
@@ -245,14 +272,20 @@ namespace Assignment1 {
 
         private void date_Change(object sender, EventArgs e) {
             TextBox box = (TextBox)sender;
+
+            // Check if you have selected box and isn't empty.
             if (box.Text.Length > 0 && box.Focused) {
                 int n;
+
+                // If input is non numerical, replace text with what was previously inserted.
                 if (!int.TryParse(box.Text, out n)) {
                     box.Text = box.Text.Substring(0, box.Text.Length - 1);
                 }
             }
         }
 
+
+        // TODO FIX THIS SHIT!
         private void Form1_SizeChanged(object sender, EventArgs e) {
 
             // Revert Scale to default
@@ -285,8 +318,11 @@ namespace Assignment1 {
         }
 
         public void submit_onClick(object sender, EventArgs e) {
+
+            // Check if form has been completed.
             if (isComplete()) {
 
+                // Create Person Object and hand it arguments.
                 int[] answers = new int[8];
 
                 answers[0] = question1.getAnswer();
@@ -308,17 +344,25 @@ namespace Assignment1 {
 
         public void tabPanel_onEnter(object sender, EventArgs e) {
             Label label = (Label)sender;
-            label.BackColor = Color.White;
+            if (label.Tag.ToString() == "0") {
+                label.ForeColor = Color.Black;
+                label.BackColor = Color.White;
+            }
         }
 
         public void tabPanel_onLeave(object sender, EventArgs e) {
             Label label = (Label)sender;
-            label.BackColor = Color.LightBlue;
+            if (label.Tag.ToString() == "0") {
+                label.ForeColor = Color.White;
+                label.BackColor = Color.Transparent;
+            }
         }
 
         #endregion
 
         public bool isComplete() {
+
+            // Loop through each control object, checking if empty.
             foreach (Control control in this.Controls) {
                 if (control is ComboBox) {
                     ComboBox box = (ComboBox)control;
@@ -337,6 +381,7 @@ namespace Assignment1 {
                 }
             }
 
+            // Loop through each question, checking if answered.
             foreach (Question question in questionList) {
                 if (question.getAnswer() == -1) {
                     return false;
@@ -352,6 +397,7 @@ namespace Assignment1 {
             int month = Convert.ToInt32(monthBox.Text);
             int day = Convert.ToInt32(dayBox.Text);
 
+            // Compare DOB with todays date to get age.
             DateTime date = DateTime.Today;
             age = date.Year - year;
 
@@ -364,6 +410,7 @@ namespace Assignment1 {
                 }
             }
 
+            // Convert age into a numerical representation.
             if (age < 10) {
                 return 0;
             } 
@@ -372,7 +419,8 @@ namespace Assignment1 {
             } 
             else if (age < 30) {
                 return 2;
-            } else if (age < 40) {
+            } 
+            else if (age < 40) {
                 return 3;
             }
             else if (age < 50) {
@@ -387,29 +435,38 @@ namespace Assignment1 {
 
         public void inflateSidebar() {
             mainContainer.Hide();
+            sideBar = new List<Label>();
+
             Panel panel = new Panel();
             this.Controls.Add(panel);
+
             panel.Size = new Size(200, mainContainer.Height);
             panel.Location = new Point(0, 150);
             panel.Margin = new Padding(0);
-            panel.BackColor = Color.DarkBlue;
+            panel.BackColor = Color.FromArgb(225, 225, 128, 0);
 
             string[] tabNames = { "Age", "Gender", "Ethnisity", "Education", "Employment", "Q1", "Q2", "Q3" };
 
             for (int i = 0; i < 8; i++) {
                 Label tab = new Label();
                 panel.Controls.Add(tab);
+
                 tab.AutoSize = false;
                 tab.Text = tabNames[i];
                 tab.TextAlign = ContentAlignment.MiddleCenter;
                 tab.Size = new Size(200, 75);
                 tab.Padding = new Padding(0);
                 tab.Location = new Point(0, ((panel.Height - 75*8 - 40) / 2) + (75 * i));
-                tab.Tag = i;
-                tab.BackColor = Color.LightBlue;
+                tab.Tag = "0";
+                tab.BackColor = Color.Transparent;
+                tab.ForeColor = Color.White;
                 tab.MouseEnter += new EventHandler(tabPanel_onEnter);
                 tab.MouseLeave += new EventHandler(tabPanel_onLeave);
+                sideBar.Add(tab);
             }
+            sideBar[0].BackColor = Color.White;
+            sideBar[0].ForeColor = Color.Black;
+            sideBar[0].Tag = "1";
         }
 
         public void inflateGraphic(Panel graphic) {
@@ -419,27 +476,45 @@ namespace Assignment1 {
             graphic.Location = new Point(100,150);
             graphic.Margin = new Padding(0);
 
-            Chart chart = new Chart();
+            ChartConstructor constructor = new ChartConstructor(data);
 
-            ChartArea area = new ChartArea();
-            area.Area3DStyle.Enable3D = true;
+            Chart chart = constructor.chartAge();
 
-            Legend legend = new Legend();
-
-            chart.ChartAreas.Add(area);
-            chart.Legends.Add(legend);
-            chart.Series.Add(getData());
             graphic.Controls.Add(chart);
             chart.Size = new Size(800, 800);
             chart.Location = new Point((graphic.Width - chart.Width) / 2, (graphic.Height - chart.Height) / 2);
         }
 
-        public Series getData() {
-            Series series = new Series();
-            series.ChartType = SeriesChartType.Pie;
-            series.Points.AddXY("Something", 10);
-            series.Points.AddXY("Something else", 5);
-            return series;
+        public void getData() {
+
+            Random rand = new Random();
+            for (int i = 0; i < 100; i++) {
+                string forname = "Billy";
+                string surname = "Boy";
+                int[] values = new int[8];
+                for (int j = 0; j < 8; j++) {
+                    if (j < 3) {
+                        values[j] = rand.Next(0, 5);
+                    }
+                    else if (j == 3) {
+                        values[j] = rand.Next(0, 7);
+                    }
+                    else if (j == 4) {
+                        values[j] = rand.Next(0, 2);
+                    }
+                    else if (j == 5) {
+                        values[j] = rand.Next(0, 5);
+                    }
+                    else if (j == 6) {
+                        values[j] = rand.Next(0, 5);
+                    } 
+                    else if (j == 7) {
+                        values[j] = rand.Next(0, 7);
+                    }
+                }
+                Person person = new Person(forname, surname, values);
+                data.addPerson(person);
+            }
         }
     }
 }
