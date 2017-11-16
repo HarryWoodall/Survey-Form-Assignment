@@ -7,15 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Assignment1 {
 
     public partial class Form1 : Form {
 
+        public Data data;
+
         private Question question1;
         private Question question2;
         private Question question3;
         private List<Question> questionList = new List<Question>();
+
+        // Panels
+        Panel graphicPanel1;
 
         // Scaling 
         private float xScale = 1;
@@ -27,6 +33,8 @@ namespace Assignment1 {
             // Maximise form on startup
             this.WindowState = FormWindowState.Maximized;
             initializeQuestions();
+            inflateSidebar();
+            inflateGraphic(graphicPanel1);
             timer1.Start();
         }
 
@@ -161,7 +169,7 @@ namespace Assignment1 {
             }
         }
 
-        public void panel_onEnter(object sender, EventArgs e) {
+        public void questionPanel_onEnter(object sender, EventArgs e) {
             Panel panel = (Panel)sender;
 
             foreach (Question question in questionList) {
@@ -174,7 +182,7 @@ namespace Assignment1 {
             }
         }
 
-        public void panel_onLeave(object sender, EventArgs e) {
+        public void questionPanel_onLeave(object sender, EventArgs e) {
             Panel panel = (Panel)sender;
 
             foreach (Question question in questionList) {
@@ -185,7 +193,7 @@ namespace Assignment1 {
             }
         }
 
-        public void panel_onClick(object sender, EventArgs e) {
+        public void questionPanel_onClick(object sender, EventArgs e) {
             Panel panel = (Panel)sender;
             Label label = (Label)panel.Controls[0];
 
@@ -263,7 +271,7 @@ namespace Assignment1 {
             titleBanner.Scale(new SizeF(xScale, yScale));
 
             // Fix Offset
-            section1.Location = new Point(12, 177);
+            section1.Location = new Point(12, 25);
             section2.Location = new Point(section1.Location.X + section1.Width + 20, section1.Location.Y);
             forenameLabel.Location = new Point(27, forenameLabel.Location.Y);
             forenameBox.Location = new Point(215, forenameBox.Location.Y);
@@ -290,7 +298,22 @@ namespace Assignment1 {
                 answers[6] = educationBox.SelectedIndex;
                 answers[7] = employmentBox.SelectedIndex;
                 Person person = new Person(forenameBox.Text, surnameBox.Text, answers);
+                data.addPerson(person);
+
+                mainContainer.Hide();
+                // TODO reset the mainContainer.
+                //inflateGraphic1();
             }
+        }
+
+        public void tabPanel_onEnter(object sender, EventArgs e) {
+            Label label = (Label)sender;
+            label.BackColor = Color.White;
+        }
+
+        public void tabPanel_onLeave(object sender, EventArgs e) {
+            Label label = (Label)sender;
+            label.BackColor = Color.LightBlue;
         }
 
         #endregion
@@ -360,6 +383,63 @@ namespace Assignment1 {
             } else {
                 return 6;
             }
+        }
+
+        public void inflateSidebar() {
+            mainContainer.Hide();
+            Panel panel = new Panel();
+            this.Controls.Add(panel);
+            panel.Size = new Size(200, mainContainer.Height);
+            panel.Location = new Point(0, 150);
+            panel.Margin = new Padding(0);
+            panel.BackColor = Color.DarkBlue;
+
+            string[] tabNames = { "Age", "Gender", "Ethnisity", "Education", "Employment", "Q1", "Q2", "Q3" };
+
+            for (int i = 0; i < 8; i++) {
+                Label tab = new Label();
+                panel.Controls.Add(tab);
+                tab.AutoSize = false;
+                tab.Text = tabNames[i];
+                tab.TextAlign = ContentAlignment.MiddleCenter;
+                tab.Size = new Size(200, 75);
+                tab.Padding = new Padding(0);
+                tab.Location = new Point(0, ((panel.Height - 75*8 - 40) / 2) + (75 * i));
+                tab.Tag = i;
+                tab.BackColor = Color.LightBlue;
+                tab.MouseEnter += new EventHandler(tabPanel_onEnter);
+                tab.MouseLeave += new EventHandler(tabPanel_onLeave);
+            }
+        }
+
+        public void inflateGraphic(Panel graphic) {
+            graphic = new Panel();
+            this.Controls.Add(graphic);
+            graphic.Size = new Size(mainContainer.Width - 200, mainContainer.Height);
+            graphic.Location = new Point(100,150);
+            graphic.Margin = new Padding(0);
+
+            Chart chart = new Chart();
+
+            ChartArea area = new ChartArea();
+            area.Area3DStyle.Enable3D = true;
+
+            Legend legend = new Legend();
+
+            chart.ChartAreas.Add(area);
+            chart.Legends.Add(legend);
+            chart.Series.Add(getData());
+            graphic.Controls.Add(chart);
+            chart.Size = new Size(800, 800);
+            chart.Location = new Point((graphic.Width - chart.Width) / 2, (graphic.Height - chart.Height) / 2);
+        }
+
+        public Series getData() {
+            Series series = new Series();
+            series.ChartType = SeriesChartType.Pie;
+            series.Points.AddXY("Something", 10);
+            series.Points.AddXY("Something else", 5);
+            return series;
         }
     }
 }

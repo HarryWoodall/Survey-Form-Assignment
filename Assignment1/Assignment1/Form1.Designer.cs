@@ -151,6 +151,7 @@
             this.q3ToolTip3 = new System.Windows.Forms.Panel();
             this.label53 = new System.Windows.Forms.Label();
             this.section2 = new System.Windows.Forms.Panel();
+            this.mainContainer = new System.Windows.Forms.Panel();
             this.titleBanner.SuspendLayout();
             this.q1Option4.SuspendLayout();
             this.q1Option3.SuspendLayout();
@@ -203,6 +204,7 @@
             this.q3ToolTip1.SuspendLayout();
             this.q3ToolTip3.SuspendLayout();
             this.section2.SuspendLayout();
+            this.mainContainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // timer1
@@ -240,6 +242,7 @@
             this.panel2.BackColor = System.Drawing.Color.Black;
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panel2.Location = new System.Drawing.Point(0, 150);
+            this.panel2.Margin = new System.Windows.Forms.Padding(0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1920, 10);
             this.panel2.TabIndex = 1;
@@ -253,9 +256,9 @@
             this.q1Option4.Size = new System.Drawing.Size(200, 100);
             this.q1Option4.TabIndex = 5;
             this.q1Option4.Tag = "3";
-            this.q1Option4.Click += new System.EventHandler(this.panel_onClick);
-            this.q1Option4.MouseEnter += new System.EventHandler(this.panel_onEnter);
-            this.q1Option4.MouseLeave += new System.EventHandler(this.panel_onLeave);
+            this.q1Option4.Click += new System.EventHandler(this.questionPanel_onClick);
+            this.q1Option4.MouseEnter += new System.EventHandler(this.questionPanel_onEnter);
+            this.q1Option4.MouseLeave += new System.EventHandler(this.questionPanel_onLeave);
             // 
             // label10
             // 
@@ -278,9 +281,9 @@
             this.q1Option3.Size = new System.Drawing.Size(200, 100);
             this.q1Option3.TabIndex = 6;
             this.q1Option3.Tag = "2";
-            this.q1Option3.Click += new System.EventHandler(this.panel_onClick);
-            this.q1Option3.MouseEnter += new System.EventHandler(this.panel_onEnter);
-            this.q1Option3.MouseLeave += new System.EventHandler(this.panel_onLeave);
+            this.q1Option3.Click += new System.EventHandler(this.questionPanel_onClick);
+            this.q1Option3.MouseEnter += new System.EventHandler(this.questionPanel_onEnter);
+            this.q1Option3.MouseLeave += new System.EventHandler(this.questionPanel_onLeave);
             // 
             // label9
             // 
@@ -303,9 +306,9 @@
             this.q1Option1.Size = new System.Drawing.Size(200, 100);
             this.q1Option1.TabIndex = 8;
             this.q1Option1.Tag = "0";
-            this.q1Option1.Click += new System.EventHandler(this.panel_onClick);
-            this.q1Option1.MouseEnter += new System.EventHandler(this.panel_onEnter);
-            this.q1Option1.MouseLeave += new System.EventHandler(this.panel_onLeave);
+            this.q1Option1.Click += new System.EventHandler(this.questionPanel_onClick);
+            this.q1Option1.MouseEnter += new System.EventHandler(this.questionPanel_onEnter);
+            this.q1Option1.MouseLeave += new System.EventHandler(this.questionPanel_onLeave);
             // 
             // label7
             // 
@@ -328,16 +331,16 @@
             this.q1Option2.Size = new System.Drawing.Size(200, 100);
             this.q1Option2.TabIndex = 7;
             this.q1Option2.Tag = "1";
-            this.q1Option2.Click += new System.EventHandler(this.panel_onClick);
-            this.q1Option2.MouseEnter += new System.EventHandler(this.panel_onEnter);
-            this.q1Option2.MouseLeave += new System.EventHandler(this.panel_onLeave);
+            this.q1Option2.Click += new System.EventHandler(this.questionPanel_onClick);
+            this.q1Option2.MouseEnter += new System.EventHandler(this.questionPanel_onEnter);
+            this.q1Option2.MouseLeave += new System.EventHandler(this.questionPanel_onLeave);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Font = new System.Drawing.Font("Calibri", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.label8.Location = new System.Drawing.Point(85, 32);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(30, 36);
@@ -353,9 +356,9 @@
             this.q1Option5.Size = new System.Drawing.Size(200, 100);
             this.q1Option5.TabIndex = 10;
             this.q1Option5.Tag = "4";
-            this.q1Option5.Click += new System.EventHandler(this.panel_onClick);
-            this.q1Option5.MouseEnter += new System.EventHandler(this.panel_onEnter);
-            this.q1Option5.MouseLeave += new System.EventHandler(this.panel_onLeave);
+            this.q1Option5.Click += new System.EventHandler(this.questionPanel_onClick);
+            this.q1Option5.MouseEnter += new System.EventHandler(this.questionPanel_onEnter);
+            this.q1Option5.MouseLeave += new System.EventHandler(this.questionPanel_onLeave);
             // 
             // label11
             // 
@@ -454,7 +457,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.label4.Location = new System.Drawing.Point(22, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(162, 26);
@@ -667,7 +670,7 @@
             this.section1.Controls.Add(this.forenameLabel);
             this.section1.Controls.Add(this.forenameBox);
             this.section1.Controls.Add(this.genderBox);
-            this.section1.Location = new System.Drawing.Point(12, 177);
+            this.section1.Location = new System.Drawing.Point(12, 25);
             this.section1.Name = "section1";
             this.section1.Size = new System.Drawing.Size(764, 812);
             this.section1.TabIndex = 21;
@@ -948,9 +951,9 @@
             this.q2Option3.Size = new System.Drawing.Size(200, 100);
             this.q2Option3.TabIndex = 6;
             this.q2Option3.Tag = "2";
-            this.q2Option3.Click += new System.EventHandler(this.panel_onClick);
-            this.q2Option3.MouseEnter += new System.EventHandler(this.panel_onEnter);
-            this.q2Option3.MouseLeave += new System.EventHandler(this.panel_onLeave);
+            this.q2Option3.Click += new System.EventHandler(this.questionPanel_onClick);
+            this.q2Option3.MouseEnter += new System.EventHandler(this.questionPanel_onEnter);
+            this.q2Option3.MouseLeave += new System.EventHandler(this.questionPanel_onLeave);
             // 
             // label25
             // 
@@ -973,9 +976,9 @@
             this.q2Option1.Size = new System.Drawing.Size(200, 100);
             this.q2Option1.TabIndex = 8;
             this.q2Option1.Tag = "0";
-            this.q2Option1.Click += new System.EventHandler(this.panel_onClick);
-            this.q2Option1.MouseEnter += new System.EventHandler(this.panel_onEnter);
-            this.q2Option1.MouseLeave += new System.EventHandler(this.panel_onLeave);
+            this.q2Option1.Click += new System.EventHandler(this.questionPanel_onClick);
+            this.q2Option1.MouseEnter += new System.EventHandler(this.questionPanel_onEnter);
+            this.q2Option1.MouseLeave += new System.EventHandler(this.questionPanel_onLeave);
             // 
             // label26
             // 
@@ -998,9 +1001,9 @@
             this.q2Option4.Size = new System.Drawing.Size(200, 100);
             this.q2Option4.TabIndex = 5;
             this.q2Option4.Tag = "3";
-            this.q2Option4.Click += new System.EventHandler(this.panel_onClick);
-            this.q2Option4.MouseEnter += new System.EventHandler(this.panel_onEnter);
-            this.q2Option4.MouseLeave += new System.EventHandler(this.panel_onLeave);
+            this.q2Option4.Click += new System.EventHandler(this.questionPanel_onClick);
+            this.q2Option4.MouseEnter += new System.EventHandler(this.questionPanel_onEnter);
+            this.q2Option4.MouseLeave += new System.EventHandler(this.questionPanel_onLeave);
             // 
             // label27
             // 
@@ -1023,9 +1026,9 @@
             this.q2Option5.Size = new System.Drawing.Size(200, 100);
             this.q2Option5.TabIndex = 10;
             this.q2Option5.Tag = "4";
-            this.q2Option5.Click += new System.EventHandler(this.panel_onClick);
-            this.q2Option5.MouseEnter += new System.EventHandler(this.panel_onEnter);
-            this.q2Option5.MouseLeave += new System.EventHandler(this.panel_onLeave);
+            this.q2Option5.Click += new System.EventHandler(this.questionPanel_onClick);
+            this.q2Option5.MouseEnter += new System.EventHandler(this.questionPanel_onEnter);
+            this.q2Option5.MouseLeave += new System.EventHandler(this.questionPanel_onLeave);
             // 
             // label28
             // 
@@ -1117,16 +1120,16 @@
             this.q2Option2.Size = new System.Drawing.Size(200, 100);
             this.q2Option2.TabIndex = 7;
             this.q2Option2.Tag = "1";
-            this.q2Option2.Click += new System.EventHandler(this.panel_onClick);
-            this.q2Option2.MouseEnter += new System.EventHandler(this.panel_onEnter);
-            this.q2Option2.MouseLeave += new System.EventHandler(this.panel_onLeave);
+            this.q2Option2.Click += new System.EventHandler(this.questionPanel_onClick);
+            this.q2Option2.MouseEnter += new System.EventHandler(this.questionPanel_onEnter);
+            this.q2Option2.MouseLeave += new System.EventHandler(this.questionPanel_onLeave);
             // 
             // label32
             // 
             this.label32.AutoSize = true;
             this.label32.BackColor = System.Drawing.Color.Transparent;
             this.label32.Font = new System.Drawing.Font("Calibri", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.label32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.label32.Location = new System.Drawing.Point(85, 32);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(30, 36);
@@ -1149,7 +1152,7 @@
             this.label33.AutoSize = true;
             this.label33.BackColor = System.Drawing.Color.Transparent;
             this.label33.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.label33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.label33.Location = new System.Drawing.Point(22, 24);
             this.label33.Name = "label33";
             this.label33.Size = new System.Drawing.Size(162, 26);
@@ -1332,9 +1335,9 @@
             this.q3Option3.Size = new System.Drawing.Size(200, 100);
             this.q3Option3.TabIndex = 6;
             this.q3Option3.Tag = "2";
-            this.q3Option3.Click += new System.EventHandler(this.panel_onClick);
-            this.q3Option3.MouseEnter += new System.EventHandler(this.panel_onEnter);
-            this.q3Option3.MouseLeave += new System.EventHandler(this.panel_onLeave);
+            this.q3Option3.Click += new System.EventHandler(this.questionPanel_onClick);
+            this.q3Option3.MouseEnter += new System.EventHandler(this.questionPanel_onEnter);
+            this.q3Option3.MouseLeave += new System.EventHandler(this.questionPanel_onLeave);
             // 
             // label41
             // 
@@ -1357,9 +1360,9 @@
             this.q3Option1.Size = new System.Drawing.Size(200, 100);
             this.q3Option1.TabIndex = 8;
             this.q3Option1.Tag = "0";
-            this.q3Option1.Click += new System.EventHandler(this.panel_onClick);
-            this.q3Option1.MouseEnter += new System.EventHandler(this.panel_onEnter);
-            this.q3Option1.MouseLeave += new System.EventHandler(this.panel_onLeave);
+            this.q3Option1.Click += new System.EventHandler(this.questionPanel_onClick);
+            this.q3Option1.MouseEnter += new System.EventHandler(this.questionPanel_onEnter);
+            this.q3Option1.MouseLeave += new System.EventHandler(this.questionPanel_onLeave);
             // 
             // label42
             // 
@@ -1382,9 +1385,9 @@
             this.q3Option4.Size = new System.Drawing.Size(200, 100);
             this.q3Option4.TabIndex = 5;
             this.q3Option4.Tag = "3";
-            this.q3Option4.Click += new System.EventHandler(this.panel_onClick);
-            this.q3Option4.MouseEnter += new System.EventHandler(this.panel_onEnter);
-            this.q3Option4.MouseLeave += new System.EventHandler(this.panel_onLeave);
+            this.q3Option4.Click += new System.EventHandler(this.questionPanel_onClick);
+            this.q3Option4.MouseEnter += new System.EventHandler(this.questionPanel_onEnter);
+            this.q3Option4.MouseLeave += new System.EventHandler(this.questionPanel_onLeave);
             // 
             // label43
             // 
@@ -1407,9 +1410,9 @@
             this.q3Option5.Size = new System.Drawing.Size(200, 100);
             this.q3Option5.TabIndex = 10;
             this.q3Option5.Tag = "4";
-            this.q3Option5.Click += new System.EventHandler(this.panel_onClick);
-            this.q3Option5.MouseEnter += new System.EventHandler(this.panel_onEnter);
-            this.q3Option5.MouseLeave += new System.EventHandler(this.panel_onLeave);
+            this.q3Option5.Click += new System.EventHandler(this.questionPanel_onClick);
+            this.q3Option5.MouseEnter += new System.EventHandler(this.questionPanel_onEnter);
+            this.q3Option5.MouseLeave += new System.EventHandler(this.questionPanel_onLeave);
             // 
             // label44
             // 
@@ -1501,16 +1504,16 @@
             this.q3Option2.Size = new System.Drawing.Size(200, 100);
             this.q3Option2.TabIndex = 7;
             this.q3Option2.Tag = "1";
-            this.q3Option2.Click += new System.EventHandler(this.panel_onClick);
-            this.q3Option2.MouseEnter += new System.EventHandler(this.panel_onEnter);
-            this.q3Option2.MouseLeave += new System.EventHandler(this.panel_onLeave);
+            this.q3Option2.Click += new System.EventHandler(this.questionPanel_onClick);
+            this.q3Option2.MouseEnter += new System.EventHandler(this.questionPanel_onEnter);
+            this.q3Option2.MouseLeave += new System.EventHandler(this.questionPanel_onLeave);
             // 
             // label48
             // 
             this.label48.AutoSize = true;
             this.label48.BackColor = System.Drawing.Color.Transparent;
             this.label48.Font = new System.Drawing.Font("Calibri", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label48.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.label48.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.label48.Location = new System.Drawing.Point(85, 32);
             this.label48.Name = "label48";
             this.label48.Size = new System.Drawing.Size(30, 36);
@@ -1533,7 +1536,7 @@
             this.label49.AutoSize = true;
             this.label49.BackColor = System.Drawing.Color.Transparent;
             this.label49.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label49.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
+            this.label49.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(250)))));
             this.label49.Location = new System.Drawing.Point(22, 24);
             this.label49.Name = "label49";
             this.label49.Size = new System.Drawing.Size(162, 26);
@@ -1652,10 +1655,19 @@
             this.section2.Controls.Add(this.q2ToolTip5);
             this.section2.Controls.Add(this.q2ToolTip4);
             this.section2.Controls.Add(this.q3ToolTip3);
-            this.section2.Location = new System.Drawing.Point(793, 177);
+            this.section2.Location = new System.Drawing.Point(805, 25);
             this.section2.Name = "section2";
-            this.section2.Size = new System.Drawing.Size(1113, 853);
+            this.section2.Size = new System.Drawing.Size(1113, 812);
             this.section2.TabIndex = 30;
+            // 
+            // mainContainer
+            // 
+            this.mainContainer.Controls.Add(this.section1);
+            this.mainContainer.Controls.Add(this.section2);
+            this.mainContainer.Location = new System.Drawing.Point(0, 160);
+            this.mainContainer.Name = "mainContainer";
+            this.mainContainer.Size = new System.Drawing.Size(1920, 920);
+            this.mainContainer.TabIndex = 31;
             // 
             // Form1
             // 
@@ -1663,8 +1675,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1904, 1042);
-            this.Controls.Add(this.section2);
-            this.Controls.Add(this.section1);
+            this.Controls.Add(this.mainContainer);
             this.Controls.Add(this.titleBanner);
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "Form1";
@@ -1773,6 +1784,7 @@
             this.q3ToolTip3.ResumeLayout(false);
             this.q3ToolTip3.PerformLayout();
             this.section2.ResumeLayout(false);
+            this.mainContainer.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1900,6 +1912,7 @@
         private System.Windows.Forms.Label employmentLabel;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.Panel mainContainer;
     }
 }
 
