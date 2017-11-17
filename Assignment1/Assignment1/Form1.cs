@@ -20,10 +20,7 @@ namespace Assignment1 {
         private Question question2;
         private Question question3;
         private List<Question> questionList = new List<Question>();
-
         private List<Label> sideBar;
-
-        Panel graphicPanel1;
 
         private float xScale = 1;
         private float yScale = 1;
@@ -35,8 +32,8 @@ namespace Assignment1 {
             this.WindowState = FormWindowState.Maximized;
             initializeQuestions();
             getData();
-            //inflateSidebar();
-            //inflateGraphic(graphicPanel1);
+            inflateSidebar();
+            inflateGraphic(0);
             timer1.Start();
         }
 
@@ -358,6 +355,27 @@ namespace Assignment1 {
             }
         }
 
+        public void tabPanel_onClick(object sender, EventArgs e) {
+            Label label = (Label)sender;
+            if (label.Tag.ToString() == "0") {
+                foreach (Control control in this.Controls) {
+                    if (control.Tag == "Graphic") {
+                        control.Dispose();
+                    }
+                }
+                inflateGraphic(sideBar.IndexOf(label));
+
+                foreach(Label item in sideBar) {
+                    item.ForeColor = Color.White;
+                    item.BackColor = Color.Transparent;
+                    item.Tag = "0";
+                }
+                label.ForeColor = Color.Black;
+                label.BackColor = Color.White;
+                label.Tag = "1";
+            }
+        }
+
         #endregion
 
         public bool isComplete() {
@@ -462,6 +480,7 @@ namespace Assignment1 {
                 tab.ForeColor = Color.White;
                 tab.MouseEnter += new EventHandler(tabPanel_onEnter);
                 tab.MouseLeave += new EventHandler(tabPanel_onLeave);
+                tab.Click += new EventHandler(tabPanel_onClick);
                 sideBar.Add(tab);
             }
             sideBar[0].BackColor = Color.White;
@@ -469,20 +488,50 @@ namespace Assignment1 {
             sideBar[0].Tag = "1";
         }
 
-        public void inflateGraphic(Panel graphic) {
-            graphic = new Panel();
+        public void inflateGraphic(int index) {
+            Panel graphic = new Panel();
             this.Controls.Add(graphic);
             graphic.Size = new Size(mainContainer.Width - 200, mainContainer.Height);
-            graphic.Location = new Point(100,150);
+            graphic.Location = new Point(200,150);
             graphic.Margin = new Padding(0);
+            graphic.Tag = "Graphic";
 
-            ChartConstructor constructor = new ChartConstructor(data);
+            ChartConstructor constructor = new ChartConstructor(data, graphic);
+            Chart chart;
 
-            Chart chart = constructor.chartAge();
+            switch (index) {
+                case 0:
+                    chart = constructor.chartAge();
+                    break;
+                case 1:
+                    chart = constructor.chartGender();
+                    break;
+                case 2:
+                    chart = constructor.chartEthnicity();
+                    break;
+                case 3:
+                    chart = constructor.chartEducation();
+                    break;
+                case 4:
+                    chart = constructor.chartEmployment();
+                    break;
+                case 5:
+                    chart = constructor.chartQuestion(0);
+                    break;
+                case 6:
+                    chart = constructor.chartQuestion(1);
+                    break;
+                case 7:
+                    chart = constructor.chartQuestion(2); ;
+                    break;
+                default:
+                    chart = chart = constructor.chartAge();
+                    break;
+            }
 
             graphic.Controls.Add(chart);
             chart.Size = new Size(800, 800);
-            chart.Location = new Point((graphic.Width - chart.Width) / 2, (graphic.Height - chart.Height) / 2);
+            chart.Location = new Point(50, (graphic.Height - chart.Height) / 2);
         }
 
         public void getData() {

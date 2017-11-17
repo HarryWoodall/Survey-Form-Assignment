@@ -32,19 +32,6 @@ namespace Assignment1 {
             q3Values = new List<int>();
         }
 
-        public void addPerson(Person person) {
-            fornames.Add(person.getForname());
-            surnames.Add(person.getSurname());
-            ageValues.Add(person.getAgeValue());
-            genderValues.Add(person.getGenderValue());
-            ethnicityValues.Add(person.getEthnicityValue());
-            educationValues.Add(person.getEducationValue());
-            employmentValues.Add(person.getEmploymentValue());
-            q1Values.Add(person.getQ1Value());
-            q2Values.Add(person.getQ2Value());
-            q3Values.Add(person.getQ3Value());
-        }
-
         public List<String> getFornames() {
             return fornames;
         }
@@ -66,7 +53,7 @@ namespace Assignment1 {
         }
 
         public List<int> getEducationValues() {
-            return ethnicityValues;
+            return educationValues;
         }
 
         public List<int> getEmploymentValues() {
@@ -83,6 +70,30 @@ namespace Assignment1 {
 
         public List<int> getQ3Values() {
             return q3Values;
+        }
+
+        public void addPerson(Person person) {
+            fornames.Add(person.getForname());
+            surnames.Add(person.getSurname());
+            ageValues.Add(person.getAgeValue());
+            genderValues.Add(person.getGenderValue());
+            ethnicityValues.Add(person.getEthnicityValue());
+            educationValues.Add(person.getEducationValue());
+            employmentValues.Add(person.getEmploymentValue());
+            q1Values.Add(person.getQ1Value());
+            q2Values.Add(person.getQ2Value());
+            q3Values.Add(person.getQ3Value());
+        }
+
+        public int getMeanAge(List<int> questionValues, int value) {
+            List<int> meanAgeValues = new List<int>();
+            foreach (int qValue in questionValues) {
+                if (qValue == value) {
+                    meanAgeValues.Add(ageValues[questionValues.IndexOf(qValue)]);
+                }
+            }
+
+            return meanAgeValues.Sum() / meanAgeValues.Count;
         }
     }
 }
