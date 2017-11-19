@@ -114,7 +114,7 @@ namespace Assignment1 {
             Chart chart = initializeChart("Gender");
             string[] chartLabels = { "Male", "Female" };
             List<int> questionValues = getQuestion(question);
-            List<int> valueList = data.getSubValues(questionValues, data.getAgeValues(), score);
+            List<int> valueList = data.getSubValues(questionValues, data.getGenderValues(), score);
             chart.Series.Add(getChartSeries(chart, valueList, chartLabels));
 
             return chart;
@@ -124,7 +124,7 @@ namespace Assignment1 {
             Chart chart = initializeChart("Ethnicity");
             string[] chartLabels = { "White / White British", "Mixed", "Asian / Asian British", "Black / Black British", "Other" };
             List<int> questionValues = getQuestion(question);
-            List<int> valueList = data.getSubValues(questionValues, data.getAgeValues(), score);
+            List<int> valueList = data.getSubValues(questionValues, data.getEthnicityValues(), score);
             chart.Series.Add(getChartSeries(chart, valueList, chartLabels));
 
             return chart;
@@ -134,7 +134,7 @@ namespace Assignment1 {
             Chart chart = initializeChart("Education");
             string[] chartLabels = { "Primary", "Secondary", "Advanced", "Higher", "Other" };
             List<int> questionValues = getQuestion(question);
-            List<int> valueList = data.getSubValues(questionValues, data.getAgeValues(), score);
+            List<int> valueList = data.getSubValues(questionValues, data.getEducationValues(), score);
             chart.Series.Add(getChartSeries(chart, valueList, chartLabels));
 
             return chart;
@@ -144,7 +144,7 @@ namespace Assignment1 {
             Chart chart = initializeChart("Employment");
             string[] chartLabels = { "Employed", "Self Employed", "Unemployed", "Looking for work", "Student", "Retired", "Other" };
             List<int> questionValues = getQuestion(question);
-            List<int> valueList = data.getSubValues(questionValues, data.getAgeValues(), score);
+            List<int> valueList = data.getSubValues(questionValues, data.getEmploymentValues(), score);
             chart.Series.Add(getChartSeries(chart, valueList, chartLabels));
 
             return chart;
