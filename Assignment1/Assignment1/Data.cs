@@ -9,6 +9,7 @@ namespace Assignment1 {
 
         private List<String> fornames;
         private List<String> surnames;
+        private List<int> ages;
 
         private List<int> ageValues;
         private List<int> genderValues;
@@ -22,6 +23,7 @@ namespace Assignment1 {
         public Data() {
             fornames = new List<string>();
             surnames = new List<string>();
+            ages = new List<int>();
             ageValues = new List<int>();
             genderValues = new List<int>();
             ethnicityValues = new List<int>();
@@ -38,6 +40,10 @@ namespace Assignment1 {
 
         public List<String> getSurnames() {
             return surnames;
+        }
+
+        public List<int> getAges() {
+            return ages;
         }
 
         public List<int> getAgeValues() {
@@ -72,9 +78,20 @@ namespace Assignment1 {
             return q3Values;
         }
 
+        public List<int> getSubValues(List<int> questionList, List<int> comparisonList, int score) {
+            List<int> ageList = new List<int>();
+            for (int i = 0; i < questionList.Count; i++) {
+                if (questionList[i] == score) {
+                    ageList.Add(comparisonList[i]);
+                }
+            }
+            return ageList;
+        }
+
         public void addPerson(Person person) {
             fornames.Add(person.getForname());
             surnames.Add(person.getSurname());
+            ages.Add(person.getAge());
             ageValues.Add(person.getAgeValue());
             genderValues.Add(person.getGenderValue());
             ethnicityValues.Add(person.getEthnicityValue());
@@ -85,15 +102,68 @@ namespace Assignment1 {
             q3Values.Add(person.getQ3Value());
         }
 
-        public int getMeanAge(List<int> questionValues, int value) {
-            List<int> meanAgeValues = new List<int>();
-            foreach (int qValue in questionValues) {
-                if (qValue == value) {
-                    meanAgeValues.Add(ageValues[questionValues.IndexOf(qValue)]);
+        #region dataGeneration
+
+        public int getMeanValue(List<int> questionValues, int value) {
+            List<int> meanValues = new List<int>();
+            for (int i = 0; i < questionValues.Count; i++) {
+                if (questionValues[i] == value) {
+                    meanValues.Add(ages[i]);
+                }
+            }
+            return Convert.ToInt32(meanValues.Average());
+        }
+
+        public int[] getMode(List<int> list) {
+            int current = -1;
+            int repeatValue = 0;
+            double maxValue = 0;
+            int mode = 0;
+            List<int> previousNumbers = new List<int>();
+
+            foreach (int number in list) {
+                if (!previousNumbers.Contains(number)) {
+                    current = number;
+                    previousNumbers.Add(current);
+                    for (int i = list.IndexOf(number); i < list.Count; i++) {
+                        if (list[i] == current) {
+                            repeatValue++;
+                        }
+                    }
+                    if (maxValue < repeatValue) {
+                        maxValue = repeatValue;
+                        mode = current;
+                    }
+                    repeatValue = 0;
                 }
             }
 
-            return meanAgeValues.Sum() / meanAgeValues.Count;
+            int[] result = { mode, Convert.ToInt32(maxValue / list.Count * 100) };
+            return result;
         }
+
+        public Value getModalValues(List<int> questionValues, int value, string type) {
+            List<int> modalValues = new List<int>();
+            for (int i = 0; i < questionValues.Count; i++) {
+                if (questionValues[i] == value) {
+                    if (type == Value.TYPE_EDUCATION) {
+                        modalValues.Add(educationValues[i]);
+                    }
+                    else if (type == Value.TYPE_EMPLOYMENT){
+                        modalValues.Add(employmentValues[i]);
+                    }
+                    else if (type == Value.TYPE_ETHNISITY) {
+                        modalValues.Add(ethnicityValues[i]);
+                    }
+                    else if (type == Value.TYPE_GENDER) {
+                        modalValues.Add(genderValues[i]);
+                    }
+                }
+            }
+
+            return new Value(getMode(modalValues), type);
+        }
+        
+        #endregion
     }
 }

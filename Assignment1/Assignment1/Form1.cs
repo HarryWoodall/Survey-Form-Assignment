@@ -20,7 +20,13 @@ namespace Assignment1 {
         private Question question2;
         private Question question3;
         private List<Question> questionList = new List<Question>();
-        private List<Label> sideBar;
+        private List<Label> sideBarTabs;
+        private List<Label> subBarTabs;
+
+        private Panel subBarContainer;
+
+        private int sideBarIndex;
+        private int subBarIndex;
 
         private float xScale = 1;
         private float yScale = 1;
@@ -33,7 +39,7 @@ namespace Assignment1 {
             initializeQuestions();
             getData();
             inflateSidebar();
-            inflateGraphic(0);
+            inflateGraphic();
             timer1.Start();
         }
 
@@ -325,37 +331,60 @@ namespace Assignment1 {
                 answers[0] = question1.getAnswer();
                 answers[1] = question2.getAnswer();
                 answers[2] = question3.getAnswer();
-                answers[3] = getAge();
+                answers[3] = getAgeValue();
                 answers[4] = genderBox.SelectedIndex;
                 answers[5] = ethnicityBox.SelectedIndex;
                 answers[6] = educationBox.SelectedIndex;
                 answers[7] = employmentBox.SelectedIndex;
-                Person person = new Person(forenameBox.Text, surnameBox.Text, answers);
+                Person person = new Person(forenameBox.Text, surnameBox.Text, getAge(), answers);
                 data.addPerson(person);
 
                 mainContainer.Hide();
                 // TODO reset the mainContainer.
-                //inflateGraphic1();
             }
         }
 
-        public void tabPanel_onEnter(object sender, EventArgs e) {
+        public void sideBarTab_onEnter(object sender, EventArgs e) {
             Label label = (Label)sender;
-            if (label.Tag.ToString() == "0") {
-                label.ForeColor = Color.Black;
-                label.BackColor = Color.White;
+            label.BackColor = Color.FromArgb(255, 217, 128, 38);
+            sideBarIndex = sideBarTabs.IndexOf(label);
+            if (sideBarTabs[0] == label) {
+                inflateSubBar();
+            } else {
+                if (subBarContainer != null && subBarContainer.Visible) {
+                    subBarContainer.Visible = false;
+                }
             }
         }
 
-        public void tabPanel_onLeave(object sender, EventArgs e) {
+        public void sideBarTab_onLeave(object sender, EventArgs e) {
             Label label = (Label)sender;
-            if (label.Tag.ToString() == "0") {
-                label.ForeColor = Color.White;
-                label.BackColor = Color.Transparent;
+            label.BackColor = Color.Transparent;
+
+        }
+
+        public void subBarTab_onEnter(object sender, EventArgs e) {
+            Label label = (Label)sender;
+            label.BackColor = Color.White;
+            label.ForeColor = Color.Black;
+            subBarIndex = subBarTabs.IndexOf(label);
+        }
+
+        public void subBarTab_onLeave(object sender, EventArgs e) {
+            Label label = (Label)sender;
+            label.BackColor = Color.Transparent;
+            label.ForeColor = Color.White;
+        }
+
+        public void sideBar_onMouseMove(object sender, MouseEventArgs e) {
+            if (e.Y < 140) {
+                if (subBarContainer != null && subBarContainer.Visible) {
+                    subBarContainer.Hide();
+                }
             }
         }
 
-        public void tabPanel_onClick(object sender, EventArgs e) {
+        public void Tab_onClick(object sender, EventArgs e) {
             Label label = (Label)sender;
             if (label.Tag.ToString() == "0") {
                 foreach (Control control in this.Controls) {
@@ -363,16 +392,25 @@ namespace Assignment1 {
                         control.Dispose();
                     }
                 }
-                inflateGraphic(sideBar.IndexOf(label));
+                inflateGraphic();
 
-                foreach(Label item in sideBar) {
-                    item.ForeColor = Color.White;
-                    item.BackColor = Color.Transparent;
-                    item.Tag = "0";
+                if (sideBarTabs.Contains(label)) {
+                    foreach (Label item in sideBarTabs) {
+                        item.Tag = "0";
+                    }
+                } else {
+                    foreach (Label item in subBarTabs) {
+                        item.Tag = "0";
+                    }
                 }
-                label.ForeColor = Color.Black;
-                label.BackColor = Color.White;
+                //label.Font = new Font("Calibri", 32, FontStyle.Bold);
                 label.Tag = "1";
+            }
+        }
+
+        public void graphic_onEnter(object sender, EventArgs e) {
+            if (subBarContainer != null && subBarContainer.Visible) {
+                subBarContainer.Hide();
             }
         }
 
@@ -409,7 +447,28 @@ namespace Assignment1 {
             return true;
         }
 
-        public int getAge() {
+        public int getAgeValue() {
+            int age = getAge();
+
+            // Convert age into a numerical representation.
+            if (age < 10) {
+                return 0;
+            } else if (age < 20) {
+                return 1;
+            } else if (age < 30) {
+                return 2;
+            } else if (age < 40) {
+                return 3;
+            } else if (age < 50) {
+                return 4;
+            } else if (age < 60) {
+                return 5;
+            } else {
+                return 6;
+            }
+        }
+
+        private int getAge() {
             int age;
             int year = Convert.ToInt32(yearBox.Text);
             int month = Convert.ToInt32(monthBox.Text);
@@ -421,117 +480,125 @@ namespace Assignment1 {
 
             if (month > date.Month) {
                 age--;
-            }
-            else if (month == date.Month) {
+            } else if (month == date.Month) {
                 if (day > date.Day) {
                     age--;
                 }
             }
 
-            // Convert age into a numerical representation.
-            if (age < 10) {
-                return 0;
-            } 
-            else if (age < 20) {
-                return 1;
-            } 
-            else if (age < 30) {
-                return 2;
-            } 
-            else if (age < 40) {
-                return 3;
-            }
-            else if (age < 50) {
-                return 4;
-            }
-            else if (age < 60) {
-                return 5;
-            } else {
-                return 6;
-            }
+            return age;
         }
 
         public void inflateSidebar() {
             mainContainer.Hide();
-            sideBar = new List<Label>();
+            sideBarTabs = new List<Label>();
 
-            Panel panel = new Panel();
-            this.Controls.Add(panel);
+            Panel sideBarContainer = new Panel();
+            this.Controls.Add(sideBarContainer);
 
-            panel.Size = new Size(200, mainContainer.Height);
-            panel.Location = new Point(0, 150);
-            panel.Margin = new Padding(0);
-            panel.BackColor = Color.FromArgb(225, 225, 128, 0);
+            sideBarContainer.Size = new Size(200, mainContainer.Height);
+            sideBarContainer.Location = new Point(0, 150);
+            sideBarContainer.Margin = new Padding(0);
+            sideBarContainer.BackColor = Color.FromArgb(225, 225, 128, 0);
+            sideBarContainer.MouseMove += new MouseEventHandler(sideBar_onMouseMove);
 
-            string[] tabNames = { "Age", "Gender", "Ethnisity", "Education", "Employment", "Q1", "Q2", "Q3" };
+            string[] tabNames = { "Total", "Q1", "Q2", "Q3" };
 
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < tabNames.Length; i++) {
                 Label tab = new Label();
-                panel.Controls.Add(tab);
+                sideBarContainer.Controls.Add(tab);
 
                 tab.AutoSize = false;
                 tab.Text = tabNames[i];
                 tab.TextAlign = ContentAlignment.MiddleCenter;
-                tab.Size = new Size(200, 75);
+                tab.Size = new Size(200, 150);
                 tab.Padding = new Padding(0);
-                tab.Location = new Point(0, ((panel.Height - 75*8 - 40) / 2) + (75 * i));
+                tab.Location = new Point(0, ((sideBarContainer.Height - tab.Height * tabNames.Length - 40) / 2) + (tab.Height * i));
                 tab.Tag = "0";
                 tab.BackColor = Color.Transparent;
                 tab.ForeColor = Color.White;
-                tab.MouseEnter += new EventHandler(tabPanel_onEnter);
-                tab.MouseLeave += new EventHandler(tabPanel_onLeave);
-                tab.Click += new EventHandler(tabPanel_onClick);
-                sideBar.Add(tab);
+                tab.MouseEnter += new EventHandler(sideBarTab_onEnter);
+                tab.MouseLeave += new EventHandler(sideBarTab_onLeave);
+
+                if (i > 0) {
+                    tab.Click += new EventHandler(Tab_onClick);
+                }
+
+                sideBarTabs.Add(tab);
             }
-            sideBar[0].BackColor = Color.White;
-            sideBar[0].ForeColor = Color.Black;
-            sideBar[0].Tag = "1";
+            sideBarTabs[0].Tag = "1";
         }
 
-        public void inflateGraphic(int index) {
+        public void inflateSubBar() {
+            if (subBarContainer == null) {
+                subBarTabs = new List<Label>();
+
+                subBarContainer = new Panel();
+                this.Controls.Add(subBarContainer);
+                subBarContainer.BringToFront();
+                titleBanner.BringToFront();
+
+
+                subBarContainer.Size = new Size(150, mainContainer.Height);
+                subBarContainer.Location = new Point(200, 150);
+                subBarContainer.Margin = new Padding(0);
+                subBarContainer.BackColor = Color.FromArgb(255, 217, 128, 38);
+
+                string[] tabNames = { "Age", "Gender", "Ethnicity", "Education", "Employment" };
+
+                for (int i = 0; i < tabNames.Length; i++) {
+                    Label tab = new Label();
+                    subBarContainer.Controls.Add(tab);
+
+                    tab.AutoSize = false;
+                    tab.Text = tabNames[i];
+                    tab.TextAlign = ContentAlignment.MiddleCenter;
+                    tab.Size = new Size(150, 100);
+                    tab.Padding = new Padding(0);
+                    tab.Location = new Point(0, ((subBarContainer.Height - tab.Height * tabNames.Length - 40) / 2) + (tab.Height * i));
+                    tab.Tag = "0";
+                    tab.BackColor = Color.Transparent;
+                    tab.ForeColor = Color.White;
+                    tab.MouseEnter += new EventHandler(subBarTab_onEnter);
+                    tab.MouseLeave += new EventHandler(subBarTab_onLeave);
+                    tab.Click += new EventHandler(Tab_onClick);
+                    subBarTabs.Add(tab);
+                }
+            } else {
+                subBarContainer.Visible = true;
+            }
+        }
+
+        public void inflateGraphic() {
             Panel graphic = new Panel();
+            graphic.SendToBack();
             this.Controls.Add(graphic);
             graphic.Size = new Size(mainContainer.Width - 200, mainContainer.Height);
             graphic.Location = new Point(200,150);
             graphic.Margin = new Padding(0);
             graphic.Tag = "Graphic";
+            graphic.MouseEnter += new EventHandler(graphic_onEnter);
 
-            ChartConstructor constructor = new ChartConstructor(data, graphic);
+            ChartConstructor constructor = new ChartConstructor(data, graphic, sideBarIndex);
             Chart chart;
 
-            switch (index) {
-                case 0:
-                    chart = constructor.chartAge();
-                    break;
-                case 1:
-                    chart = constructor.chartGender();
-                    break;
-                case 2:
-                    chart = constructor.chartEthnicity();
-                    break;
-                case 3:
-                    chart = constructor.chartEducation();
-                    break;
-                case 4:
-                    chart = constructor.chartEmployment();
-                    break;
-                case 5:
-                    chart = constructor.chartQuestion(0);
-                    break;
-                case 6:
-                    chart = constructor.chartQuestion(1);
-                    break;
-                case 7:
-                    chart = constructor.chartQuestion(2); ;
-                    break;
-                default:
-                    chart = chart = constructor.chartAge();
-                    break;
-            }
+            chart = getChart(graphic);
 
             graphic.Controls.Add(chart);
             chart.Size = new Size(800, 800);
-            chart.Location = new Point(50, (graphic.Height - chart.Height) / 2);
+            chart.Location = new Point((graphic.Width - chart.Width) / 2, (graphic.Height - chart.Height) / 2);
+        }
+
+        public Chart getChart(Panel panel) {
+            ChartConstructor constructor = new ChartConstructor(data, panel, sideBarIndex);
+            if (sideBarIndex == 0) {
+                Chart[] chartArray = new Chart[] {
+                    constructor.totalAge(), constructor.totalGender(), constructor.totalEthnicity(), constructor.totalEducation(), constructor.totalEmployment()
+                };
+                return chartArray[subBarIndex];
+            } else {
+                return constructor.chartQuestion(sideBarIndex - 1);
+            }
         }
 
         public void getData() {
@@ -540,6 +607,7 @@ namespace Assignment1 {
             for (int i = 0; i < 100; i++) {
                 string forname = "Billy";
                 string surname = "Boy";
+                int age = rand.Next(10, 90);
                 int[] values = new int[8];
                 for (int j = 0; j < 8; j++) {
                     if (j < 3) {
@@ -561,7 +629,7 @@ namespace Assignment1 {
                         values[j] = rand.Next(0, 7);
                     }
                 }
-                Person person = new Person(forname, surname, values);
+                Person person = new Person(forname, surname, age, values);
                 data.addPerson(person);
             }
         }
