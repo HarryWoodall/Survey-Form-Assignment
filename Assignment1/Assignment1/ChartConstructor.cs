@@ -25,7 +25,8 @@ namespace Assignment1 {
 
         public Chart initializeChart(string name) {
             Chart chart = new Chart();
-            chart.Name = name;
+            chart.Titles.Add(name);
+            chart.Titles[0].Font = new Font("Calibri", 32, FontStyle.Bold);
             ChartArea area = new ChartArea();
             //area.Area3DStyle.Enable3D = true;
 
@@ -189,6 +190,15 @@ namespace Assignment1 {
             return chart;
         }
 
+        public Chart chartQuestion(int number, int score) {
+            Chart chart = chartQuestion(number);
+            chart.Series[0].Points[score]["Exploded"] = "true";
+            chart.Series[0].Points[score].BorderWidth = 3;
+            chart.Series[0].Points[score].BorderColor = Color.Black;
+
+            return chart;
+        }
+
         public void chart_onClick(object sender, MouseEventArgs e) {
             Chart chart = (Chart)sender;
             HitTestResult results = chart.HitTest(e.X, e.Y);
@@ -230,20 +240,28 @@ namespace Assignment1 {
         public void tab_onClick(object sender, EventArgs e) {
             Chart chart;
             Label label = (Label)sender;
+
             for (int i = 0; i < tabLayoutPanel.Controls.Count; i++) {
+
+                tabLayoutPanel.Controls[i].Size = new Size(150, 100);
+                tabLayoutPanel.Controls[i].Font = new Font(label.Font, FontStyle.Regular);
+
                 if (tabLayoutPanel.Controls[i] as Label == label) {
                     switch (i) {
                         case 0:
-                            chart = chartAge(question, currentScore);
+                            chart = chartQuestion(question, currentScore);
                             break;
                         case 1:
-                            chart = chartGender(question, currentScore);
+                            chart = chartAge(question, currentScore);
                             break;
                         case 2:
-                            chart = chartEthnicity(question, currentScore);
+                            chart = chartGender(question, currentScore);
                             break;
                         case 3:
-                            chart = chartEducation(question, currentScore);
+                            chart = chartEthnicity(question, currentScore);
+                            break;
+                        case 4:
+                            chart = chart = chartEducation(question, currentScore);
                             break;
                         default:
                             chart = chartEmployment(question, currentScore);
@@ -252,6 +270,8 @@ namespace Assignment1 {
                     reDrawChart(chart);
                 }
             }
+            label.Size = new Size(200, 100);
+            label.Font = new Font(label.Font, FontStyle.Bold);
         }
 
         public void generateStatistics(int question, Chart chart, int chartIndex) {
@@ -312,9 +332,9 @@ namespace Assignment1 {
             tabLayoutPanel.FlowDirection = FlowDirection.RightToLeft;
             tabLayoutPanel.Dock = DockStyle.Right;
 
-            string[] labelText = { "AGE", "GENDER", "ETHNICITY", "EDUCATION", "EMPLOYMENT" };
+            string[] labelText = { "TOTAL", "AGE", "GENDER", "ETHNICITY", "EDUCATION", "EMPLOYMENT" };
 
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < labelText.Length; i++) {
                 Label tabLabel = new Label();
                 tabLayoutPanel.Controls.Add(tabLabel);
                 tabLabel.AutoSize = false;
