@@ -17,10 +17,13 @@ namespace Assignment1 {
 
         private int currentScore;
         private int question;
+        private int graphIndex;
 
-        public ChartConstructor(Data data, Panel panel, int question) {
+        public ChartConstructor(Data data, Panel panel, int question, int graphIndex) {
             this.data = data;
             this.container = panel;
+            this.question = question;
+            this.graphIndex = graphIndex;
         }
 
         public Chart initializeChart(string name) {
@@ -60,7 +63,7 @@ namespace Assignment1 {
             Chart chart = initializeChart("Age");
             string[] chartLabels = { "< 10", "10 - 19", "20 - 29", "30 - 39", "40 - 49", "50 - 59", "60+" };
             chart.Series.Add(getChartSeries(chart, data.getAgeValues(), chartLabels));
-            //chart.MouseClick += new MouseEventHandler(chart_onClick);
+            chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
@@ -69,7 +72,7 @@ namespace Assignment1 {
             Chart chart = initializeChart("Gender");
             string[] chartLabels = { "Male", "Female" };
             chart.Series.Add(getChartSeries(chart, data.getGenderValues(), chartLabels));
-            //chart.MouseClick += new MouseEventHandler(chart_onClick);
+            chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
@@ -78,7 +81,7 @@ namespace Assignment1 {
             Chart chart = initializeChart("Ethnicity");
             string[] chartLabels = { "White / White British", "Mixed", "Asian / Asian British", "Black / Black British", "Other" };
             chart.Series.Add(getChartSeries(chart, data.getEthnicityValues(), chartLabels));
-            //chart.MouseClick += new MouseEventHandler(chart_onClick);
+            chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
@@ -87,7 +90,7 @@ namespace Assignment1 {
             Chart chart = initializeChart("Education");
             string[] chartLabels = { "Primary", "Secondary", "Advanced", "Higher", "Other" };
             chart.Series.Add(getChartSeries(chart, data.getEducationValues(), chartLabels));
-            //chart.MouseClick += new MouseEventHandler(chart_onClick);
+            chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
@@ -96,7 +99,7 @@ namespace Assignment1 {
             Chart chart = initializeChart("Employment");
             string[] chartLabels = { "Employed", "Self Employed", "Unemployed", "Looking for work", "Student", "Retired", "Other" };
             chart.Series.Add(getChartSeries(chart, data.getEmploymentValues(), chartLabels));
-            //chart.MouseClick += new MouseEventHandler(chart_onClick);
+            chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
@@ -224,8 +227,10 @@ namespace Assignment1 {
                 }
 
                 chart.Location = new Point(200, (container.Height - chart.Height) / 2);
-                generateTabs(container);
-                generateStatistics(1, chart, results.PointIndex);
+                if (question > 0) {
+                    generateTabs(container);
+                };
+                generateStatistics(chart, results.PointIndex);
             }
             else if (results.ChartElementType == ChartElementType.PlottingArea) {
                 foreach (DataPoint point in chart.Series[0].Points) {
@@ -274,7 +279,7 @@ namespace Assignment1 {
             label.Font = new Font(label.Font, FontStyle.Bold);
         }
 
-        public void generateStatistics(int question, Chart chart, int chartIndex) {
+        public void generateStatistics(Chart chart, int chartIndex) {
             statPanel = new FlowLayoutPanel();
             container.Controls.Add(statPanel);
 
@@ -284,33 +289,60 @@ namespace Assignment1 {
             statPanel.BackColor = Color.FromArgb(255, 100, 100, 100);
             statPanel.Padding = new Padding(0);
 
+            if (question > 0) {
+                generateQuestionStats(chart, chartIndex);
+
+            } else {
+                generateDemographStats(chart, chartIndex);
+            }
+        }
+
+        private void generateDemographStats(Chart chart, int chartIndex) {
+            Label titleLabel = new Label();
+            titleLabel.Text = chart.Series[0].Points[chartIndex].AxisLabel;
+            generateLabel(titleLabel);
+            titleLabel.Height = 200;
+            titleLabel.Margin = new Padding(0, (statPanel.Height - (3 * titleLabel.Height)) / 2, 0, 0);
+            titleLabel.TextAlign = ContentAlignment.MiddleCenter;
+            titleLabel.Font = new Font("Calibri", 36, FontStyle.Underline);
+
+            Label percentLabel = new Label();
+            percentLabel.Text = Convert.ToInt32((chart.Series[0].Points[chartIndex].YValues[0] / data.getAmmount()) * 100) + "%";
+            generateLabel(percentLabel);
+            percentLabel.Height = 200;
+            percentLabel.Font = new Font("Calibri", 48, FontStyle.Bold);
+            percentLabel.TextAlign = ContentAlignment.MiddleCenter;
+        }
+
+        private void generateQuestionStats(Chart chart, int chartIndex) {
+            Label titleLabel = new Label();
+            titleLabel.Text = chart.Series[0].Points[chartIndex].AxisLabel;
+            generateLabel(titleLabel);
+            titleLabel.TextAlign = ContentAlignment.MiddleCenter;
+            titleLabel.Font = new Font("Calibri", 36, FontStyle.Underline);
+
             Label ageLabel = new Label();
-            ageLabel.Text = "Average age: " + data.getMeanValue(data.getQ1Values(), chartIndex).ToString();
-            ageLabel.ForeColor = Color.White;
+            ageLabel.Text = "Average age: " + data.getMeanValue(getQuestion(question), chartIndex).ToString();
             generateLabel(ageLabel);
 
             Label genderLabel = new Label();
-            Value genderValue = data.getModalValues(data.getQ1Values(), chartIndex, Value.TYPE_GENDER);
+            Value genderValue = data.getModalValues(getQuestion(question), chartIndex, Value.TYPE_GENDER);
             genderLabel.Text = genderValue.getPercentage() + "% are " + genderValue.getValue();
-            genderLabel.ForeColor = Color.White;
             generateLabel(genderLabel);
 
             Label educationLabel = new Label();
-            Value educationValue = data.getModalValues(data.getQ1Values(), chartIndex, Value.TYPE_EDUCATION);
+            Value educationValue = data.getModalValues(getQuestion(question), chartIndex, Value.TYPE_EDUCATION);
             educationLabel.Text = educationValue.getPercentage() + "% have " + educationValue.getValue() + " education";
-            educationLabel.ForeColor = Color.White;
             generateLabel(educationLabel);
 
             Label ethnicityLabel = new Label();
-            Value ethnicityValue = data.getModalValues(data.getQ1Values(), chartIndex, Value.TYPE_ETHNISITY);
+            Value ethnicityValue = data.getModalValues(getQuestion(question), chartIndex, Value.TYPE_ETHNISITY);
             ethnicityLabel.Text = ethnicityValue.getPercentage() + "% are of " + ethnicityValue.getValue() + " ethnicity";
-            ethnicityLabel.ForeColor = Color.White;
             generateLabel(ethnicityLabel);
 
             Label employmentLabel = new Label();
-            Value employmentValue = data.getModalValues(data.getQ1Values(), chartIndex, Value.TYPE_EMPLOYMENT);
+            Value employmentValue = data.getModalValues(getQuestion(question), chartIndex, Value.TYPE_EMPLOYMENT);
             employmentLabel.Text = employmentValue.getPercentage() + "% are " + employmentValue.getValue();
-            employmentLabel.ForeColor = Color.White; 
             generateLabel(employmentLabel);
         }
 
@@ -318,10 +350,12 @@ namespace Assignment1 {
             Font font = new Font("Calibri", 18, FontStyle.Bold);
 
             statPanel.Controls.Add(label);
+            label.ForeColor = Color.White;
             label.Font = font;
             label.AutoSize = false;
             label.Size = new Size(statPanel.Width, 100);
-            label.TextAlign = ContentAlignment.MiddleCenter;
+            label.TextAlign = ContentAlignment.MiddleLeft;
+            label.Padding = new Padding(10, 0, 0, 0);
             label.Margin = new Padding(0);
         }
 
@@ -347,6 +381,7 @@ namespace Assignment1 {
 
                 if (i == 0) {
                     tabLabel.Margin = new Padding(0, (tabLayoutPanel.Height - 600) / 2, 0, 0);
+                    tabLabel.BackColor = Color.FromArgb(255, 204, 102, 0);
                 } else {
                     tabLabel.Margin = new Padding(0, 0, 0, 0);
                 }

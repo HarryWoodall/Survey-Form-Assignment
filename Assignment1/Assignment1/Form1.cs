@@ -359,21 +359,30 @@ namespace Assignment1 {
 
         public void sideBarTab_onLeave(object sender, EventArgs e) {
             Label label = (Label)sender;
-            label.BackColor = Color.Transparent;
-
+            if (label.Tag.ToString() == "0") {
+                label.BackColor = Color.Transparent;
+            }
         }
 
         public void subBarTab_onEnter(object sender, EventArgs e) {
             Label label = (Label)sender;
-            label.BackColor = Color.White;
-            label.ForeColor = Color.Black;
+            sideBarTabs[0].BackColor = Color.FromArgb(255, 217, 128, 38);
+            if (label.Tag.ToString() == "0") {
+                label.BackColor = Color.White;
+                label.ForeColor = Color.Black;
+            }
             subBarIndex = subBarTabs.IndexOf(label);
         }
 
         public void subBarTab_onLeave(object sender, EventArgs e) {
             Label label = (Label)sender;
-            label.BackColor = Color.Transparent;
-            label.ForeColor = Color.White;
+            if (sideBarTabs[0].Tag.ToString() == "0") {
+                sideBarTabs[0].BackColor = Color.Transparent;
+            }
+            if (label.Tag.ToString() == "0") {
+                label.BackColor = Color.Transparent;
+                label.ForeColor = Color.White;
+            }
         }
 
         public void sideBar_onMouseMove(object sender, MouseEventArgs e) {
@@ -394,16 +403,28 @@ namespace Assignment1 {
                 }
                 inflateGraphic();
 
-                if (sideBarTabs.Contains(label)) {
-                    foreach (Label item in sideBarTabs) {
-                        item.Tag = "0";
-                    }
-                } else {
+                foreach (Label item in sideBarTabs) {
+                    item.BackColor = Color.Transparent;
+                    item.Tag = "0";
+                }
+
+                if (subBarTabs != null) {
                     foreach (Label item in subBarTabs) {
+                        item.BackColor = Color.Transparent;
+                        item.ForeColor = Color.White;
                         item.Tag = "0";
                     }
                 }
-                //label.Font = new Font("Calibri", 32, FontStyle.Bold);
+                if (sideBarTabs.Contains(label)) {
+                    label.BackColor = Color.FromArgb(255, 217, 128, 38);
+                } else {
+                    label.BackColor = Color.White;
+                    label.ForeColor = Color.Black;
+                    label.Tag = "1";
+
+                    sideBarTabs[0].BackColor = Color.FromArgb(255, 217, 128, 38);
+                    sideBarTabs[0].Tag = "1";
+                }
                 label.Tag = "1";
             }
         }
@@ -527,6 +548,7 @@ namespace Assignment1 {
                 sideBarTabs.Add(tab);
             }
             sideBarTabs[0].Tag = "1";
+            sideBarTabs[0].BackColor = Color.FromArgb(255, 217, 128, 38);
         }
 
         public void inflateSubBar() {
@@ -579,7 +601,7 @@ namespace Assignment1 {
             graphic.Tag = "Graphic";
             graphic.MouseEnter += new EventHandler(graphic_onEnter);
 
-            ChartConstructor constructor = new ChartConstructor(data, graphic, sideBarIndex);
+            ChartConstructor constructor = new ChartConstructor(data, graphic, sideBarIndex, subBarIndex);
             Chart chart;
 
             chart = getChart(graphic);
@@ -590,7 +612,7 @@ namespace Assignment1 {
         }
 
         public Chart getChart(Panel panel) {
-            ChartConstructor constructor = new ChartConstructor(data, panel, sideBarIndex);
+            ChartConstructor constructor = new ChartConstructor(data, panel, sideBarIndex, subBarIndex);
             if (sideBarIndex == 0) {
                 Chart[] chartArray = new Chart[] {
                     constructor.totalAge(), constructor.totalGender(), constructor.totalEthnicity(), constructor.totalEducation(), constructor.totalEmployment()

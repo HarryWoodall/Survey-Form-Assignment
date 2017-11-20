@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 namespace Assignment1 {
     public class Data {
 
+        private int ammount;
+
         private List<String> fornames;
         private List<String> surnames;
         private List<int> ages;
@@ -21,6 +23,7 @@ namespace Assignment1 {
         private List<int> q3Values;
 
         public Data() {
+            ammount = 0;
             fornames = new List<string>();
             surnames = new List<string>();
             ages = new List<int>();
@@ -32,6 +35,10 @@ namespace Assignment1 {
             q1Values = new List<int>();
             q2Values = new List<int>();
             q3Values = new List<int>();
+        }
+
+        public int getAmmount() {
+            return ammount;
         }
 
         public List<String> getFornames() {
@@ -100,6 +107,8 @@ namespace Assignment1 {
             q1Values.Add(person.getQ1Value());
             q2Values.Add(person.getQ2Value());
             q3Values.Add(person.getQ3Value());
+
+            ammount++;
         }
 
         #region dataGeneration
