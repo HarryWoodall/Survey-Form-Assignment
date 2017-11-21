@@ -15,7 +15,8 @@ namespace Assignment1 {
         private FlowLayoutPanel statPanel;
         private FlowLayoutPanel tabLayoutPanel;
 
-        private int currentScore;
+        private int mainCurrentIndex;
+        private int currentTab = -1;
         private int question;
         private int graphIndex;
 
@@ -110,6 +111,7 @@ namespace Assignment1 {
             List<int> questionValues = getQuestion(question);
             List<int> valueList = data.getSubValues(questionValues, data.getAgeValues(), score);
             chart.Series.Add(getChartSeries(chart, valueList, chartLabels));
+            chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
@@ -120,6 +122,7 @@ namespace Assignment1 {
             List<int> questionValues = getQuestion(question);
             List<int> valueList = data.getSubValues(questionValues, data.getGenderValues(), score);
             chart.Series.Add(getChartSeries(chart, valueList, chartLabels));
+            chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
@@ -130,6 +133,7 @@ namespace Assignment1 {
             List<int> questionValues = getQuestion(question);
             List<int> valueList = data.getSubValues(questionValues, data.getEthnicityValues(), score);
             chart.Series.Add(getChartSeries(chart, valueList, chartLabels));
+            chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
@@ -140,6 +144,7 @@ namespace Assignment1 {
             List<int> questionValues = getQuestion(question);
             List<int> valueList = data.getSubValues(questionValues, data.getEducationValues(), score);
             chart.Series.Add(getChartSeries(chart, valueList, chartLabels));
+            chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
@@ -150,6 +155,7 @@ namespace Assignment1 {
             List<int> questionValues = getQuestion(question);
             List<int> valueList = data.getSubValues(questionValues, data.getEmploymentValues(), score);
             chart.Series.Add(getChartSeries(chart, valueList, chartLabels));
+            chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
@@ -206,9 +212,8 @@ namespace Assignment1 {
             Chart chart = (Chart)sender;
             HitTestResult results = chart.HitTest(e.X, e.Y);
 
-            currentScore = results.PointIndex;
-
             if (results.ChartElementType == ChartElementType.DataPoint) {
+
                 foreach (DataPoint point in chart.Series[0].Points) {
                     point["Exploded"] = "false";
                     point.BorderWidth = 0;
@@ -222,22 +227,37 @@ namespace Assignment1 {
                     statPanel.Dispose();
                 }
 
-                if (tabLayoutPanel != null) {
-                    tabLayoutPanel.Dispose();
+                chart.Location = new Point(200, (container.Height - chart.Height) / 2);
+
+                if (question > 0 && currentTab < 1) {
+                    mainCurrentIndex = results.PointIndex;
                 }
 
-                chart.Location = new Point(200, (container.Height - chart.Height) / 2);
                 if (question > 0) {
-                    generateTabs(container);
+                    if (tabLayoutPanel == null) {
+                        generateTabs(container);
+                    }
                 };
+
                 generateStatistics(chart, results.PointIndex);
             }
+            // This is causing issues.
             else if (results.ChartElementType == ChartElementType.PlottingArea) {
                 foreach (DataPoint point in chart.Series[0].Points) {
                     point["Exploded"] = "false";
                     point.BorderWidth = 0;
                 }
-                statPanel.Dispose();
+
+                if (statPanel != null) {
+                    statPanel.Dispose();
+                }
+
+                if (tabLayoutPanel != null) {
+                    //tabLayoutPanel.Dispose();
+                    //tabLayoutPanel = null;
+                    //currentTab = -1;
+                }
+
                 chart.Location = new Point((container.Width - chart.Width) / 2, (container.Height - chart.Height) / 2);
             }
         }
@@ -254,25 +274,30 @@ namespace Assignment1 {
                 if (tabLayoutPanel.Controls[i] as Label == label) {
                     switch (i) {
                         case 0:
-                            chart = chartQuestion(question, currentScore);
+                            chart = chartQuestion(question, mainCurrentIndex);
                             break;
                         case 1:
-                            chart = chartAge(question, currentScore);
+                            chart = chartAge(question, mainCurrentIndex);
                             break;
                         case 2:
-                            chart = chartGender(question, currentScore);
+                            chart = chartGender(question, mainCurrentIndex);
                             break;
                         case 3:
-                            chart = chartEthnicity(question, currentScore);
+                            chart = chartEthnicity(question, mainCurrentIndex);
                             break;
                         case 4:
-                            chart = chart = chartEducation(question, currentScore);
+                            chart = chart = chartEducation(question, mainCurrentIndex);
                             break;
                         default:
-                            chart = chartEmployment(question, currentScore);
+                            chart = chartEmployment(question, mainCurrentIndex);
                             break;
                     }
                     reDrawChart(chart);
+                    currentTab = i;
+
+                    if (i > 0) {
+                        statPanel.Dispose();
+                    }
                 }
             }
             label.Size = new Size(200, 100);
@@ -289,7 +314,7 @@ namespace Assignment1 {
             statPanel.BackColor = Color.FromArgb(255, 100, 100, 100);
             statPanel.Padding = new Padding(0);
 
-            if (question > 0) {
+            if (question > 0 && currentTab < 1) {
                 generateQuestionStats(chart, chartIndex);
 
             } else {
@@ -307,7 +332,7 @@ namespace Assignment1 {
             titleLabel.Font = new Font("Calibri", 36, FontStyle.Underline);
 
             Label percentLabel = new Label();
-            percentLabel.Text = Convert.ToInt32((chart.Series[0].Points[chartIndex].YValues[0] / data.getAmmount()) * 100) + "%";
+            percentLabel.Text = Convert.ToInt32((chart.Series[0].Points[chartIndex].YValues[0] / getChartSize(chart)) * 100) + "%";
             generateLabel(percentLabel);
             percentLabel.Height = 200;
             percentLabel.Font = new Font("Calibri", 48, FontStyle.Bold);
@@ -385,7 +410,24 @@ namespace Assignment1 {
                 } else {
                     tabLabel.Margin = new Padding(0, 0, 0, 0);
                 }
+
+                if (currentTab == -1) {
+                    tabLabel.Size = new Size(200, 100);
+                    tabLabel.Font = new Font(tabLabel.Font, FontStyle.Bold);
+                } 
+                else if (i == currentTab) {
+                    tabLabel.Size = new Size(200, 100);
+                    tabLabel.Font = new Font(tabLabel.Font, FontStyle.Bold);
+                }
             }
+        }
+        
+        public int getChartSize(Chart chart) {
+            int result = 0;
+            foreach (DataPoint point in chart.Series[0].Points) {
+                result += Convert.ToInt32(point.YValues[0]);
+            }
+            return result;
         }
 
         public void reDrawChart(Chart newChart) {
