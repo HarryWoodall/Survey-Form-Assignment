@@ -53,6 +53,10 @@ namespace Assignment1 {
                     }
                 }
                 series.Points.AddXY(labels[i], values[i]);
+
+                if (values[i] == 0) {
+                    series.Points[i]["PieLabelStyle"] = "Disabled";
+                }
             }
 
             return series;
@@ -262,7 +266,7 @@ namespace Assignment1 {
             }
         }
 
-        public void tab_onClick(object sender, EventArgs e) {
+        public void chartTab_onClick(object sender, EventArgs e) {
             Chart chart;
             Label label = (Label)sender;
 
@@ -292,8 +296,8 @@ namespace Assignment1 {
                             chart = chartEmployment(question, mainCurrentIndex);
                             break;
                     }
-                    reDrawChart(chart);
                     currentTab = i;
+                    reDrawChart(chart, container);
 
                     if (i > 0) {
                         statPanel.Dispose();
@@ -323,11 +327,22 @@ namespace Assignment1 {
         }
 
         private void generateDemographStats(Chart chart, int chartIndex) {
+            if (question > 0) {
+                string[] headerText = { "STRONGLY AGREE", "AGREE", "NEITHER AGREE", "DISAGREE", "STRONGLY DISAGREE" };
+                Label header = new Label();
+                header.Text = headerText[mainCurrentIndex];
+                generateLabel(header);
+                header.Height = 200;
+                header.Margin = new Padding(0, 50, 0, 0);
+                header.TextAlign = ContentAlignment.MiddleCenter;
+                header.Font = new Font("Calibri", 38, FontStyle.Bold);
+            }
+
             Label titleLabel = new Label();
             titleLabel.Text = chart.Series[0].Points[chartIndex].AxisLabel;
             generateLabel(titleLabel);
             titleLabel.Height = 200;
-            titleLabel.Margin = new Padding(0, (statPanel.Height - (3 * titleLabel.Height)) / 2, 0, 0);
+            titleLabel.Margin = new Padding(0, (statPanel.Height - (4 * titleLabel.Height)) / 2, 0, 0);
             titleLabel.TextAlign = ContentAlignment.MiddleCenter;
             titleLabel.Font = new Font("Calibri", 36, FontStyle.Underline);
 
@@ -402,7 +417,7 @@ namespace Assignment1 {
                 tabLabel.ForeColor = Color.White;
                 tabLabel.BackColor = Color.FromArgb(255, 255, 128, 0);
                 tabLabel.TextAlign = ContentAlignment.MiddleCenter;
-                tabLabel.Click += new EventHandler(tab_onClick);
+                tabLabel.Click += new EventHandler(chartTab_onClick);
 
                 if (i == 0) {
                     tabLabel.Margin = new Padding(0, (tabLayoutPanel.Height - 600) / 2, 0, 0);
@@ -430,13 +445,17 @@ namespace Assignment1 {
             return result;
         }
 
-        public void reDrawChart(Chart newChart) {
+        public void reDrawChart(Chart newChart, Panel panel) {
             Chart chart = newChart;
             foreach (Control control in container.Controls) {
                 if (control is Chart) {
                     Chart oldChart = (Chart)control;
                     chart.Size = oldChart.Size;
-                    chart.Location = oldChart.Location;
+                    if (currentTab != 0) {
+                        chart.Location = new Point((container.Width - chart.Width) / 2, oldChart.Location.Y);
+                    } else {
+                        chart.Location = oldChart.Location;
+                    }
                     container.Controls.Remove(control);
                     container.Controls.Add(newChart);
                 }

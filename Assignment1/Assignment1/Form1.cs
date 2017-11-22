@@ -23,6 +23,8 @@ namespace Assignment1 {
         private List<Label> sideBarTabs;
         private List<Label> subBarTabs;
 
+        private Panel statsContainer;
+        private Panel sideBarContainer;
         private Panel subBarContainer;
 
         private int sideBarIndex;
@@ -38,8 +40,7 @@ namespace Assignment1 {
             this.WindowState = FormWindowState.Maximized;
             initializeQuestions();
             getData();
-            inflateSidebar();
-            inflateGraphic();
+            inflateStatsPage();
             timer1.Start();
         }
 
@@ -171,6 +172,23 @@ namespace Assignment1 {
                         fadeIn(question.getToolTipList().IndexOf(panel), question);
                     } else if (panel.Visible && panel.Tag.ToString() == "1") {
                         fadeOut(question.getToolTipList().IndexOf(panel), question);
+                    }
+                }
+            }
+
+            if (subBarContainer != null) {
+                if (subBarContainer.Visible && subBarContainer.Tag.ToString() == "0") {
+                    if (subBarContainer.Location.X < 235) {
+                        subBarContainer.Left += 15;
+                    } else {
+                        subBarContainer.Left = 250;
+                    }
+                } else if (subBarContainer.Visible && subBarContainer.Tag.ToString() == "1") {
+                    if (subBarContainer.Location.X > 15) {
+                        subBarContainer.Left -= 15;
+                    } else {
+                        subBarContainer.Left = 0;
+                        subBarContainer.Visible = false;
                     }
                 }
             }
@@ -339,8 +357,9 @@ namespace Assignment1 {
                 Person person = new Person(forenameBox.Text, surnameBox.Text, getAge(), answers);
                 data.addPerson(person);
 
+                resetMainContainer();
                 mainContainer.Hide();
-                // TODO reset the mainContainer.
+                inflateStatsPage();
             }
         }
 
@@ -350,9 +369,12 @@ namespace Assignment1 {
             sideBarIndex = sideBarTabs.IndexOf(label);
             if (sideBarTabs[0] == label) {
                 inflateSubBar();
+                sideBarContainer.BringToFront();
+                subBarContainer.Tag = "0";
             } else {
                 if (subBarContainer != null && subBarContainer.Visible) {
-                    subBarContainer.Visible = false;
+                    //subBarContainer.Visible = false;
+                    subBarContainer.Tag = "1";
                 }
             }
         }
@@ -388,23 +410,25 @@ namespace Assignment1 {
         public void sideBar_onMouseMove(object sender, MouseEventArgs e) {
             if (e.Y < 140) {
                 if (subBarContainer != null && subBarContainer.Visible) {
-                    subBarContainer.Hide();
+                    subBarContainer.Tag = "1";
                 }
             }
         }
 
-        public void Tab_onClick(object sender, EventArgs e) {
+        public void tab_onClick(object sender, EventArgs e) {
             Label label = (Label)sender;
             if (label.Tag.ToString() == "0") {
-                foreach (Control control in this.Controls) {
+                foreach (Control control in statsContainer.Controls) {
                     if (control.Tag == "Graphic") {
                         control.Dispose();
                     }
                 }
+
                 inflateGraphic();
 
                 foreach (Label item in sideBarTabs) {
                     item.BackColor = Color.Transparent;
+                    item.Font = new Font(item.Font, FontStyle.Regular);
                     item.Tag = "0";
                 }
 
@@ -417,6 +441,8 @@ namespace Assignment1 {
                 }
                 if (sideBarTabs.Contains(label)) {
                     label.BackColor = Color.FromArgb(255, 217, 128, 38);
+                    label.Font = new Font(label.Font, FontStyle.Bold);
+
                 } else {
                     label.BackColor = Color.White;
                     label.ForeColor = Color.Black;
@@ -431,8 +457,13 @@ namespace Assignment1 {
 
         public void graphic_onEnter(object sender, EventArgs e) {
             if (subBarContainer != null && subBarContainer.Visible) {
-                subBarContainer.Hide();
+                subBarContainer.Tag = "1";
             }
+        }
+
+        public void createNew_onClick(object sender, EventArgs e) {
+            statsContainer.Hide();
+            mainContainer.Show();
         }
 
         #endregion
@@ -510,45 +541,107 @@ namespace Assignment1 {
             return age;
         }
 
-        public void inflateSidebar() {
-            mainContainer.Hide();
-            sideBarTabs = new List<Label>();
+        public void resetMainContainer() {
+            foreach (Control control in section1.Controls) {
+                if (control is TextBox) {
+                    TextBox box = (TextBox)control;
+                    box.Text = "";
+                }
+                else if (control is ComboBox) {
+                    ComboBox box = (ComboBox)control;
+                    box.SelectedIndex = -1;
+                }
+            }
 
-            Panel sideBarContainer = new Panel();
-            this.Controls.Add(sideBarContainer);
-
-            sideBarContainer.Size = new Size(200, mainContainer.Height);
-            sideBarContainer.Location = new Point(0, 150);
-            sideBarContainer.Margin = new Padding(0);
-            sideBarContainer.BackColor = Color.FromArgb(225, 225, 128, 0);
-            sideBarContainer.MouseMove += new MouseEventHandler(sideBar_onMouseMove);
-
-            string[] tabNames = { "Total", "Q1", "Q2", "Q3" };
-
-            for (int i = 0; i < tabNames.Length; i++) {
-                Label tab = new Label();
-                sideBarContainer.Controls.Add(tab);
-
-                tab.AutoSize = false;
-                tab.Text = tabNames[i];
-                tab.TextAlign = ContentAlignment.MiddleCenter;
-                tab.Size = new Size(200, 150);
-                tab.Padding = new Padding(0);
-                tab.Location = new Point(0, ((sideBarContainer.Height - tab.Height * tabNames.Length - 40) / 2) + (tab.Height * i));
-                tab.Tag = "0";
-                tab.BackColor = Color.Transparent;
-                tab.ForeColor = Color.White;
-                tab.MouseEnter += new EventHandler(sideBarTab_onEnter);
-                tab.MouseLeave += new EventHandler(sideBarTab_onLeave);
-
-                if (i > 0) {
-                    tab.Click += new EventHandler(Tab_onClick);
+            foreach (Question question in questionList) {
+                foreach (Panel selected in question.getSelectedList()) {
+                    selected.Visible = false;
                 }
 
-                sideBarTabs.Add(tab);
+                foreach (Panel main in question.getMainList()) {
+                    Label lb = (Label)main.Controls[0];
+                    lb.Font = new Font("Calibri", 22);
+                    lb.Location = new Point((main.Width - lb.Width) / 2, (main.Height - lb.Height) / 2);
+                }
             }
-            sideBarTabs[0].Tag = "1";
-            sideBarTabs[0].BackColor = Color.FromArgb(255, 217, 128, 38);
+
+            dayBox.ForeColor = Color.Gray;
+            dayBox.Text = "DD";
+            dayBox.Tag = "0";
+
+            monthBox.ForeColor = Color.Gray;
+            monthBox.Text = "MM";
+            monthBox.Tag = "0";
+
+            yearBox.ForeColor = Color.Gray;
+            yearBox.Text = "YYYY";
+            yearBox.Tag = "0";
+        }
+
+        #region Inflators
+
+        public void inflateStatsPage() {
+            if (statsContainer == null) {
+                statsContainer = new Panel();
+                this.Controls.Add(statsContainer);
+
+                statsContainer.Size = new Size(1980, mainContainer.Height);
+                statsContainer.Location = new Point(0, 150);
+                statsContainer.Margin = new Padding(0);
+
+                mainContainer.Hide();
+
+                inflateSidebar();
+                inflateGraphic();
+            } else {
+                statsContainer.Show();
+            }
+        }
+
+        public void inflateSidebar() {
+            sideBarTabs = new List<Label>();
+
+            if (sideBarContainer == null) {
+                sideBarContainer = new Panel();
+                statsContainer.Controls.Add(sideBarContainer);
+
+                sideBarContainer.Size = new Size(250, mainContainer.Height);
+                sideBarContainer.Location = new Point(0, 0);
+                sideBarContainer.Margin = new Padding(0);
+                sideBarContainer.BackColor = Color.FromArgb(225, 225, 128, 0);
+                sideBarContainer.MouseMove += new MouseEventHandler(sideBar_onMouseMove);
+
+                string[] tabNames = { "TOTAL", "I ENJOYED THE SCULPTURE", "I AM CURIOUS AS TO HOW IT WORKS", "I WANT TO KNOW MORE ABOUT SCIENCE AS A RESULT" };
+
+                for (int i = 0; i < tabNames.Length; i++) {
+                    Label tab = new Label();
+                    sideBarContainer.Controls.Add(tab);
+
+                    tab.AutoSize = false;
+                    tab.Text = tabNames[i];
+                    tab.Font = new Font("Calibri", 18);
+                    tab.TextAlign = ContentAlignment.MiddleCenter;
+                    tab.Size = new Size(sideBarContainer.Width, 150);
+                    tab.Padding = new Padding(0);
+                    tab.Location = new Point(0, ((sideBarContainer.Height - tab.Height * tabNames.Length - 40) / 2) + (tab.Height * i));
+                    tab.Tag = "0";
+                    tab.BackColor = Color.Transparent;
+                    tab.ForeColor = Color.White;
+                    tab.MouseEnter += new EventHandler(sideBarTab_onEnter);
+                    tab.MouseLeave += new EventHandler(sideBarTab_onLeave);
+
+                    if (i > 0) {
+                        tab.Click += new EventHandler(tab_onClick);
+                    }
+
+                    sideBarTabs.Add(tab);
+                }
+
+                sideBarTabs[0].Tag = "1";
+                sideBarTabs[0].BackColor = Color.FromArgb(255, 217, 128, 38);
+            } else {
+                sideBarContainer.Visible = true;
+            }
         }
 
         public void inflateSubBar() {
@@ -556,13 +649,13 @@ namespace Assignment1 {
                 subBarTabs = new List<Label>();
 
                 subBarContainer = new Panel();
-                this.Controls.Add(subBarContainer);
+                statsContainer.Controls.Add(subBarContainer);
                 subBarContainer.BringToFront();
                 titleBanner.BringToFront();
 
 
                 subBarContainer.Size = new Size(150, mainContainer.Height);
-                subBarContainer.Location = new Point(200, 150);
+                subBarContainer.Location = new Point(0, 0);
                 subBarContainer.Margin = new Padding(0);
                 subBarContainer.BackColor = Color.FromArgb(255, 217, 128, 38);
 
@@ -583,7 +676,7 @@ namespace Assignment1 {
                     tab.ForeColor = Color.White;
                     tab.MouseEnter += new EventHandler(subBarTab_onEnter);
                     tab.MouseLeave += new EventHandler(subBarTab_onLeave);
-                    tab.Click += new EventHandler(Tab_onClick);
+                    tab.Click += new EventHandler(tab_onClick);
                     subBarTabs.Add(tab);
                 }
             } else {
@@ -594,9 +687,9 @@ namespace Assignment1 {
         public void inflateGraphic() {
             Panel graphic = new Panel();
             graphic.SendToBack();
-            this.Controls.Add(graphic);
-            graphic.Size = new Size(mainContainer.Width - 200, mainContainer.Height);
-            graphic.Location = new Point(200,150);
+            statsContainer.Controls.Add(graphic);
+            graphic.Size = new Size(mainContainer.Width - 250, mainContainer.Height);
+            graphic.Location = new Point(250,0);
             graphic.Margin = new Padding(0);
             graphic.Tag = "Graphic";
             graphic.MouseEnter += new EventHandler(graphic_onEnter);
@@ -609,7 +702,22 @@ namespace Assignment1 {
             graphic.Controls.Add(chart);
             chart.Size = new Size(800, 800);
             chart.Location = new Point((graphic.Width - chart.Width) / 2, (graphic.Height - chart.Height) / 2);
+
+            Label createNew = new Label();
+            graphic.Controls.Add(createNew);
+
+            createNew.Text = "CREATE NEW";
+            createNew.Size = new Size(150, 150);
+            createNew.Location = new Point(0, graphic.Height - createNew.Height);
+            createNew.BackColor = Color.FromArgb(190,76,0);
+            createNew.ForeColor = Color.White;
+            createNew.TextAlign = ContentAlignment.TopCenter;
+            createNew.Padding = new Padding(20,30,20,0);
+            createNew.Font = new Font("Calibri", 16, FontStyle.Bold);
+            createNew.Click += new EventHandler(createNew_onClick);
         }
+
+        #endregion
 
         public Chart getChart(Panel panel) {
             ChartConstructor constructor = new ChartConstructor(data, panel, sideBarIndex, subBarIndex);
