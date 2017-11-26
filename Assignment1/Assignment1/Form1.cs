@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -23,10 +24,12 @@ namespace Assignment1 {
         private List<Label> sideBarTabs;
         private List<Label> subBarTabs;
 
+        private Panel frontPage;
         private Panel statsContainer;
         private Panel sideBarContainer;
         private Panel subBarContainer;
 
+        private int introCounter;
         private int sideBarIndex;
         private int subBarIndex;
 
@@ -40,7 +43,8 @@ namespace Assignment1 {
             this.WindowState = FormWindowState.Maximized;
             initializeQuestions();
             getData();
-            inflateStatsPage();
+            inflateFrontPage();
+            //inflateStatsPage();
             timer1.Start();
         }
 
@@ -157,6 +161,25 @@ namespace Assignment1 {
             }
         }
 
+        public void introFadeOut() {
+            if (frontPage.BackColor.R < 230) {
+                frontPage.BackColor = Color.FromArgb(255, frontPage.BackColor.R + 2, frontPage.BackColor.B + 2, frontPage.BackColor.G + 2);
+            } else {
+                frontPage.Hide();
+            }
+        }
+
+        public void introFadeIn() {
+            if (frontPage.BackColor.R > 50) {
+                frontPage.BackColor = Color.FromArgb(255, frontPage.BackColor.R - 2, frontPage.BackColor.B - 2, frontPage.BackColor.G - 2);
+            } else {
+                introCounter++;
+                if (introCounter > 200) {
+                    frontPage.Tag = "1";
+                }
+            }
+        }
+
         #endregion
 
         #region Event Handlers
@@ -190,6 +213,14 @@ namespace Assignment1 {
                         subBarContainer.Left = 0;
                         subBarContainer.Visible = false;
                     }
+                }
+            }
+
+            if (frontPage != null) {
+                if (frontPage.Tag.ToString() == "0") {
+                    introFadeIn();
+                } else {
+                    introFadeOut();
                 }
             }
         }
@@ -468,6 +499,14 @@ namespace Assignment1 {
 
         #endregion
 
+        //https://freesound.org/people/frankum/sounds/393520/
+        public void playSound(object sender, EventArgs e) {
+            if (!frontPage.Visible) {
+                SoundPlayer sound = new SoundPlayer(Properties.Resources._393520_frankum_ambient_guitar_x1_loop_mode);
+                sound.PlayLooping();
+            }
+        }
+
         public bool isComplete() {
 
             // Loop through each control object, checking if empty.
@@ -579,6 +618,28 @@ namespace Assignment1 {
         }
 
         #region Inflators
+
+        private void inflateFrontPage() {
+            frontPage = new Panel();
+            this.Controls.Add(frontPage);
+            frontPage.Size = this.Size;
+            frontPage.Location = new Point(0, 0);
+            frontPage.BackColor = Color.White;
+            frontPage.Tag = "0";
+            frontPage.BringToFront();
+            frontPage.VisibleChanged += new EventHandler(playSound);
+
+            Label title = new Label();
+            frontPage.Controls.Add(title);
+            title.Text = "Singing Sculpture Survey";
+            title.AutoSize = false;
+            title.Size = new Size(frontPage.Width / 3, frontPage.Height / 3);
+            title.TextAlign = ContentAlignment.TopCenter;
+            title.BackColor = Color.Transparent;
+            title.ForeColor = Color.White;
+            title.Font = new Font("Calibri", 64, FontStyle.Italic);
+            title.Location = new Point((frontPage.Width - title.Width) / 2, (frontPage.Height - title.Height) / 2);
+        }
 
         public void inflateStatsPage() {
             if (statsContainer == null) {
