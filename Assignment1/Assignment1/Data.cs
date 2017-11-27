@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Assignment1 {
     public class Data {
+
+        private readonly string FILE_PATH = "saveFile.txt";
 
         private int ammount;
 
@@ -109,6 +112,50 @@ namespace Assignment1 {
             q3Values.Add(person.getQ3Value());
 
             ammount++;
+        }
+
+        public void saveToFile() {
+            string path = "saveFile.txt";
+            using (StreamWriter writer = File.AppendText(path)) {
+
+                if (!File.Exists(path)) {
+                    File.Create(path);
+                }
+
+                for (int i = 0; i < ammount; i++) {
+                    string line = fornames[i] + ","
+                        + surnames[i] + ","
+                        + ages[i] + ","
+                        + ageValues[i] + ","
+                        + genderValues[i] + ","
+                        + ethnicityValues[i] + ","
+                        + educationValues[i] + ","
+                        + employmentValues[i] + ","
+                        + q1Values[i] + ","
+                        + q2Values[i] + ","
+                        + q3Values[i];
+                    writer.WriteLine(line);
+                }
+            }
+        }
+
+        public void loadFile() {
+            StreamReader reader = new StreamReader(FILE_PATH);
+            string line;
+            while ((line = reader.ReadLine()) != null) {
+                string[] data = line.Split(',');
+                string forname = data[0];
+                string surname = data[1];
+                int age = Convert.ToInt32(data[2]);
+                int[] questionValues = new int[8];
+
+                for(int i = 0; i < questionValues.Length; i++) {
+                    questionValues[i] = Convert.ToInt32(data[i + 3]);
+                }
+                Person person = new Person(forname, surname, age, questionValues);
+                addPerson(person);
+            }
+            reader.Close();
         }
 
         #region dataGeneration

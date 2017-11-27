@@ -42,9 +42,10 @@ namespace Assignment1 {
             // Maximise form on startup
             this.WindowState = FormWindowState.Maximized;
             initializeQuestions();
-            getData();
+            data.loadFile();
+            //getData();
             inflateFrontPage();
-            inflateStatsPage();
+            //inflateStatsPage();
             timer1.Start();
         }
 
@@ -349,10 +350,6 @@ namespace Assignment1 {
             section1.Scale(new SizeF(1 / xScale, 1 / yScale));
             section2.Scale(new SizeF(1 / xScale, 1 / yScale));
             titleBanner.Scale(new SizeF(1 / xScale, 1 / yScale));
-            if (statsContainer != null) {
-                statsContainer.Scale(new SizeF(1 / xScale, 1 / yScale));
-            }
-
 
             // Calculate new Scale
             xScale = (float)ClientRectangle.Width / 1920;
@@ -362,7 +359,6 @@ namespace Assignment1 {
             section1.Scale(new SizeF(xScale, yScale));
             section2.Scale(new SizeF(xScale, yScale));
             titleBanner.Scale(new SizeF(xScale, yScale));
-            statsContainer.Scale(new SizeF(xScale, yScale));
 
             // Fix Offset
             section1.Location = new Point(12, 25);
@@ -396,6 +392,7 @@ namespace Assignment1 {
                 answers[7] = employmentBox.SelectedIndex;
                 Person person = new Person(forenameBox.Text, surnameBox.Text, getAge(), answers);
                 data.addPerson(person);
+                data.saveToFile();
 
                 resetMainContainer();
                 mainContainer.Hide();
@@ -759,7 +756,7 @@ namespace Assignment1 {
             graphic.SendToBack();
             statsContainer.Controls.Add(graphic);
             graphic.Size = new Size(mainContainer.Width - 250, mainContainer.Height);
-            graphic.Location = new Point(250,0);
+            graphic.Location = new Point(sideBarContainer.Width,0);
             graphic.Margin = new Padding(0);
             graphic.Tag = "Graphic";
             graphic.MouseEnter += new EventHandler(graphic_onEnter);
