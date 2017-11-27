@@ -26,6 +26,8 @@ namespace Assignment1 {
         private List<int> q3Values;
 
         public Data() {
+
+            // Initialize null values;
             ammount = 0;
             fornames = new List<string>();
             surnames = new List<string>();
@@ -39,6 +41,8 @@ namespace Assignment1 {
             q2Values = new List<int>();
             q3Values = new List<int>();
         }
+
+        #region Getters
 
         public int getAmmount() {
             return ammount;
@@ -98,6 +102,9 @@ namespace Assignment1 {
             return ageList;
         }
 
+        #endregion
+
+        // Add person to data and split data into groups.
         public void addPerson(Person person) {
             fornames.Add(person.getForname());
             surnames.Add(person.getSurname());
@@ -115,13 +122,14 @@ namespace Assignment1 {
         }
 
         public void saveToFile() {
-            string path = "saveFile.txt";
+            string path = FILE_PATH;
             using (StreamWriter writer = File.AppendText(path)) {
 
                 if (!File.Exists(path)) {
                     File.Create(path);
                 }
 
+                // Save each dataset on a new line sepperated by a ','.
                 for (int i = 0; i < ammount; i++) {
                     string line = fornames[i] + ","
                         + surnames[i] + ","
@@ -142,6 +150,8 @@ namespace Assignment1 {
         public void loadFile() {
             StreamReader reader = new StreamReader(FILE_PATH);
             string line;
+
+            // Load the file the same way it was stored.
             while ((line = reader.ReadLine()) != null) {
                 string[] data = line.Split(',');
                 string forname = data[0];
@@ -160,6 +170,7 @@ namespace Assignment1 {
 
         #region dataGeneration
 
+        // Find the average value of a certain question answer.
         public int getMeanValue(List<int> questionValues, int value) {
             List<int> meanValues = new List<int>();
             for (int i = 0; i < questionValues.Count; i++) {
@@ -170,6 +181,7 @@ namespace Assignment1 {
             return Convert.ToInt32(meanValues.Average());
         }
 
+        // Find the modal value of a list.
         public int[] getMode(List<int> list) {
             int current = -1;
             int repeatValue = 0;
@@ -198,9 +210,12 @@ namespace Assignment1 {
             return result;
         }
 
+        // Returns the modal value of a certain question answer.
         public Value getModalValues(List<int> questionValues, int value, string type) {
             List<int> modalValues = new List<int>();
             for (int i = 0; i < questionValues.Count; i++) {
+
+                // If the value corresponds to the answer, add it to the list.
                 if (questionValues[i] == value) {
                     if (type == Value.TYPE_EDUCATION) {
                         modalValues.Add(educationValues[i]);

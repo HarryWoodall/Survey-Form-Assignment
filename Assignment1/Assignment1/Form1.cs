@@ -43,9 +43,8 @@ namespace Assignment1 {
             this.WindowState = FormWindowState.Maximized;
             initializeQuestions();
             data.loadFile();
-            //getData();
+            getData();
             inflateFrontPage();
-            //inflateStatsPage();
             timer1.Start();
         }
 
@@ -187,6 +186,7 @@ namespace Assignment1 {
 
         private void timer1_Tick(object sender, EventArgs e) {
 
+            // Aniimation for likert scale
             // Loops through each panel in each question, animating if need be
             foreach (Question question in questionList) {
                 foreach (Panel panel in question.getToolTipList()) {
@@ -200,14 +200,19 @@ namespace Assignment1 {
                 }
             }
 
+            // Anination for stats page sub bar
             if (subBarContainer != null) {
                 if (subBarContainer.Visible && subBarContainer.Tag.ToString() == "0") {
+
+                    // If State is moving into visibility, move container until it reaches destination
                     if (subBarContainer.Location.X < 235) {
                         subBarContainer.Left += 15;
                     } else {
                         subBarContainer.Left = 250;
                     }
                 } else if (subBarContainer.Visible && subBarContainer.Tag.ToString() == "1") {
+
+                    // If state is moving out of visibility, move container until it reaches destination
                     if (subBarContainer.Location.X > 15) {
                         subBarContainer.Left -= 15;
                     } else {
@@ -217,6 +222,7 @@ namespace Assignment1 {
                 }
             }
 
+            // Animation for intro page
             if (frontPage != null) {
                 if (frontPage.Tag.ToString() == "0") {
                     introFadeIn();
@@ -404,18 +410,22 @@ namespace Assignment1 {
             Label label = (Label)sender;
             label.BackColor = Color.FromArgb(255, 217, 128, 38);
             sideBarIndex = sideBarTabs.IndexOf(label);
+
+            // If 'TOTAL' tab is selected, create the sub bar.
             if (sideBarTabs[0] == label) {
                 inflateSubBar();
                 sideBarContainer.BringToFront();
                 subBarContainer.Tag = "0";
             } else {
+
+                // If 'TOTAL' tab is not selected, remove the sub bar.
                 if (subBarContainer != null && subBarContainer.Visible) {
-                    //subBarContainer.Visible = false;
                     subBarContainer.Tag = "1";
                 }
             }
         }
 
+        // Revert the tab to its previous state.
         public void sideBarTab_onLeave(object sender, EventArgs e) {
             Label label = (Label)sender;
             if (label.Tag.ToString() == "0") {
@@ -425,14 +435,19 @@ namespace Assignment1 {
 
         public void subBarTab_onEnter(object sender, EventArgs e) {
             Label label = (Label)sender;
+
+            // Keep the 'TOTAL' tab selected
             sideBarTabs[0].BackColor = Color.FromArgb(255, 217, 128, 38);
             if (label.Tag.ToString() == "0") {
                 label.BackColor = Color.White;
                 label.ForeColor = Color.Black;
             }
+
+            // Track the index of the sub bar
             subBarIndex = subBarTabs.IndexOf(label);
         }
 
+        // Revert the tab to its previous state
         public void subBarTab_onLeave(object sender, EventArgs e) {
             Label label = (Label)sender;
             if (sideBarTabs[0].Tag.ToString() == "0") {
@@ -444,6 +459,7 @@ namespace Assignment1 {
             }
         }
 
+        // Check to see if mouse has left sidebar
         public void sideBar_onMouseMove(object sender, MouseEventArgs e) {
             if (e.Y < 140) {
                 if (subBarContainer != null && subBarContainer.Visible) {
@@ -455,14 +471,18 @@ namespace Assignment1 {
         public void tab_onClick(object sender, EventArgs e) {
             Label label = (Label)sender;
             if (label.Tag.ToString() == "0") {
+
+                // Search for the old graphic panel and remove it.
                 foreach (Control control in statsContainer.Controls) {
                     if (control.Tag == "Graphic") {
                         control.Dispose();
                     }
                 }
 
+                // Create the new graphic
                 inflateGraphic();
 
+                // Reset the state of the tabs.
                 foreach (Label item in sideBarTabs) {
                     item.BackColor = Color.Transparent;
                     item.Font = new Font(item.Font, FontStyle.Regular);
@@ -476,6 +496,8 @@ namespace Assignment1 {
                         item.Tag = "0";
                     }
                 }
+
+                // Check to see if you clicked a side bar or sub bar tab, then change its state.
                 if (sideBarTabs.Contains(label)) {
                     label.BackColor = Color.FromArgb(255, 217, 128, 38);
                     label.Font = new Font(label.Font, FontStyle.Bold);
@@ -492,12 +514,15 @@ namespace Assignment1 {
             }
         }
 
+
+        // Check to see if your mouse has left the sub bar.
         public void graphic_onEnter(object sender, EventArgs e) {
             if (subBarContainer != null && subBarContainer.Visible) {
                 subBarContainer.Tag = "1";
             }
         }
 
+        // Create a new Survey
         public void createNew_onClick(object sender, EventArgs e) {
             statsContainer.Hide();
             mainContainer.Show();
@@ -505,6 +530,7 @@ namespace Assignment1 {
 
         #endregion
 
+        // Play ambient sound in the background.
         //https://freesound.org/people/frankum/sounds/393520/
         public void playSound(object sender, EventArgs e) {
             if (!frontPage.Visible) {
@@ -586,7 +612,10 @@ namespace Assignment1 {
             return age;
         }
 
+        // Set up main page for a new survey.
         public void resetMainContainer() {
+
+            // Reset each control to default state.
             foreach (Control control in section1.Controls) {
                 if (control is TextBox) {
                     TextBox box = (TextBox)control;
@@ -625,6 +654,7 @@ namespace Assignment1 {
 
         #region Inflators
 
+        // Create intro page and add it to controls.
         private void inflateFrontPage() {
             frontPage = new Panel();
             this.Controls.Add(frontPage);
@@ -647,7 +677,9 @@ namespace Assignment1 {
             title.Location = new Point((frontPage.Width - title.Width) / 2, (frontPage.Height - title.Height) / 2);
         }
 
+        // Create stats page and add it to main controls.
         public void inflateStatsPage() {
+            // If not null, just make visible. Else create new.
             if (statsContainer == null) {
                 statsContainer = new Panel();
                 this.Controls.Add(statsContainer);
@@ -665,6 +697,7 @@ namespace Assignment1 {
             }
         }
 
+        // Create Sidebar and add it to main controls.
         public void inflateSidebar() {
             sideBarTabs = new List<Label>();
 
@@ -680,6 +713,7 @@ namespace Assignment1 {
 
                 string[] tabNames = { "TOTAL", "I ENJOYED THE SCULPTURE", "I AM CURIOUS AS TO HOW IT WORKS", "I WANT TO KNOW MORE ABOUT SCIENCE AS A RESULT" };
 
+                // Add tab labels and delegate event handelers.
                 for (int i = 0; i < tabNames.Length; i++) {
                     Label tab = new Label();
                     sideBarContainer.Controls.Add(tab);
@@ -711,6 +745,7 @@ namespace Assignment1 {
             }
         }
 
+        // Create sub bar and add it to controls.
         public void inflateSubBar() {
             if (subBarContainer == null) {
                 subBarTabs = new List<Label>();
@@ -728,6 +763,7 @@ namespace Assignment1 {
 
                 string[] tabNames = { "Age", "Gender", "Ethnicity", "Education", "Employment" };
 
+                // Add tab labels and delegate event handelers.
                 for (int i = 0; i < tabNames.Length; i++) {
                     Label tab = new Label();
                     subBarContainer.Controls.Add(tab);
@@ -751,6 +787,7 @@ namespace Assignment1 {
             }
         }
 
+        // Create chart graphic and add it to controls.
         public void inflateGraphic() {
             Panel graphic = new Panel();
             graphic.SendToBack();
@@ -761,11 +798,14 @@ namespace Assignment1 {
             graphic.Tag = "Graphic";
             graphic.MouseEnter += new EventHandler(graphic_onEnter);
 
+            // Create an instance of ChartConstuctor and give it the data, a container it will go in and current indexes of sidebars.
             ChartConstructor constructor = new ChartConstructor(data, graphic, sideBarIndex, subBarIndex);
             Chart chart;
 
+            // Create the chart.
             chart = getChart(graphic);
 
+            // Add it to the container.
             graphic.Controls.Add(chart);
             chart.Size = new Size(800, 800);
             chart.Location = new Point((graphic.Width - chart.Width) / 2, (graphic.Height - chart.Height) / 2);
@@ -773,6 +813,8 @@ namespace Assignment1 {
             Label createNew = new Label();
             graphic.Controls.Add(createNew);
 
+
+            // Add the createNew button.
             createNew.Text = "CREATE NEW";
             createNew.Size = new Size(150, 150);
             createNew.Location = new Point(0, graphic.Height - createNew.Height);
@@ -786,6 +828,7 @@ namespace Assignment1 {
 
         #endregion
 
+        // Generate the correct chart.
         public Chart getChart(Panel panel) {
             ChartConstructor constructor = new ChartConstructor(data, panel, sideBarIndex, subBarIndex);
             if (sideBarIndex == 0) {
@@ -798,6 +841,7 @@ namespace Assignment1 {
             }
         }
 
+        // Genertate 100 random pieces of data to show off graphs.
         public void getData() {
 
             Random rand = new Random();

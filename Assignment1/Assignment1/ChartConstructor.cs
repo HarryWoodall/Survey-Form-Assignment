@@ -8,7 +8,7 @@ using System.Windows.Forms.DataVisualization.Charting;
 using System.Drawing;
 
 namespace Assignment1 {
-    class ChartConstructor {
+    public class ChartConstructor {
 
         private Data data;
         private Panel container;
