@@ -44,7 +44,7 @@ namespace Assignment1 {
             initializeQuestions();
             getData();
             inflateFrontPage();
-            //inflateStatsPage();
+            inflateStatsPage();
             timer1.Start();
         }
 
@@ -340,10 +340,18 @@ namespace Assignment1 {
         // TODO FIX THIS SHIT!
         private void Form1_SizeChanged(object sender, EventArgs e) {
 
+            // Scale frontPage
+            frontPage.Size = new Size(ClientRectangle.Width, ClientRectangle.Height);
+            frontPage.Controls[0].Size = new Size(frontPage.Width / 3, frontPage.Height / 3);
+            frontPage.Controls[0].Location = new Point((frontPage.Width - frontPage.Controls[0].Width) / 2, (frontPage.Height - frontPage.Controls[0].Height) / 2);
+
             // Revert Scale to default
             section1.Scale(new SizeF(1 / xScale, 1 / yScale));
             section2.Scale(new SizeF(1 / xScale, 1 / yScale));
             titleBanner.Scale(new SizeF(1 / xScale, 1 / yScale));
+            if (statsContainer != null) {
+                statsContainer.Scale(new SizeF(1 / xScale, 1 / yScale));
+            }
 
 
             // Calculate new Scale
@@ -354,6 +362,7 @@ namespace Assignment1 {
             section1.Scale(new SizeF(xScale, yScale));
             section2.Scale(new SizeF(xScale, yScale));
             titleBanner.Scale(new SizeF(xScale, yScale));
+            statsContainer.Scale(new SizeF(xScale, yScale));
 
             // Fix Offset
             section1.Location = new Point(12, 25);
@@ -622,7 +631,7 @@ namespace Assignment1 {
         private void inflateFrontPage() {
             frontPage = new Panel();
             this.Controls.Add(frontPage);
-            frontPage.Size = this.Size;
+            frontPage.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             frontPage.Location = new Point(0, 0);
             frontPage.BackColor = Color.White;
             frontPage.Tag = "0";
@@ -646,8 +655,8 @@ namespace Assignment1 {
                 statsContainer = new Panel();
                 this.Controls.Add(statsContainer);
 
-                statsContainer.Size = new Size(1980, mainContainer.Height);
-                statsContainer.Location = new Point(0, 150);
+                statsContainer.Size = new Size(this.Width, mainContainer.Height);
+                statsContainer.Location = new Point(0, titleBanner.Height);
                 statsContainer.Margin = new Padding(0);
 
                 mainContainer.Hide();

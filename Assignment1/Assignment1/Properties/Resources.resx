@@ -118,15 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="_219472__jarredgibb__button_01" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\219472__jarredgibb__button-01.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="_257357__brnck__button_click" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\257357__brnck__button-click.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="_376532__womb_affliction__flute_trill" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\376532__womb-affliction__flute-trill.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="_393520_frankum_ambient_guitar_x1_loop_mode" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\393520_frankum_ambient-guitar-x1-loop-mode.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
