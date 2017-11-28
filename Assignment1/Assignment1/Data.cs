@@ -134,14 +134,14 @@ namespace Assignment1 {
                     string line = fornames[i] + ","
                         + surnames[i] + ","
                         + ages[i] + ","
+                        + q1Values[i] + ","
+                        + q2Values[i] + ","
+                        + q3Values[i] + ","
                         + ageValues[i] + ","
                         + genderValues[i] + ","
                         + ethnicityValues[i] + ","
                         + educationValues[i] + ","
-                        + employmentValues[i] + ","
-                        + q1Values[i] + ","
-                        + q2Values[i] + ","
-                        + q3Values[i];
+                        + employmentValues[i];
                     writer.WriteLine(line);
                 }
             }

@@ -43,7 +43,8 @@ namespace Assignment1 {
             this.WindowState = FormWindowState.Maximized;
             initializeQuestions();
             data.loadFile();
-            getData();
+            //getData();
+            inflateStatsPage();
             inflateFrontPage();
             timer1.Start();
         }
