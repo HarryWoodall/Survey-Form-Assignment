@@ -44,6 +44,7 @@ namespace Assignment1 {
             initializeQuestions();
             data.loadFile();
             //getData();
+            //data.saveToFile();
             inflateStatsPage();
             inflateFrontPage();
             timer1.Start();
@@ -370,6 +371,9 @@ namespace Assignment1 {
             // Fix Offset
             section1.Location = new Point(12, 25);
             section2.Location = new Point(section1.Location.X + section1.Width + 20, section1.Location.Y);
+            if (statsContainer != null) {
+                statsContainer.Location = new Point(0, titleBanner.Height);
+            }
             forenameLabel.Location = new Point(27, forenameLabel.Location.Y);
             forenameBox.Location = new Point(215, forenameBox.Location.Y);
             surnameLabel.Location = new Point(44, surnameLabel.Location.Y);
@@ -834,7 +838,7 @@ namespace Assignment1 {
             ChartConstructor constructor = new ChartConstructor(data, panel, sideBarIndex, subBarIndex);
             if (sideBarIndex == 0) {
                 Chart[] chartArray = new Chart[] {
-                    constructor.totalAge(), constructor.totalGender(), constructor.totalEthnicity(), constructor.totalEducation(), constructor.totalEmployment()
+                    constructor.chartAge(), constructor.chartGender(), constructor.chartEthnicity(), constructor.chartEducation(), constructor.chartEmployment()
                 };
                 return chartArray[subBarIndex];
             } else {

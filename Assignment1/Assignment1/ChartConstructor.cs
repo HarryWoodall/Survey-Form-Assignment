@@ -10,6 +10,8 @@ using System.Drawing;
 namespace Assignment1 {
     public class ChartConstructor {
 
+        // Field variables.
+
         private Data data;
         private Panel container;
         private FlowLayoutPanel statPanel;
@@ -20,6 +22,12 @@ namespace Assignment1 {
         private int question;
         private int graphIndex;
 
+        private string[] ageLabels = { "< 10", "10 - 19", "20 - 29", "30 - 39", "40 - 49", "50 - 59", "60+" };
+        private string[] genderLabels = { "Male", "Female" };
+        private string[] ethnicityLabels = { "White / White British", "Mixed", "Asian / Asian British", "Black / Black British", "Other" };
+        private string[] educationLabels = { "Primary", "Secondary", "Advanced", "Higher", "Other" };
+        private string[] employmentLabels = { "Employed", "Self Employed", "Unemployed", "Looking for work", "Student", "Retired", "Other" };
+
         public ChartConstructor(Data data, Panel panel, int question, int graphIndex) {
             this.data = data;
             this.container = panel;
@@ -27,12 +35,13 @@ namespace Assignment1 {
             this.graphIndex = graphIndex;
         }
 
+        // returns a chart with these attributes
         public Chart initializeChart(string name) {
             Chart chart = new Chart();
+            chart.Palette = ChartColorPalette.Pastel;
             chart.Titles.Add(name);
             chart.Titles[0].Font = new Font("Calibri", 32, FontStyle.Bold);
             ChartArea area = new ChartArea();
-            //area.Area3DStyle.Enable3D = true;
 
             Legend legend = new Legend();
 
@@ -41,6 +50,7 @@ namespace Assignment1 {
             return chart;
         }
 
+        // Returnes a series given a list and chart labels.
         public Series getChartSeries(Chart chart, List<int> list, string[] labels) {
             Series series = new Series();
             series.ChartType = SeriesChartType.Pie;
@@ -52,7 +62,9 @@ namespace Assignment1 {
                         values[i]++;
                     }
                 }
+
                 series.Points.AddXY(labels[i], values[i]);
+                series.Points[i].Font = new Font("Calibri", 12, FontStyle.Italic);
 
                 if (values[i] == 0) {
                     series.Points[i]["PieLabelStyle"] = "Disabled";
@@ -62,108 +74,114 @@ namespace Assignment1 {
             return series;
         }
 
-        //TODO change chartLabels to memeber variable.
+        #region Charts
 
-        public Chart totalAge() {
+        // Returns the chart that gives age values.
+        public Chart chartAge() {
             Chart chart = initializeChart("Age");
-            string[] chartLabels = { "< 10", "10 - 19", "20 - 29", "30 - 39", "40 - 49", "50 - 59", "60+" };
-            chart.Series.Add(getChartSeries(chart, data.getAgeValues(), chartLabels));
+            chart.Series.Add(getChartSeries(chart, data.getAgeValues(), ageLabels));
             chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
 
-        public Chart totalGender() {
-            Chart chart = initializeChart("Gender");
-            string[] chartLabels = { "Male", "Female" };
-            chart.Series.Add(getChartSeries(chart, data.getGenderValues(), chartLabels));
-            chart.MouseClick += new MouseEventHandler(chart_onClick);
-
-            return chart;
-        }
-
-        public Chart totalEthnicity() {
-            Chart chart = initializeChart("Ethnicity");
-            string[] chartLabels = { "White / White British", "Mixed", "Asian / Asian British", "Black / Black British", "Other" };
-            chart.Series.Add(getChartSeries(chart, data.getEthnicityValues(), chartLabels));
-            chart.MouseClick += new MouseEventHandler(chart_onClick);
-
-            return chart;
-        }
-
-        public Chart totalEducation() {
-            Chart chart = initializeChart("Education");
-            string[] chartLabels = { "Primary", "Secondary", "Advanced", "Higher", "Other" };
-            chart.Series.Add(getChartSeries(chart, data.getEducationValues(), chartLabels));
-            chart.MouseClick += new MouseEventHandler(chart_onClick);
-
-            return chart;
-        }
-
-        public Chart totalEmployment() {
-            Chart chart = initializeChart("Employment");
-            string[] chartLabels = { "Employed", "Self Employed", "Unemployed", "Looking for work", "Student", "Retired", "Other" };
-            chart.Series.Add(getChartSeries(chart, data.getEmploymentValues(), chartLabels));
-            chart.MouseClick += new MouseEventHandler(chart_onClick);
-
-            return chart;
-        }
-
+        // An overide of the chartAge function.
         public Chart chartAge(int question, int score) {
             Chart chart = initializeChart("Age");
-            string[] chartLabels = { "< 10", "10 - 19", "20 - 29", "30 - 39", "40 - 49", "50 - 59", "60+" };
             List<int> questionValues = getQuestion(question);
             List<int> valueList = data.getSubValues(questionValues, data.getAgeValues(), score);
-            chart.Series.Add(getChartSeries(chart, valueList, chartLabels));
+            chart.Series.Add(getChartSeries(chart, valueList, ageLabels));
             chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
 
+
+        // Returns the chart that gives gender values. 
+        public Chart chartGender() {
+            Chart chart = initializeChart("Gender");
+            chart.Series.Add(getChartSeries(chart, data.getGenderValues(), genderLabels));
+            chart.MouseClick += new MouseEventHandler(chart_onClick);
+
+            return chart;
+        }
+
+        // An overide of the chartGender function.
         public Chart chartGender(int question, int score) {
             Chart chart = initializeChart("Gender");
-            string[] chartLabels = { "Male", "Female" };
             List<int> questionValues = getQuestion(question);
             List<int> valueList = data.getSubValues(questionValues, data.getGenderValues(), score);
-            chart.Series.Add(getChartSeries(chart, valueList, chartLabels));
+            chart.Series.Add(getChartSeries(chart, valueList, genderLabels));
             chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
 
+
+        // Returns the chart that gives ethnicity values.
+        public Chart chartEthnicity() {
+            Chart chart = initializeChart("Ethnicity");
+            chart.Series.Add(getChartSeries(chart, data.getEthnicityValues(), ethnicityLabels));
+            chart.MouseClick += new MouseEventHandler(chart_onClick);
+
+            return chart;
+        }
+
+        // An overide of the chartEthnicity function.
         public Chart chartEthnicity(int question, int score) {
             Chart chart = initializeChart("Ethnicity");
-            string[] chartLabels = { "White / White British", "Mixed", "Asian / Asian British", "Black / Black British", "Other" };
             List<int> questionValues = getQuestion(question);
             List<int> valueList = data.getSubValues(questionValues, data.getEthnicityValues(), score);
-            chart.Series.Add(getChartSeries(chart, valueList, chartLabels));
+            chart.Series.Add(getChartSeries(chart, valueList, ethnicityLabels));
             chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
 
+
+        // Returns the chart that gives the education values.
+        public Chart chartEducation() {
+            Chart chart = initializeChart("Education");
+            chart.Series.Add(getChartSeries(chart, data.getEducationValues(), educationLabels));
+            chart.MouseClick += new MouseEventHandler(chart_onClick);
+
+            return chart;
+        }
+
+        // An overide of the chartEducation function.
         public Chart chartEducation(int question, int score) {
             Chart chart = initializeChart("Education");
-            string[] chartLabels = { "Primary", "Secondary", "Advanced", "Higher", "Other" };
             List<int> questionValues = getQuestion(question);
             List<int> valueList = data.getSubValues(questionValues, data.getEducationValues(), score);
-            chart.Series.Add(getChartSeries(chart, valueList, chartLabels));
+            chart.Series.Add(getChartSeries(chart, valueList, educationLabels));
             chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
 
+
+        // Returns the chart that gives the employment values.
+        public Chart chartEmployment() {
+            Chart chart = initializeChart("Employment");
+            chart.Series.Add(getChartSeries(chart, data.getEmploymentValues(), employmentLabels));
+            chart.MouseClick += new MouseEventHandler(chart_onClick);
+
+            return chart;
+        }
+
+        // An overide of the chartEmployment function.
         public Chart chartEmployment(int question, int score) {
             Chart chart = initializeChart("Employment");
-            string[] chartLabels = { "Employed", "Self Employed", "Unemployed", "Looking for work", "Student", "Retired", "Other" };
             List<int> questionValues = getQuestion(question);
             List<int> valueList = data.getSubValues(questionValues, data.getEmploymentValues(), score);
-            chart.Series.Add(getChartSeries(chart, valueList, chartLabels));
+            chart.Series.Add(getChartSeries(chart, valueList, employmentLabels));
             chart.MouseClick += new MouseEventHandler(chart_onClick);
 
             return chart;
         }
 
+
+        // Returns a list depending on which question is active.
         public List<int> getQuestion(int question) {
             List<int> result;
             switch (question) {
@@ -180,6 +198,7 @@ namespace Assignment1 {
             return result;
         }
 
+        // Returns the chart that give the question values.
         public Chart chartQuestion(int number) {
             Chart chart;
             string[] chartLabels = { "Strongly Agree", "Agree", "Neither Agree", "Dissagree", "Strongly Dissagree" };
@@ -203,6 +222,7 @@ namespace Assignment1 {
             return chart;
         }
 
+        // An overide of the question fuction.
         public Chart chartQuestion(int number, int score) {
             Chart chart = chartQuestion(number);
             chart.Series[0].Points[score]["Exploded"] = "true";
@@ -212,16 +232,22 @@ namespace Assignment1 {
             return chart;
         }
 
+        #endregion
+
         public void chart_onClick(object sender, MouseEventArgs e) {
             Chart chart = (Chart)sender;
             HitTestResult results = chart.HitTest(e.X, e.Y);
 
+            // Check to see if you clicked the chart itself.
             if (results.ChartElementType == ChartElementType.DataPoint) {
 
+                // Reset each chart peice to default value.
                 foreach (DataPoint point in chart.Series[0].Points) {
                     point["Exploded"] = "false";
                     point.BorderWidth = 0;
                 }
+
+                // 'Explode' the chart piece.
                 // https://forums.asp.net/t/1549781.aspx?Explode+a+slice+of+a+pie+chart+microsoft+chart+controls+
                 chart.Series[0].Points[results.PointIndex]["Exploded"] = "true";
                 chart.Series[0].Points[results.PointIndex].BorderWidth = 3;
@@ -231,12 +257,14 @@ namespace Assignment1 {
                     statPanel.Dispose();
                 }
 
+                // re-center the chart.
                 chart.Location = new Point(200, (container.Height - chart.Height) / 2);
 
                 if (question > 0 && currentTab < 1) {
                     mainCurrentIndex = results.PointIndex;
                 }
 
+                // Generate tabs if chart values arn't total.
                 if (question > 0) {
                     if (tabLayoutPanel == null) {
                         generateTabs(container);
@@ -245,8 +273,11 @@ namespace Assignment1 {
 
                 generateStatistics(chart, results.PointIndex);
             }
-            // This is causing issues.
+
+            // Check to see if you clicked outside of the chart. 
             else if (results.ChartElementType == ChartElementType.PlottingArea) {
+
+                // Reset the chart's position and state.
                 foreach (DataPoint point in chart.Series[0].Points) {
                     point["Exploded"] = "false";
                     point.BorderWidth = 0;
@@ -254,12 +285,6 @@ namespace Assignment1 {
 
                 if (statPanel != null) {
                     statPanel.Dispose();
-                }
-
-                if (tabLayoutPanel != null) {
-                    //tabLayoutPanel.Dispose();
-                    //tabLayoutPanel = null;
-                    //currentTab = -1;
                 }
 
                 chart.Location = new Point((container.Width - chart.Width) / 2, (container.Height - chart.Height) / 2);
@@ -272,9 +297,11 @@ namespace Assignment1 {
 
             for (int i = 0; i < tabLayoutPanel.Controls.Count; i++) {
 
+                // Reset the state of the tab.
                 tabLayoutPanel.Controls[i].Size = new Size(150, 100);
                 tabLayoutPanel.Controls[i].Font = new Font(label.Font, FontStyle.Regular);
 
+                // Check which tab was clicked and draw the corresponding graph.
                 if (tabLayoutPanel.Controls[i] as Label == label) {
                     switch (i) {
                         case 0:
@@ -304,13 +331,18 @@ namespace Assignment1 {
                     }
                 }
             }
+
+            // Increase the tab size.
             label.Size = new Size(200, 100);
             label.Font = new Font(label.Font, FontStyle.Bold);
         }
 
         public void generateStatistics(Chart chart, int chartIndex) {
+
+            // Create a new FlowLayoutPanel and add it to container.
             statPanel = new FlowLayoutPanel();
             container.Controls.Add(statPanel);
+
 
             statPanel.Size = new Size(450, container.Height);
             statPanel.Dock = DockStyle.Right;
@@ -318,6 +350,7 @@ namespace Assignment1 {
             statPanel.BackColor = Color.FromArgb(255, 100, 100, 100);
             statPanel.Padding = new Padding(0);
 
+            // Generate different stats depending on tabIndex.
             if (question > 0 && currentTab < 1) {
                 generateQuestionStats(chart, chartIndex);
 
@@ -326,6 +359,7 @@ namespace Assignment1 {
             }
         }
 
+        // Data generated from demographic answers.
         private void generateDemographStats(Chart chart, int chartIndex) {
             if (question > 0) {
                 string[] headerText = { "STRONGLY AGREE", "AGREE", "NEITHER AGREE", "DISAGREE", "STRONGLY DISAGREE" };
@@ -354,6 +388,7 @@ namespace Assignment1 {
             percentLabel.TextAlign = ContentAlignment.MiddleCenter;
         }
 
+        // Data generated from question answers.
         private void generateQuestionStats(Chart chart, int chartIndex) {
             Label titleLabel = new Label();
             titleLabel.Text = chart.Series[0].Points[chartIndex].AxisLabel;
@@ -386,6 +421,7 @@ namespace Assignment1 {
             generateLabel(employmentLabel);
         }
 
+        // Create and add a label to the statPanel Controls.
         public void generateLabel(Label label) {
             Font font = new Font("Calibri", 18, FontStyle.Bold);
 
@@ -399,6 +435,7 @@ namespace Assignment1 {
             label.Margin = new Padding(0);
         }
 
+        // Generate and add the Tabs to the container.
         public void generateTabs(Panel container) {
             tabLayoutPanel = new FlowLayoutPanel();
             container.Controls.Add(tabLayoutPanel);
@@ -408,6 +445,7 @@ namespace Assignment1 {
 
             string[] labelText = { "TOTAL", "AGE", "GENDER", "ETHNICITY", "EDUCATION", "EMPLOYMENT" };
 
+            // Create each tab.
             for (int i = 0; i < labelText.Length; i++) {
                 Label tabLabel = new Label();
                 tabLayoutPanel.Controls.Add(tabLabel);
@@ -426,6 +464,7 @@ namespace Assignment1 {
                     tabLabel.Margin = new Padding(0, 0, 0, 0);
                 }
 
+                // Create bigger labels depending on what is selected.
                 if (currentTab == -1) {
                     tabLabel.Size = new Size(200, 100);
                     tabLabel.Font = new Font(tabLabel.Font, FontStyle.Bold);
@@ -437,6 +476,7 @@ namespace Assignment1 {
             }
         }
         
+        // Return the number of slices in a chart.
         public int getChartSize(Chart chart) {
             int result = 0;
             foreach (DataPoint point in chart.Series[0].Points) {
@@ -445,6 +485,7 @@ namespace Assignment1 {
             return result;
         }
 
+        // Replace an old chart with a new chart.
         public void reDrawChart(Chart newChart, Panel panel) {
             Chart chart = newChart;
             foreach (Control control in container.Controls) {
