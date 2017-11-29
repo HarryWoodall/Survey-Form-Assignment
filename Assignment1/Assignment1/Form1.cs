@@ -351,7 +351,7 @@ namespace Assignment1 {
 
             // Scale frontPage
             frontPage.Size = new Size(ClientRectangle.Width, ClientRectangle.Height);
-            frontPage.Controls[0].Size = new Size(frontPage.Width / 3, frontPage.Height / 3);
+            frontPage.Controls[0].Size = new Size(frontPage.Width / 2, frontPage.Height / 2);
             frontPage.Controls[0].Location = new Point((frontPage.Width - frontPage.Controls[0].Width) / 2, (frontPage.Height - frontPage.Controls[0].Height) / 2);
 
             // Revert Scale to default
@@ -501,6 +501,7 @@ namespace Assignment1 {
                     foreach (Label item in subBarTabs) {
                         item.BackColor = Color.Transparent;
                         item.ForeColor = Color.White;
+                        item.Font = new Font(item.Font, FontStyle.Regular);
                         item.Tag = "0";
                     }
                 }
@@ -513,6 +514,7 @@ namespace Assignment1 {
                 } else {
                     label.BackColor = Color.White;
                     label.ForeColor = Color.Black;
+                    label.Font = new Font(label.Font, FontStyle.Bold);
                     label.Tag = "1";
 
                     sideBarTabs[0].BackColor = Color.FromArgb(255, 217, 128, 38);
@@ -677,16 +679,17 @@ namespace Assignment1 {
             frontPage.Controls.Add(title);
             title.Text = "Singing Sculpture Survey";
             title.AutoSize = false;
-            title.Size = new Size(frontPage.Width / 3, frontPage.Height / 3);
-            title.TextAlign = ContentAlignment.TopCenter;
+            title.Size = new Size(frontPage.Width / 2, frontPage.Height / 2);
+            title.TextAlign = ContentAlignment.MiddleCenter;
             title.BackColor = Color.Transparent;
             title.ForeColor = Color.White;
-            title.Font = new Font("Calibri", 64, FontStyle.Italic);
+            title.Font = new Font("Calibri", 88, FontStyle.Italic);
             title.Location = new Point((frontPage.Width - title.Width) / 2, (frontPage.Height - title.Height) / 2);
         }
 
         // Create stats page and add it to main controls.
         public void inflateStatsPage() {
+
             // If not null, just make visible. Else create new.
             if (statsContainer == null) {
                 statsContainer = new Panel();
@@ -780,6 +783,7 @@ namespace Assignment1 {
                     tab.Text = tabNames[i];
                     tab.TextAlign = ContentAlignment.MiddleCenter;
                     tab.Size = new Size(150, 100);
+                    tab.Font = new Font("Calibri", 16);
                     tab.Padding = new Padding(0);
                     tab.Location = new Point(0, ((subBarContainer.Height - tab.Height * tabNames.Length - 40) / 2) + (tab.Height * i));
                     tab.Tag = "0";

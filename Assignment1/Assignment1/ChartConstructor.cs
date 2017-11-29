@@ -399,6 +399,13 @@ namespace Assignment1 {
             Label ageLabel = new Label();
             ageLabel.Text = "Average age: " + data.getMeanValue(getQuestion(question), chartIndex).ToString();
             generateLabel(ageLabel);
+            ageLabel.Font = new Font("Calibri", 28, FontStyle.Bold);
+
+            Label subTitleLabel = new Label();
+            subTitleLabel.Text = "Modal values";
+            generateLabel(subTitleLabel);
+            subTitleLabel.Font = new Font("Calibri", 24, FontStyle.Underline);
+            subTitleLabel.Margin = new Padding(0, 15, 0, 0);
 
             Label genderLabel = new Label();
             Value genderValue = data.getModalValues(getQuestion(question), chartIndex, Value.TYPE_GENDER);
