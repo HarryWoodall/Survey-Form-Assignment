@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Assignment1 {
     public class Data {
 
-        private readonly string FILE_PATH = "saveFile.txt";
+        private readonly string FILE_PATH = "../../saveFile.txt";
 
         private int ammount;
 

@@ -358,6 +358,7 @@ namespace Assignment1 {
             section1.Scale(new SizeF(1 / xScale, 1 / yScale));
             section2.Scale(new SizeF(1 / xScale, 1 / yScale));
             titleBanner.Scale(new SizeF(1 / xScale, 1 / yScale));
+            titleBanner.Controls[0].Font = new Font("Calibri", titleBanner.Controls[0].Font.Size / xScale);
 
             // Calculate new Scale
             xScale = (float)ClientRectangle.Width / 1920;
@@ -367,10 +368,12 @@ namespace Assignment1 {
             section1.Scale(new SizeF(xScale, yScale));
             section2.Scale(new SizeF(xScale, yScale));
             titleBanner.Scale(new SizeF(xScale, yScale));
+            titleBanner.Controls[0].Font = new Font("Calibri", titleBanner.Controls[0].Font.Size * xScale);
 
             // Fix Offset
             section1.Location = new Point(12, 25);
             section2.Location = new Point(section1.Location.X + section1.Width + 20, section1.Location.Y);
+            titleBanner.Controls[0].Location = new Point(titleBanner.Controls[0].Location.X, (titleBanner.Height - titleBanner.Controls[1].Height) - titleBanner.Controls[0].Height);
             if (statsContainer != null) {
                 statsContainer.Location = new Point(0, titleBanner.Height);
             }
