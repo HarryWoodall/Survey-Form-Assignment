@@ -45,7 +45,7 @@ namespace Assignment1 {
             data.loadFile();
             //getData();
             //data.saveToFile();
-            inflateStatsPage();
+            //inflateStatsPage();
             inflateFrontPage();
             timer1.Start();
         }
@@ -699,8 +699,6 @@ namespace Assignment1 {
                 statsContainer.Location = new Point(0, titleBanner.Height);
                 statsContainer.Margin = new Padding(0);
 
-                mainContainer.Hide();
-
                 inflateSidebar();
                 inflateGraphic();
             } else {
@@ -809,9 +807,6 @@ namespace Assignment1 {
             graphic.Margin = new Padding(0);
             graphic.Tag = "Graphic";
             graphic.MouseEnter += new EventHandler(graphic_onEnter);
-
-            // Create an instance of ChartConstuctor and give it the data, a container it will go in and current indexes of sidebars.
-            ChartConstructor constructor = new ChartConstructor(data, graphic, sideBarIndex, subBarIndex);
             Chart chart;
 
             // Create the chart.
@@ -840,7 +835,7 @@ namespace Assignment1 {
 
         #endregion
 
-        // Generate the correct chart.
+        // Generate the correct chart using the ChartConstructor class.
         public Chart getChart(Panel panel) {
             ChartConstructor constructor = new ChartConstructor(data, panel, sideBarIndex, subBarIndex);
             if (sideBarIndex == 0) {

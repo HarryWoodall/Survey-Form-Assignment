@@ -10,7 +10,7 @@ namespace Assignment1 {
 
         private readonly string FILE_PATH = "../../saveFile.txt";
 
-        private int ammount;
+        private List<Person> people;
 
         private List<String> fornames;
         private List<String> surnames;
@@ -27,8 +27,8 @@ namespace Assignment1 {
 
         public Data() {
 
-            // Initialize null values;
-            ammount = 0;
+            // Initialize values;
+            people = new List<Person>();
             fornames = new List<string>();
             surnames = new List<string>();
             ages = new List<int>();
@@ -45,7 +45,7 @@ namespace Assignment1 {
         #region Getters
 
         public int getAmmount() {
-            return ammount;
+            return people.Count;
         }
 
         public List<String> getFornames() {
@@ -106,6 +106,7 @@ namespace Assignment1 {
 
         // Add person to data and split data into groups.
         public void addPerson(Person person) {
+            people.Add(person);
             fornames.Add(person.getForname());
             surnames.Add(person.getSurname());
             ages.Add(person.getAge());
@@ -117,8 +118,6 @@ namespace Assignment1 {
             q1Values.Add(person.getQ1Value());
             q2Values.Add(person.getQ2Value());
             q3Values.Add(person.getQ3Value());
-
-            ammount++;
         }
 
         public void saveToFile() {
@@ -130,7 +129,7 @@ namespace Assignment1 {
                 }
 
                 // Save each dataset on a new line sepperated by a ','.
-                for (int i = 0; i < ammount; i++) {
+                for (int i = 0; i < people.Count; i++) {
                     string line = fornames[i] + ","
                         + surnames[i] + ","
                         + ages[i] + ","
