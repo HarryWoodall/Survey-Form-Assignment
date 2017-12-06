@@ -411,6 +411,8 @@ namespace Assignment1 {
                 resetMainContainer();
                 mainContainer.Hide();
                 inflateStatsPage();
+            } else {
+                MessageBox.Show("Your Form is incomplete of contains errors");
             }
         }
 
@@ -538,8 +540,6 @@ namespace Assignment1 {
             mainContainer.Show();
         }
 
-        #endregion
-
         // Play ambient sound in the background.
         //https://freesound.org/people/frankum/sounds/393520/
         public void playSound(object sender, EventArgs e) {
@@ -549,17 +549,19 @@ namespace Assignment1 {
             }
         }
 
+        #endregion
+
         public bool isComplete() {
 
             // Loop through each control object, checking if empty.
-            foreach (Control control in this.Controls) {
+            foreach (Control control in section1.Controls) {
                 if (control is ComboBox) {
                     ComboBox box = (ComboBox)control;
                     if (box.SelectedIndex == -1) {
                         return false;
                     }
                 } else if (control is TextBox) {
-                    if (control.Tag.ToString() == "0") {
+                    if (control.Tag != null && control.Tag.ToString() == "0") {
                         return false;
                     } else {
                         TextBox box = (TextBox)control;
@@ -577,7 +579,34 @@ namespace Assignment1 {
                 }
             }
 
-            return true;
+            // Extra date validation
+            return checkDate();
+        }
+
+        public bool checkDate() {
+            DateTime date = DateTime.Today;
+            int day = Convert.ToInt32(dayBox.Text);
+            int month = Convert.ToInt32(monthBox.Text);
+            int year = Convert.ToInt32(yearBox.Text);
+
+            string inputDate = yearBox.Text + "-" + monthBox.Text + "-" + dayBox.Text;
+
+            if (date.Year < year || year < 1900) {
+                validDateLabel.Show();
+                return false;
+
+            } else if (!DateTime.TryParse(inputDate, out date)) {
+                validDateLabel.Show();
+                return false;
+
+            } else {
+
+                if (validDateLabel.Visible) {
+                    validDateLabel.Hide();
+                }
+                return true;
+            }
+
         }
 
         public int getAgeValue() {

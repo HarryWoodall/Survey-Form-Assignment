@@ -152,6 +152,8 @@
             this.label53 = new System.Windows.Forms.Label();
             this.section2 = new System.Windows.Forms.Panel();
             this.mainContainer = new System.Windows.Forms.Panel();
+            this.validDateLabel = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
             this.titleBanner.SuspendLayout();
             this.q1Option4.SuspendLayout();
             this.q1Option3.SuspendLayout();
@@ -653,6 +655,8 @@
             // section1
             // 
             this.section1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(230)))));
+            this.section1.Controls.Add(this.label19);
+            this.section1.Controls.Add(this.validDateLabel);
             this.section1.Controls.Add(this.panel1);
             this.section1.Controls.Add(this.employmentBox);
             this.section1.Controls.Add(this.employmentLabel);
@@ -1670,6 +1674,29 @@
             this.mainContainer.Size = new System.Drawing.Size(1920, 920);
             this.mainContainer.TabIndex = 31;
             // 
+            // validDateLabel
+            // 
+            this.validDateLabel.AutoSize = true;
+            this.validDateLabel.BackColor = System.Drawing.Color.Transparent;
+            this.validDateLabel.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.validDateLabel.ForeColor = System.Drawing.Color.Red;
+            this.validDateLabel.Location = new System.Drawing.Point(551, 192);
+            this.validDateLabel.Name = "validDateLabel";
+            this.validDateLabel.Size = new System.Drawing.Size(143, 33);
+            this.validDateLabel.TabIndex = 36;
+            this.validDateLabel.Text = "Invalid DOB";
+            this.validDateLabel.Visible = false;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(122, 193);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(77, 39);
+            this.label19.TabIndex = 37;
+            this.label19.Text = "DOB";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1914,6 +1941,8 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Panel mainContainer;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label validDateLabel;
     }
 }
 
