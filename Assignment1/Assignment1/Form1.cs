@@ -15,7 +15,7 @@ namespace Assignment1 {
     public partial class Form1 : Form {
 
         // Field Variables
-        public Data data = new Data();
+        public Data data = Data.getInstance();
 
         private Question question1;
         private Question question2;
@@ -45,7 +45,8 @@ namespace Assignment1 {
             data.loadFile();
             //getData();
             //data.saveToFile();
-            //inflateStatsPage();
+            inflateStatsPage();
+            mainContainer.Hide();
             inflateFrontPage();
             timer1.Start();
         }
@@ -866,7 +867,7 @@ namespace Assignment1 {
 
         // Generate the correct chart using the ChartConstructor class.
         public Chart getChart(Panel panel) {
-            ChartConstructor constructor = new ChartConstructor(data, panel, sideBarIndex, subBarIndex);
+            ChartConstructor constructor = new ChartConstructor(panel, sideBarIndex, subBarIndex);
             if (sideBarIndex == 0) {
                 Chart[] chartArray = new Chart[] {
                     constructor.chartAge(), constructor.chartGender(), constructor.chartEthnicity(), constructor.chartEducation(), constructor.chartEmployment()

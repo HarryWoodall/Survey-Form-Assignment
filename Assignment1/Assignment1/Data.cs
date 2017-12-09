@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 namespace Assignment1 {
     public class Data {
 
+        private static Data data_instance = null;
+
         private readonly string FILE_PATH = "../../saveFile.txt";
 
         private List<Person> people;
@@ -25,7 +27,7 @@ namespace Assignment1 {
         private List<int> q2Values;
         private List<int> q3Values;
 
-        public Data() {
+        private Data() {
 
             // Initialize values;
             people = new List<Person>();
@@ -40,6 +42,13 @@ namespace Assignment1 {
             q1Values = new List<int>();
             q2Values = new List<int>();
             q3Values = new List<int>();
+        }
+
+        public static Data getInstance() {
+            if (data_instance == null) {
+                data_instance = new Data();
+            }
+            return data_instance;
         }
 
         #region Getters

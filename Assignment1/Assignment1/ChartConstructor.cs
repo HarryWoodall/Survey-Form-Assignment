@@ -28,8 +28,8 @@ namespace Assignment1 {
         private string[] educationLabels = { "Primary", "Secondary", "Advanced", "Higher", "Other" };
         private string[] employmentLabels = { "Employed", "Self Employed", "Unemployed", "Looking for work", "Student", "Retired", "Other" };
 
-        public ChartConstructor(Data data, Panel panel, int question, int graphIndex) {
-            this.data = data;
+        public ChartConstructor(Panel panel, int question, int graphIndex) {
+            data = Data.getInstance();
             this.container = panel;
             this.question = question;
             this.graphIndex = graphIndex;
