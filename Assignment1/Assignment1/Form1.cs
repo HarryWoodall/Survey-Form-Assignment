@@ -44,7 +44,6 @@ namespace Assignment1 {
             initializeQuestions();
             data.loadFile();
             //getData();
-            //data.saveToFile();
             inflateStatsPage();
             mainContainer.Hide();
             inflateFrontPage();
@@ -407,7 +406,7 @@ namespace Assignment1 {
                 answers[7] = employmentBox.SelectedIndex;
                 Person person = new Person(forenameBox.Text, surnameBox.Text, getAge(), answers);
                 data.addPerson(person);
-                data.saveToFile();
+                data.saveToFile(person);
 
                 resetMainContainer();
                 mainContainer.Hide();
@@ -878,7 +877,7 @@ namespace Assignment1 {
             }
         }
 
-        // Genertate 100 random pieces of data to show off graphs.
+        // Genertate 100 random pieces of data to show off graphs -- THIS WILL OVEWRITE ALL DATA.
         public void getData() {
 
             Random rand = new Random();
@@ -910,6 +909,7 @@ namespace Assignment1 {
                 Person person = new Person(forname, surname, age, values);
                 data.addPerson(person);
             }
+            data.saveToFile();
         }
     }
 }

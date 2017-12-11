@@ -131,7 +131,7 @@ namespace Assignment1 {
 
         public void saveToFile() {
             string path = FILE_PATH;
-            using (StreamWriter writer = File.AppendText(path)) {
+            using (StreamWriter writer = File.CreateText(path)) {
 
                 if (!File.Exists(path)) {
                     File.Create(path);
@@ -152,6 +152,30 @@ namespace Assignment1 {
                         + employmentValues[i];
                     writer.WriteLine(line);
                 }
+            }
+        }
+
+        public void saveToFile(Person person) {
+            string path = FILE_PATH;
+            using (StreamWriter writer = File.AppendText(path)) {
+
+                if (!File.Exists(path)) {
+                    File.Create(path);
+                }
+
+                // Save each dataset on a new line sepperated by a ','.
+                string line = person.getForname() + ","
+                        + person.getSurname() + ","
+                        + person.getAge() + ","
+                        + person.getQ1Value() + ","
+                        + person.getQ2Value() + ","
+                        + person.getQ3Value() + ","
+                        + person.getAgeValue() + ","
+                        + person.getGenderValue() + ","
+                        + person.getEthnicityValue() + ","
+                        + person.getEducationValue() + ","
+                        + person.getEmploymentValue();
+                writer.WriteLine(line);
             }
         }
 

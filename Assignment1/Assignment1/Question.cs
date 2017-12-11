@@ -15,6 +15,7 @@ namespace Assignment1 {
         private int[] currentAlphas = new int[5];
         private Panel currentPanel;
 
+        // Set answer to default value.
         public Question() {
             answer = -1;
         }

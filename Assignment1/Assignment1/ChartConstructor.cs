@@ -333,7 +333,7 @@ namespace Assignment1 {
             }
 
             // Increase the tab size.
-            label.Size = new Size(200, 100);
+            label.Size = new Size(175, 100);
             label.Font = new Font(label.Font, FontStyle.Bold);
         }
 
@@ -473,11 +473,13 @@ namespace Assignment1 {
 
                 // Create bigger labels depending on what is selected.
                 if (currentTab == -1) {
-                    tabLabel.Size = new Size(200, 100);
-                    tabLabel.Font = new Font(tabLabel.Font, FontStyle.Bold);
+                    if (i == 0) {
+                        tabLabel.Size = new Size(175, 100);
+                        tabLabel.Font = new Font(tabLabel.Font, FontStyle.Bold);
+                    }
                 } 
                 else if (i == currentTab) {
-                    tabLabel.Size = new Size(200, 100);
+                    tabLabel.Size = new Size(175, 100);
                     tabLabel.Font = new Font(tabLabel.Font, FontStyle.Bold);
                 }
             }

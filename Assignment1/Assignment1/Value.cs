@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace Assignment1 {
     public class Value {
 
+        // Constant values for any class to use.
         public static readonly string TYPE_EDUCATION = "Education";
         public static readonly string TYPE_ETHNISITY = "Ethnisity";
         public static readonly string TYPE_EMPLOYMENT = "Employment";
