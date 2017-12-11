@@ -69,6 +69,8 @@
             this.forenameBox = new System.Windows.Forms.TextBox();
             this.genderBox = new System.Windows.Forms.ComboBox();
             this.section1 = new System.Windows.Forms.Panel();
+            this.label19 = new System.Windows.Forms.Label();
+            this.validDateLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label18 = new System.Windows.Forms.Label();
             this.employmentBox = new System.Windows.Forms.ComboBox();
@@ -152,8 +154,6 @@
             this.label53 = new System.Windows.Forms.Label();
             this.section2 = new System.Windows.Forms.Panel();
             this.mainContainer = new System.Windows.Forms.Panel();
-            this.validDateLabel = new System.Windows.Forms.Label();
-            this.label19 = new System.Windows.Forms.Label();
             this.titleBanner.SuspendLayout();
             this.q1Option4.SuspendLayout();
             this.q1Option3.SuspendLayout();
@@ -679,6 +679,29 @@
             this.section1.Name = "section1";
             this.section1.Size = new System.Drawing.Size(764, 812);
             this.section1.TabIndex = 21;
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(122, 193);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(77, 39);
+            this.label19.TabIndex = 37;
+            this.label19.Text = "DOB";
+            // 
+            // validDateLabel
+            // 
+            this.validDateLabel.AutoSize = true;
+            this.validDateLabel.BackColor = System.Drawing.Color.Transparent;
+            this.validDateLabel.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.validDateLabel.ForeColor = System.Drawing.Color.Red;
+            this.validDateLabel.Location = new System.Drawing.Point(551, 192);
+            this.validDateLabel.Name = "validDateLabel";
+            this.validDateLabel.Size = new System.Drawing.Size(143, 33);
+            this.validDateLabel.TabIndex = 36;
+            this.validDateLabel.Text = "Invalid DOB";
+            this.validDateLabel.Visible = false;
             // 
             // panel1
             // 
@@ -1673,29 +1696,6 @@
             this.mainContainer.Name = "mainContainer";
             this.mainContainer.Size = new System.Drawing.Size(1920, 920);
             this.mainContainer.TabIndex = 31;
-            // 
-            // validDateLabel
-            // 
-            this.validDateLabel.AutoSize = true;
-            this.validDateLabel.BackColor = System.Drawing.Color.Transparent;
-            this.validDateLabel.Font = new System.Drawing.Font("Calibri", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.validDateLabel.ForeColor = System.Drawing.Color.Red;
-            this.validDateLabel.Location = new System.Drawing.Point(551, 192);
-            this.validDateLabel.Name = "validDateLabel";
-            this.validDateLabel.Size = new System.Drawing.Size(143, 33);
-            this.validDateLabel.TabIndex = 36;
-            this.validDateLabel.Text = "Invalid DOB";
-            this.validDateLabel.Visible = false;
-            // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label19.Location = new System.Drawing.Point(122, 193);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(77, 39);
-            this.label19.TabIndex = 37;
-            this.label19.Text = "DOB";
             // 
             // Form1
             // 

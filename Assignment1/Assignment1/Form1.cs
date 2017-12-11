@@ -10,6 +10,15 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
+/*
+ * Background Banner Art
+ * http://verdewall.com/music-wallpaper-6hc.html/music-wallpaper-6hc
+ * 
+ * Background Music
+ * https://freesound.org/people/frankum/sounds/393520/
+ * 
+ */
+
 namespace Assignment1 {
 
     public partial class Form1 : Form {
@@ -543,7 +552,6 @@ namespace Assignment1 {
         }
 
         // Play ambient sound in the background.
-        //https://freesound.org/people/frankum/sounds/393520/
         public void playSound(object sender, EventArgs e) {
             if (!frontPage.Visible) {
                 SoundPlayer sound = new SoundPlayer(Properties.Resources._393520_frankum_ambient_guitar_x1_loop_mode);

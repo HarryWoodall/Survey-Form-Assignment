@@ -86,16 +86,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\376532__womb-affliction__flute-trill.wav" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\393520_frankum_ambient-guitar-x1-loop-mode.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\219472__jarredgibb__button-01.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\257357__brnck__button-click.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
