@@ -44,8 +44,8 @@ namespace Assignment1 {
             initializeQuestions();
             data.loadFile();
             //getData();
-            inflateStatsPage();
-            mainContainer.Hide();
+            //inflateStatsPage();
+            //mainContainer.Hide();
             inflateFrontPage();
             timer1.Start();
         }
@@ -277,22 +277,24 @@ namespace Assignment1 {
                 // Find the panel in MainPanelList.
                 if (question.getMainList().Contains(panel)) {
                     int index = Convert.ToInt32(panel.Tag);
+                    if (index != question.getAnswer()) {
 
-                    // Set all panels in SelectedPanelsList to invisible.
-                    foreach (Panel selected in question.getSelectedList()) {
-                        selected.Visible = false;
+                        // Set all panels in SelectedPanelsList to invisible.
+                        foreach (Panel selected in question.getSelectedList()) {
+                            selected.Visible = false;
+                        }
+
+                        // Set all labels in MainPanelList to default font size.
+                        foreach (Panel main in question.getMainList()) {
+                            Label lb = (Label)main.Controls[0];
+                            lb.Font = new Font("Calibri", 22);
+                            lb.Location = new Point((panel.Width - label.Width) / 2, (panel.Height - label.Height) / 2);
+                        }
+
+                        // Set coresponding selected panel to visible and store index.
+                        question.getSelectedList()[index].Visible = true;
+                        question.setAnswer(index);
                     }
-
-                    // Set all labels in MainPanelList to default font size.
-                    foreach (Panel main in question.getMainList()) {
-                        Label lb = (Label)main.Controls[0];
-                        lb.Font = new Font("Calibri", 22);
-                        lb.Location = new Point((panel.Width - label.Width) / 2, (panel.Height - label.Height) / 2);
-                    }
-
-                    // Set coresponding selected panel to visible and store index.
-                    question.getSelectedList()[index].Visible = true;
-                    question.setAnswer(index);
                 }
             }
 
