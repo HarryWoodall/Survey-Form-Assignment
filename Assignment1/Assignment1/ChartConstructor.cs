@@ -436,7 +436,7 @@ namespace Assignment1 {
             label.ForeColor = Color.White;
             label.Font = font;
             label.AutoSize = false;
-            label.Size = new Size(statPanel.Width, 100);
+            label.Size = new Size(statPanel.Width, 100); 
             label.TextAlign = ContentAlignment.MiddleLeft;
             label.Padding = new Padding(10, 0, 0, 0);
             label.Margin = new Padding(0);

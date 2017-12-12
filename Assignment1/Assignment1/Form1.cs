@@ -37,6 +37,7 @@ namespace Assignment1 {
         private Panel statsContainer;
         private Panel sideBarContainer;
         private Panel subBarContainer;
+        private Label createNew;
 
         private int introCounter;
         private int sideBarIndex;
@@ -53,8 +54,8 @@ namespace Assignment1 {
             initializeQuestions();
             data.loadFile();
             //getData();
-            //inflateStatsPage();
-            //mainContainer.Hide();
+            inflateStatsPage();
+            mainContainer.Hide();
             inflateFrontPage();
             timer1.Start();
         }
@@ -191,6 +192,22 @@ namespace Assignment1 {
             }
         }
 
+        public void createNewFadeIn() {
+            if (createNew.Top > 760) {
+                createNew.Top -= 10;
+            } else {
+                createNew.Top = 750;
+            }
+        }
+
+        public void createNewFadeOut() {
+            if (createNew.Top < 810) {
+                createNew.Top += 10;
+            } else {
+                createNew.Top = 820;
+            }
+        }
+
         #endregion
 
         #region Event Handlers
@@ -239,6 +256,14 @@ namespace Assignment1 {
                     introFadeIn();
                 } else {
                     introFadeOut();
+                }
+            }
+
+            if (createNew != null) {
+                if (createNew.Tag.ToString() == "0") {
+                    createNewFadeOut();
+                } else {
+                    createNewFadeIn();
                 }
             }
         }
@@ -551,6 +576,16 @@ namespace Assignment1 {
             mainContainer.Show();
         }
 
+        public void createNew_onEnter(object sender, EventArgs e) {
+            Label label = (Label)sender;
+            label.Tag = "1";
+        }
+
+        public void createNew_onLeave(object sender, EventArgs e) {
+            Label label = (Label)sender;
+            label.Tag = "0";
+        }
+
         // Play ambient sound in the background.
         public void playSound(object sender, EventArgs e) {
             if (!frontPage.Visible) {
@@ -856,20 +891,23 @@ namespace Assignment1 {
             chart.Size = new Size(800, 800);
             chart.Location = new Point((graphic.Width - chart.Width) / 2, (graphic.Height - chart.Height) / 2);
 
-            Label createNew = new Label();
+            createNew = new Label();
             graphic.Controls.Add(createNew);
 
 
             // Add the createNew button.
             createNew.Text = "CREATE NEW";
-            createNew.Size = new Size(150, 150);
-            createNew.Location = new Point(0, graphic.Height - createNew.Height);
+            createNew.Size = new Size(150, 200);
+            createNew.Location = new Point(0, 810);
             createNew.BackColor = Color.FromArgb(190,76,0);
             createNew.ForeColor = Color.White;
             createNew.TextAlign = ContentAlignment.TopCenter;
-            createNew.Padding = new Padding(20,30,20,0);
+            createNew.Padding = new Padding(20,50,20,0);
             createNew.Font = new Font("Calibri", 16, FontStyle.Bold);
+            createNew.Tag = "0";
             createNew.Click += new EventHandler(createNew_onClick);
+            createNew.MouseEnter += new EventHandler(createNew_onEnter);
+            createNew.MouseLeave += new EventHandler(createNew_onLeave);
         }
 
         #endregion

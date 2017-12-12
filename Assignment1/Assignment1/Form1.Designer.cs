@@ -438,11 +438,11 @@
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
-            this.label6.Location = new System.Drawing.Point(49, 24);
+            this.label6.Location = new System.Drawing.Point(33, 24);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(103, 26);
+            this.label6.Size = new System.Drawing.Size(135, 26);
             this.label6.TabIndex = 3;
-            this.label6.Text = "Don\'t Care";
+            this.label6.Text = "Neither Agree";
             // 
             // q1ToolTip2
             // 
@@ -1273,11 +1273,11 @@
             this.label37.BackColor = System.Drawing.Color.Transparent;
             this.label37.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label37.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
-            this.label37.Location = new System.Drawing.Point(49, 24);
+            this.label37.Location = new System.Drawing.Point(33, 24);
             this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(103, 26);
+            this.label37.Size = new System.Drawing.Size(135, 26);
             this.label37.TabIndex = 3;
-            this.label37.Text = "Don\'t Care";
+            this.label37.Text = "Neither Agree";
             // 
             // panel6
             // 
@@ -1657,11 +1657,11 @@
             this.label53.BackColor = System.Drawing.Color.Transparent;
             this.label53.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label53.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(150)))), ((int)(((byte)(150)))), ((int)(((byte)(150)))));
-            this.label53.Location = new System.Drawing.Point(49, 24);
+            this.label53.Location = new System.Drawing.Point(33, 24);
             this.label53.Name = "label53";
-            this.label53.Size = new System.Drawing.Size(103, 26);
+            this.label53.Size = new System.Drawing.Size(135, 26);
             this.label53.TabIndex = 3;
-            this.label53.Text = "Don\'t Care";
+            this.label53.Text = "Neither Agree";
             // 
             // section2
             // 
