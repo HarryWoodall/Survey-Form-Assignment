@@ -611,9 +611,9 @@
             this.label17.Font = new System.Drawing.Font("Calibri", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.Location = new System.Drawing.Point(9, 8);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(391, 39);
+            this.label17.Size = new System.Drawing.Size(376, 39);
             this.label17.TabIndex = 16;
-            this.label17.Text = "I ENJOYED THE SCULPTURE?";
+            this.label17.Text = "I ENJOYED THE SCULPTURE";
             // 
             // section5
             // 

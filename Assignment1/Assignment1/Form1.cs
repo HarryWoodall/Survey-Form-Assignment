@@ -46,6 +46,8 @@ namespace Assignment1 {
         private float xScale = 1;
         private float yScale = 1;
 
+        private bool chartViewed = false;
+
         public Form1() {
             InitializeComponent();
 
@@ -53,9 +55,6 @@ namespace Assignment1 {
             this.WindowState = FormWindowState.Maximized;
             initializeQuestions();
             data.loadFile();
-            //getData();
-            inflateStatsPage();
-            mainContainer.Hide();
             inflateFrontPage();
             timer1.Start();
         }
@@ -154,10 +153,13 @@ namespace Assignment1 {
 
         public void fadeIn(int index, Question question) {
 
+            // Change the alpha levels in the panel below the one you are hovering over.
             if (question.getAlphas()[index] <= question.getCurrentPanel().BackColor.A - question.getCurrentPanel().BackColor.A / 10) {
                 question.setAlpha(index, question.getAlphas()[index] += question.getCurrentPanel().BackColor.A / 10);
                 question.getToolTipList()[index].BackColor = Color.FromArgb(question.getAlphas()[index], question.getToolTipList()[index].BackColor);
             } else {
+
+                // If the alpha on the main panel and tool tip are equal, don't change them.
                 question.getToolTipList()[index].BackColor = Color.FromArgb(question.getCurrentPanel().BackColor.A, question.getToolTipList()[index].BackColor);
             }
         }
@@ -167,6 +169,8 @@ namespace Assignment1 {
                 question.setAlpha(index, question.getAlphas()[index] -= question.getCurrentPanel().BackColor.A / 10);
                 question.getToolTipList()[index].BackColor = Color.FromArgb(question.getAlphas()[index], question.getToolTipList()[index].BackColor);
             } else {
+
+                // If the alpha levels are 1/10 of the main panel, set alpha to 0 and make invisible. 
                 question.getAlphas()[index] = 0;
                 question.getToolTipList()[index].BackColor = Color.FromArgb(question.getAlphas()[index], question.getToolTipList()[index].BackColor);
                 question.getToolTipList()[index].Visible = false;
@@ -174,6 +178,8 @@ namespace Assignment1 {
         }
 
         public void introFadeOut() {
+
+            // Increase RGB values until BackColor is white, then hide it.
             if (frontPage.BackColor.R < 230) {
                 frontPage.BackColor = Color.FromArgb(255, frontPage.BackColor.R + 2, frontPage.BackColor.B + 2, frontPage.BackColor.G + 2);
             } else {
@@ -182,9 +188,13 @@ namespace Assignment1 {
         }
 
         public void introFadeIn() {
+
+            // Decrease RGB values until BackColor is light grey.
             if (frontPage.BackColor.R > 50) {
                 frontPage.BackColor = Color.FromArgb(255, frontPage.BackColor.R - 2, frontPage.BackColor.B - 2, frontPage.BackColor.G - 2);
             } else {
+
+                // Wait 200 'ticks', then change state. 
                 introCounter++;
                 if (introCounter > 200) {
                     frontPage.Tag = "1";
@@ -192,7 +202,30 @@ namespace Assignment1 {
             }
         }
 
+        private void subBarMoveIn() {
+
+            // Move subBar until it reaches its destination.
+            if (subBarContainer.Location.X < 235) {
+                subBarContainer.Left += 15;
+            } else {
+                subBarContainer.Left = 250;
+            }
+        }
+
+        private void subBarMoveOut() {
+
+            // Move subBar until it is out of view, then hide it.
+            if (subBarContainer.Location.X > 15) {
+                subBarContainer.Left -= 15;
+            } else {
+                subBarContainer.Left = 0;
+                subBarContainer.Visible = false;
+            }
+        }
+
         public void createNewFadeIn() {
+
+            // Move createNew tab until text is visible.
             if (createNew.Top > 760) {
                 createNew.Top -= 10;
             } else {
@@ -201,6 +234,8 @@ namespace Assignment1 {
         }
 
         public void createNewFadeOut() {
+
+            // Move createNew tab until text is hidden.
             if (createNew.Top < 810) {
                 createNew.Top += 10;
             } else {
@@ -214,7 +249,7 @@ namespace Assignment1 {
 
         private void timer1_Tick(object sender, EventArgs e) {
 
-            // Aniimation for likert scale
+            // Aniimation for Likert scale
             // Loops through each panel in each question, animating if need be
             foreach (Question question in questionList) {
                 foreach (Panel panel in question.getToolTipList()) {
@@ -222,7 +257,8 @@ namespace Assignment1 {
                     // Check to see what state each panel is in
                     if (panel.Visible && panel.Tag.ToString() == "0") {
                         fadeIn(question.getToolTipList().IndexOf(panel), question);
-                    } else if (panel.Visible && panel.Tag.ToString() == "1") {
+                    }
+                    else if (panel.Visible && panel.Tag.ToString() == "1") {
                         fadeOut(question.getToolTipList().IndexOf(panel), question);
                     }
                 }
@@ -231,22 +267,9 @@ namespace Assignment1 {
             // Anination for stats page sub bar
             if (subBarContainer != null) {
                 if (subBarContainer.Visible && subBarContainer.Tag.ToString() == "0") {
-
-                    // If State is moving into visibility, move container until it reaches destination
-                    if (subBarContainer.Location.X < 235) {
-                        subBarContainer.Left += 15;
-                    } else {
-                        subBarContainer.Left = 250;
-                    }
+                    subBarMoveIn();
                 } else if (subBarContainer.Visible && subBarContainer.Tag.ToString() == "1") {
-
-                    // If state is moving out of visibility, move container until it reaches destination
-                    if (subBarContainer.Location.X > 15) {
-                        subBarContainer.Left -= 15;
-                    } else {
-                        subBarContainer.Left = 0;
-                        subBarContainer.Visible = false;
-                    }
+                    subBarMoveOut();
                 }
             }
 
@@ -448,7 +471,7 @@ namespace Assignment1 {
                 mainContainer.Hide();
                 inflateStatsPage();
             } else {
-                MessageBox.Show("Your Form is incomplete of contains errors");
+                MessageBox.Show("Form is incomplete or contains errors");
             }
         }
 
@@ -526,6 +549,7 @@ namespace Assignment1 {
                 }
 
                 // Create the new graphic
+                chartViewed = true;
                 inflateGraphic();
 
                 // Reset the state of the tabs.
@@ -572,6 +596,7 @@ namespace Assignment1 {
 
         // Create a new Survey
         public void createNew_onClick(object sender, EventArgs e) {
+            chartViewed = false;
             statsContainer.Hide();
             mainContainer.Show();
         }
@@ -820,9 +845,6 @@ namespace Assignment1 {
 
                     sideBarTabs.Add(tab);
                 }
-
-                sideBarTabs[0].Tag = "1";
-                sideBarTabs[0].BackColor = Color.FromArgb(255, 217, 128, 38);
             } else {
                 sideBarContainer.Visible = true;
             }
@@ -894,7 +916,6 @@ namespace Assignment1 {
             createNew = new Label();
             graphic.Controls.Add(createNew);
 
-
             // Add the createNew button.
             createNew.Text = "CREATE NEW";
             createNew.Size = new Size(150, 200);
@@ -908,9 +929,35 @@ namespace Assignment1 {
             createNew.Click += new EventHandler(createNew_onClick);
             createNew.MouseEnter += new EventHandler(createNew_onEnter);
             createNew.MouseLeave += new EventHandler(createNew_onLeave);
+
+            // Create Helper
+            if (!chartViewed) {
+                chart.Hide();
+                getHelper(graphic);
+                createNew.BringToFront();
+            }
         }
 
         #endregion
+
+        public void getHelper(Panel panel) {
+            Panel overview = new Panel();
+            panel.Controls.Add(overview);
+            overview.Size = panel.Size;
+            overview.Location = new Point(0, 0);
+            overview.BackColor = Color.FromArgb(150, 255, 128, 0);
+            overview.MouseEnter += new EventHandler(graphic_onEnter);
+
+            Label label = new Label();
+            overview.Controls.Add(label);
+            label.Font = new Font("Calibri", 52, FontStyle.Bold);
+            label.ForeColor = Color.White;
+            label.BackColor = Color.Transparent;
+            label.Text = "< SELECT A GRAPH";
+            label.Size = new Size(panel.Width / 2, panel.Height);
+            label.Location = new Point(160,0);
+            label.TextAlign = ContentAlignment.MiddleLeft;
+        }
 
         // Generate the correct chart using the ChartConstructor class.
         public Chart getChart(Panel panel) {
