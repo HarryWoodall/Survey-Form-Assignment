@@ -35,7 +35,7 @@ namespace Assignment1 {
             this.graphIndex = graphIndex;
         }
 
-        // returns a chart with these attributes
+        // Returns a chart with these attributes
         public Chart initializeChart(string name) {
             Chart chart = new Chart();
             chart.Palette = ChartColorPalette.Pastel;
@@ -50,7 +50,7 @@ namespace Assignment1 {
             return chart;
         }
 
-        // Returnes a series given a list and chart labels.
+        // Returns a series given a list and chart labels.
         public Series getChartSeries(Chart chart, List<int> list, string[] labels) {
             Series series = new Series();
             series.ChartType = SeriesChartType.Pie;

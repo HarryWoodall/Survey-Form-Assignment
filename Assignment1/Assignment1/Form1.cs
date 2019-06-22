@@ -405,7 +405,6 @@ namespace Assignment1 {
         }
 
 
-        // TODO FIX THIS SHIT!
         private void Form1_SizeChanged(object sender, EventArgs e) {
 
             // Scale frontPage
@@ -977,8 +976,8 @@ namespace Assignment1 {
 
             Random rand = new Random();
             for (int i = 0; i < 100; i++) {
-                string forname = "Billy";
-                string surname = "Boy";
+                string forname = "Joe";
+                string surname = "Bloggs";
                 int age = rand.Next(10, 90);
                 int[] values = new int[8];
                 for (int j = 0; j < 8; j++) {
